@@ -59,49 +59,55 @@ const CATEGORY_LABELS = {
     "materiale-stampabile": "Materiale stampabile"
 };
 
-// Le 6 fasi del protocollo, riutilizzate sia dalla timeline sia dai piani di trattamento
+// Le 3 fasi del Protocollo Pelle Sana, allineate ai principi guida
+// RIVITALIZZA, RINNOVA, RIGENERA (vedi .phases-guides in index.html).
+// Il campo "piano" descrive l'eventuale sotto-timeline della fase:
+// - tipo "alternative": modalità alternative tra cui scegliere (fase 1)
+// - tipo "sequenza": blocchi temporali in successione (fase 2)
+// La fase di mantenimento non prevede una sotto-timeline (piano: null).
 const METODO_FASI = [
     {
-        id: "analisi",
-        numero: "01",
-        nome: "Analisi",
-        sintesi: "Valutazione approfondita della pelle e anamnesi della cliente.",
-        dettaglio: "Osservazione dello stato cutaneo, raccolta dell'anamnesi, individuazione della problematica prevalente e definizione degli obiettivi realistici del percorso."
-    },
-    {
         id: "preparazione",
-        numero: "02",
+        numero: "01",
         nome: "Preparazione",
-        sintesi: "La pelle viene preparata a ricevere i trattamenti successivi.",
-        dettaglio: "Detersione profonda, eventuale esfoliazione e primi passaggi di riequilibrio, per rendere la cute ricettiva agli attivi professionali."
-    },
-    {
-        id: "rivitalizzazione",
-        numero: "03",
-        nome: "Rivitalizzazione",
-        sintesi: "Si riattivano i processi energetici e metabolici della pelle.",
-        dettaglio: "Impiego di biorivitalizzanti, esosomi e complessi vitaminici per restituire energia cellulare e favorire i processi rigenerativi."
+        sintesi: "La fase iniziale del percorso: si valuta la pelle e si preparano i tessuti ai trattamenti successivi.",
+        dettaglio: "Comprende anamnesi professionale, valutazione iniziale della pelle e definizione del percorso personalizzato, seguite dal trattamento con acidi cosmetici e/o biorivitalizzanti in base alle esigenze cutanee.",
+        piano: {
+            tipo: "alternative",
+            titolo: "Primi 2 mesi",
+            nota: "4 sedute o momenti di trattamento, secondo la modalità più indicata per la pelle della cliente:",
+            opzioni: [
+                { nome: "Biorivitalizzanti + microneedling", frequenza: "1 seduta ogni 15–21 giorni" },
+                { nome: "Acidi cosmetici", frequenza: "Ciclo di 4–6 sedute, frequenza settimanale" }
+            ]
+        }
     },
     {
         id: "ricostituzione",
-        numero: "04",
+        numero: "02",
         nome: "Ricostituzione",
-        sintesi: "Si ricostruisce la matrice cutanea (collagene, elastina, HA).",
-        dettaglio: "Attivi mirati alla sintesi di collagene ed elastina e al ripristino della matrice extracellulare, per tono, densità ed elasticità."
+        sintesi: "Il ciclo di ricostituzione: una fase progressiva dedicata a migliorare idratazione, vitalità, compattezza e qualità generale della pelle.",
+        dettaglio: "Il percorso prosegue per 6 mesi, con una seduta ogni circa 30 giorni.",
+        piano: {
+            tipo: "sequenza",
+            titolo: "Successivi 6 mesi",
+            nota: "Tre blocchi di attivi, in ordine progressivo:",
+            opzioni: [
+                { nome: "Mese 1–2", frequenza: "Attivi per l'idratazione" },
+                { nome: "Mese 3–4", frequenza: "Attivi vitaminici" },
+                { nome: "Mese 5–6", frequenza: "Attivi proteici" }
+            ],
+            chiusura: "Il ciclo prevede trattamenti di microneedling mensili, personalizzati con attivi specifici per idratazione, vitamine e proteine."
+        }
     },
     {
         id: "mantenimento",
-        numero: "05",
-        nome: "Mantenimento",
-        sintesi: "I risultati vengono consolidati nel tempo.",
-        dettaglio: "Sedute di richiamo a intervalli programmati e home care mirata, per mantenere nel tempo i risultati ottenuti in cabina."
-    },
-    {
-        id: "monitoraggio",
-        numero: "06",
-        nome: "Monitoraggio",
-        sintesi: "Si osserva l'evoluzione della pelle e si aggiorna il piano.",
-        dettaglio: "Verifica periodica dei progressi (anche fotografica), confronto con gli obiettivi iniziali ed eventuale aggiornamento del piano di trattamento."
+        numero: "03",
+        nome: "Mantenimento e monitoraggio",
+        sintesi: "La fase conclusiva, dedicata a consolidare i risultati nel tempo.",
+        dettaglio: "Il mantenimento consente di preservare i risultati ottenuti attraverso sedute di richiamo programmate, monitoraggio periodico della pelle e un protocollo home care mirato e personalizzato.",
+        finale: true,
+        piano: null
     }
 ];
 
@@ -1083,18 +1089,46 @@ function renderMetodoTimeline() {
     if (!container) return;
 
     container.innerHTML = METODO_FASI.map((fase, i) => `
-        <li class="phases__item ${i % 2 === 0 ? "phases__item--right" : "phases__item--left"}">
+        <li class="phases__item ${i % 2 === 0 ? "phases__item--right" : "phases__item--left"}${fase.finale ? " phases__item--finale" : ""}">
             <span class="phases__marker" aria-hidden="true"></span>
             <div class="phases__content">
                 <span class="phases__number">${fase.numero}</span>
                 <h4 class="phases__name">${fase.nome}</h4>
                 <p class="phases__sintesi">${fase.sintesi}</p>
                 <p class="phases__dettaglio">${fase.dettaglio}</p>
+                ${fase.piano ? phasePlanHtml(fase.piano) : ""}
             </div>
         </li>
     `).join("");
 
     initPhasesScrollReveal(container);
+}
+
+// Sotto-timeline di una fase: modalità alternative (fase 1) oppure blocchi
+// temporali in sequenza (fase 2). Un separatore visivo ("oppure" / "→")
+// chiarisce se le voci sono alternative o progressive.
+function phasePlanHtml(piano) {
+    const isSequenza = piano.tipo === "sequenza";
+    const divider = isSequenza ? "&rarr;" : "oppure";
+
+    const optionsHtml = piano.opzioni.map((opzione, i) => `
+        ${i > 0 ? `<li class="phase-plan__divider" aria-hidden="true">${divider}</li>` : ""}
+        <li class="phase-plan__option">
+            <span class="phase-plan__option-name">${opzione.nome}</span>
+            <span class="phase-plan__option-freq">${opzione.frequenza}</span>
+        </li>
+    `).join("");
+
+    return `
+        <div class="phase-plan">
+            <span class="phase-plan__title">${piano.titolo}</span>
+            ${piano.nota ? `<span class="phase-plan__note">${piano.nota}</span>` : ""}
+            <ul class="phase-plan__options phase-plan__options--${piano.tipo}">
+                ${optionsHtml}
+            </ul>
+            ${piano.chiusura ? `<p class="phase-plan__closing">${piano.chiusura}</p>` : ""}
+        </div>
+    `;
 }
 
 // Rivela le fasi con una leggera animazione all'ingresso durante lo scroll

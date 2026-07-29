@@ -478,11 +478,49 @@ button, select {
     margin: 0;
 }
 
+/* --- Tre principi guida (Rivitalizza, Rinnova, Rigenera) --- */
+
+.phases-guides {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    list-style: none;
+    max-width: 780px;
+    margin: 28px auto 0;
+    padding: 0;
+    text-align: center;
+}
+
+.phases-guides__item {
+    min-width: 0;
+    padding: 0 10px;
+}
+
+.phases-guides__item + .phases-guides__item {
+    border-left: 1px solid var(--border);
+}
+
+.phases-guides__word {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 6px;
+}
+
+.phases-guides__claim {
+    display: block;
+    font-size: 13.5px;
+    color: var(--text-soft);
+}
+
 /* --- Timeline editoriale verticale --- */
 
 .phases {
     position: relative;
-    max-width: 880px;
+    max-width: 960px;
     margin: 56px auto 0;
 }
 
@@ -568,6 +606,91 @@ button, select {
     color: var(--text-soft);
     font-size: 14.5px;
     margin: 0;
+}
+
+/* --- Card conclusiva (fase di mantenimento) --- */
+
+.phases__item--finale .phases__content {
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px 28px;
+}
+
+/* --- Sotto-timeline di fase (piano di trattamento) --- */
+
+.phase-plan {
+    display: block;
+    text-align: left;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border);
+}
+
+.phase-plan__title {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 6px;
+}
+
+.phase-plan__note {
+    display: block;
+    font-size: 13.5px;
+    color: var(--text-soft);
+    margin-bottom: 12px;
+}
+
+.phase-plan__options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.phase-plan__option {
+    flex: 1 1 170px;
+    min-width: 0;
+    background: var(--ivory);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+}
+
+.phase-plan__option-name {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+}
+
+.phase-plan__option-freq {
+    display: block;
+    font-size: 13px;
+    color: var(--text-soft);
+}
+
+.phase-plan__divider {
+    flex: 0 0 auto;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--nude);
+}
+
+.phase-plan__closing {
+    margin: 14px 0 0;
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--text-soft);
 }
 
 
@@ -1377,6 +1500,31 @@ button, select {
     .phases__item--right .phases__marker {
         left: 14px;
         right: auto;
+    }
+
+    .phases-guides {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .phases-guides__item + .phases-guides__item {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding-top: 16px;
+    }
+
+    .phase-plan__options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .phase-plan__option {
+        flex-basis: auto;
+    }
+
+    .phase-plan__divider {
+        align-self: center;
+        padding: 2px 0;
     }
 
     .video-hero {
