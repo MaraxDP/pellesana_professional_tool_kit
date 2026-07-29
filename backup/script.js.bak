@@ -1,0 +1,9 @@
+const actionButton = document.getElementById("actionButton");
+const resultMessage = document.getElementById("resultMessage");
+
+actionButton.addEventListener("click", function () {
+    resultMessage.textContent =
+        "Perfetto: il collegamento JavaScript funziona.";
+
+    actionButton.textContent = "Funziona!";
+});

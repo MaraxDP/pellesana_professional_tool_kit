@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Protocollo Pelle Sana | FIDEST × InLab medical</title>
+    <meta name="description" content="Protocollo Pelle Sana: il metodo FIDEST con i prodotti professionali InLab. Piani di trattamento, schede tecniche, home care, casi studio e formazione per estetiste e professioniste.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================================
+         HEADER / NAVIGAZIONE
+         ===================================================================== -->
+    <header class="site-header">
+        <div class="site-header__inner container">
+            <a class="brand" href="#hero" aria-label="Protocollo Pelle Sana — torna alla home">
+                <img
+                    src="assets/img/logo/logo-protocollo-pelle-sana.png"
+                    alt="Protocollo Pelle Sana"
+                    class="brand__logo"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';"
+                >
+                <span class="brand__fallback" style="display:none;">
+                    <span class="brand__eyebrow">Protocollo</span>
+                    <span class="brand__name">Pelle Sana</span>
+                </span>
+            </a>
+
+            <button
+                id="navToggle"
+                class="nav-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="siteNav"
+                aria-label="Apri/chiudi il menu di navigazione"
+            >
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav id="siteNav" class="site-nav" aria-label="Navigazione principale">
+                <a href="#metodo">Il metodo</a>
+                <a href="#piani">Piani di trattamento</a>
+                <a href="#builder">Protocol builder</a>
+                <a href="#schede-tecniche">Schede tecniche</a>
+                <a href="#home-care">Home care</a>
+                <a href="#casi-studio">Casi studio</a>
+                <a href="#formazione">Formazione</a>
+                <a href="#materiali">Materiali</a>
+                <a href="#faq">FAQ e supporto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================================
+             1. HOME / PRESENTAZIONE
+             ================================================================= -->
+        <section id="hero" class="section hero">
+            <div class="container hero__grid">
+                <div class="hero__content">
+                    <p class="eyebrow">FIDEST × InLab medical</p>
+
+                    <h1>
+                        Protocollo <span class="text-accent">Pelle Sana</span>
+                    </h1>
+
+                    <p class="payoff">Rivitalizza, rinnova, rigenera.</p>
+
+                    <p class="description">
+                        [PLACEHOLDER — Descrizione breve del protocollo da confermare]
+                        Il metodo FIDEST che unisce analisi professionale, percorsi personalizzati e i
+                        prodotti InLab per accompagnare la pelle verso la sua vera salute nel tempo.
+                    </p>
+
+                    <div class="hero__cta">
+                        <a class="btn btn--accent" href="#piani">Esplora i piani di trattamento</a>
+                        <a class="btn btn--outline" href="#metodo">Scopri il metodo</a>
+                    </div>
+
+                    <ul class="hero__indicators" role="list">
+                        <li>
+                            <span class="hero__indicator-icon" aria-hidden="true">◎</span>
+                            <span>Analisi professionale</span>
+                        </li>
+                        <li>
+                            <span class="hero__indicator-icon" aria-hidden="true">◇</span>
+                            <span>Percorso personalizzato</span>
+                        </li>
+                        <li>
+                            <span class="hero__indicator-icon" aria-hidden="true">◈</span>
+                            <span>Monitoraggio progressivo</span>
+                        </li>
+                        <li>
+                            <span class="hero__indicator-icon" aria-hidden="true">◆</span>
+                            <span>Mantenimento domiciliare</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="hero__visual" aria-hidden="true">
+                    <!-- PLACEHOLDER: sostituire con il visual principale ufficiale -->
+                    <div class="hero__visual-frame">
+                        <span>Visual principale</span>
+                        <span class="hero__visual-note">assets/img/hero/hero-main.jpg</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             2. IL METODO PELLE SANA
+             ================================================================= -->
+        <section id="metodo" class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Il metodo</p>
+                    <h2>Non una seduta. Un sistema.</h2>
+                    <p class="section-intro">
+                        Protocollo Pelle Sana non è un trattamento standard né un anti-age generico:
+                        è un sistema professionale che lavora sulla <strong>skin longevity</strong>,
+                        aiutando la pelle a tornare a funzionare meglio nel tempo.
+                    </p>
+                </div>
+
+                <ul class="method-points">
+                    <li>Non è una singola seduta</li>
+                    <li>Non è un trattamento standard</li>
+                    <li>Non è anti-age generico</li>
+                    <li>Lavora sulla skin longevity</li>
+                    <li>Aiuta la pelle a tornare a funzionare meglio</li>
+                    <li>Prevede analisi, percorso, monitoraggio e home care</li>
+                </ul>
+
+                <h3 class="timeline-title">Le 6 fasi del metodo</h3>
+                <ol id="metodoTimeline" class="timeline">
+                    <!-- Generato da script.js — renderMetodoTimeline() -->
+                </ol>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             3. PIANI DI TRATTAMENTO
+             ================================================================= -->
+        <section id="piani" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Piani di trattamento</p>
+                    <h2>Un piano per ogni problematica</h2>
+                    <p class="section-intro">
+                        Filtra i piani per problematica. Ogni scheda riporta obiettivo, durata,
+                        numero di sedute, attivi e home care abbinati.
+                        <strong>Contenuto dimostrativo da validare con la Master Trainer.</strong>
+                    </p>
+                </div>
+
+                <div id="piani-filters" class="filter-bar" role="group" aria-label="Filtra i piani per problematica"></div>
+                <div id="piani-grid" class="card-grid">
+                    <!-- Generato da script.js — renderTreatmentPlans() -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             4. PROTOCOL BUILDER
+             ================================================================= -->
+        <section id="builder" class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Costruisci il piano</p>
+                    <h2>Protocol Builder</h2>
+                    <p class="section-intro">
+                        Componi un piano personalizzato selezionando problematica, fase, attivo
+                        professionale, tecnologia, trattamento cosmetico e home care.
+                    </p>
+                </div>
+
+                <form id="protocolBuilder" class="builder-form">
+                    <div class="builder-form__grid">
+                        <label class="field">
+                            <span>Problematica</span>
+                            <select id="pbProblematica"></select>
+                        </label>
+                        <label class="field">
+                            <span>Fase</span>
+                            <select id="pbFase"></select>
+                        </label>
+                        <label class="field">
+                            <span>Attivo professionale</span>
+                            <select id="pbAttivo"></select>
+                        </label>
+                        <label class="field">
+                            <span>Tecnologia</span>
+                            <select id="pbTecnologia"></select>
+                        </label>
+                        <label class="field">
+                            <span>Trattamento cosmetico</span>
+                            <select id="pbTrattamento"></select>
+                        </label>
+                        <label class="field">
+                            <span>Home care</span>
+                            <select id="pbHomeCare"></select>
+                        </label>
+                    </div>
+
+                    <div id="pbSummary" class="builder-summary" aria-live="polite">
+                        <!-- Generato da script.js -->
+                    </div>
+
+                    <div class="builder-actions">
+                        <button type="button" id="pbCopy" class="btn btn--outline btn--small">Copia riepilogo</button>
+                        <button type="button" id="pbPrint" class="btn btn--outline btn--small">Stampa piano</button>
+                        <button type="reset" id="pbReset" class="btn btn--ghost btn--small">Azzera selezione</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             5. SCHEDE TECNICHE — ATTIVI PROFESSIONALI
+             ================================================================= -->
+        <section id="schede-tecniche" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Schede tecniche</p>
+                    <h2>Attivi professionali InLab</h2>
+                    <p class="section-intro">
+                        Filtra per categoria e apri la scheda completa di ciascun prodotto professionale.
+                        Dati tratti dalle schede tecniche ufficiali InLab.
+                    </p>
+                </div>
+
+                <div id="schede-filters" class="filter-bar" role="group" aria-label="Filtra gli attivi professionali per categoria"></div>
+                <div id="schede-grid" class="card-grid">
+                    <!-- Generato da script.js — renderProfessionalProducts() -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             6. HOME CARE E PRODOTTI DA RIVENDITA
+             ================================================================= -->
+        <section id="home-care" class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Home care</p>
+                    <h2>Prodotti da rivendita</h2>
+                    <p class="section-intro">
+                        La linea domiciliare InLab per il mantenimento quotidiano dei risultati
+                        ottenuti in cabina.
+                    </p>
+                </div>
+
+                <div id="homecare-filters" class="filter-bar" role="group" aria-label="Filtra i prodotti home care per categoria"></div>
+                <div id="homecare-grid" class="card-grid">
+                    <!-- Generato da script.js — renderRetailProducts() -->
+                </div>
+
+                <div class="routine-builder">
+                    <h3>Costruisci la routine domiciliare</h3>
+                    <form id="routineBuilder" class="builder-form">
+                        <div class="builder-form__grid builder-form__grid--4">
+                            <label class="field">
+                                <span>1. Detersione</span>
+                                <select id="rbDetersione"></select>
+                            </label>
+                            <label class="field">
+                                <span>2. Trattamento</span>
+                                <select id="rbTrattamento"></select>
+                            </label>
+                            <label class="field">
+                                <span>3. Crema</span>
+                                <select id="rbCrema"></select>
+                            </label>
+                            <label class="field">
+                                <span>4. Protezione</span>
+                                <select id="rbProtezione"></select>
+                            </label>
+                        </div>
+                        <div id="rbResult" class="builder-summary" aria-live="polite">
+                            <!-- Generato da script.js -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             7. CASI STUDIO E RISULTATI
+             ================================================================= -->
+        <section id="casi-studio" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Casi studio</p>
+                    <h2>Risultati reali, percorsi reali</h2>
+                    <p class="section-intro">
+                        Trascina lo slider per confrontare la pelle prima e dopo il percorso.
+                        <strong>Contenuto in fase di completamento.</strong>
+                    </p>
+                </div>
+
+                <div id="casi-grid" class="card-grid card-grid--cases">
+                    <!-- Generato da script.js — renderCaseStudies() -->
+                </div>
+
+                <p class="disclaimer">
+                    I risultati possono variare in base alle condizioni iniziali della pelle,
+                    alla risposta individuale e alla costanza nel seguire il percorso.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             8. VIDEO E FORMAZIONE
+             ================================================================= -->
+        <section id="formazione" class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Video e formazione</p>
+                    <h2>Impara con la Master Trainer</h2>
+                    <p class="section-intro">
+                        Video introduttivi, protocolli pratici e approfondimenti sugli attivi.
+                        <strong>I link ai video verranno aggiunti a breve.</strong>
+                    </p>
+                </div>
+
+                <div id="video-filters" class="filter-bar" role="group" aria-label="Filtra i video per categoria"></div>
+                <div id="video-grid" class="card-grid">
+                    <!-- Generato da script.js — renderVideos() -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             9. MATERIALI
+             ================================================================= -->
+        <section id="materiali" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Materiali</p>
+                    <h2>Libreria documenti</h2>
+                    <p class="section-intro">
+                        Schede tecniche, brochure, protocolli, listini e materiali pronti all'uso.
+                    </p>
+                </div>
+
+                <div id="materiali-filters" class="filter-bar" role="group" aria-label="Filtra i materiali per categoria"></div>
+                <div id="materiali-grid" class="card-grid">
+                    <!-- Generato da script.js — renderResources() -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             10. FAQ E SUPPORTO
+             ================================================================= -->
+        <section id="faq" class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">FAQ</p>
+                    <h2>Domande frequenti</h2>
+                    <p class="section-intro">Filtra le domande per argomento.</p>
+                </div>
+
+                <div id="faq-filters" class="filter-bar" role="group" aria-label="Filtra le FAQ per argomento"></div>
+                <div id="faq-list" class="faq-list">
+                    <!-- Generato da script.js — renderFaq() -->
+                </div>
+
+                <div class="support-panel">
+                    <h3>Serve supporto?</h3>
+                    <div class="support-grid">
+                        <div class="support-card">
+                            <h4>Referente commerciale</h4>
+                            <p class="support-card__placeholder">[Nome referente da inserire]</p>
+                            <p class="support-card__placeholder">[Telefono / email da inserire]</p>
+                        </div>
+                        <div class="support-card">
+                            <h4>Master Trainer</h4>
+                            <p>Annarita</p>
+                            <p class="support-card__placeholder">[Contatto Master Trainer da inserire]</p>
+                        </div>
+                        <div class="support-card">
+                            <h4>Assistenza tecnica piattaforma</h4>
+                            <p class="support-card__placeholder">[Email assistenza tecnica da inserire]</p>
+                        </div>
+                        <div class="support-card">
+                            <h4>Email</h4>
+                            <p class="support-card__placeholder">[indirizzo@email-da-inserire.it]</p>
+                        </div>
+                        <div class="support-card">
+                            <h4>WhatsApp</h4>
+                            <p class="support-card__placeholder">[Numero WhatsApp da inserire]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =====================================================================
+         MODAL GENERICO (schede tecniche, piani, home care)
+         ===================================================================== -->
+    <dialog id="detailModal" class="modal">
+        <div class="modal__inner">
+            <button id="modalClose" type="button" class="modal__close" aria-label="Chiudi la scheda">×</button>
+            <div id="modalBody" class="modal__body">
+                <!-- Popolato dinamicamente da script.js -->
+            </div>
+        </div>
+    </dialog>
+
+    <!-- =====================================================================
+         FOOTER
+         ===================================================================== -->
+    <footer class="site-footer">
+        <div class="container site-footer__inner">
+            <p>Protocollo Pelle Sana — FIDEST × InLab medical</p>
+            <p>&copy; <span id="currentYear"></span> FIDEST. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

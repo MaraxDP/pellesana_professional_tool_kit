@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Il mio progetto interattivo</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <section class="hero">
+            <p class="eyebrow">PROGETTO DIGITALE</p>
+
+            <h1>Il mio primo progetto interattivo</h1>
+
+            <p class="description">
+                Questa pagina è stata creata con HTML, CSS e JavaScript.
+            </p>
+
+            <button id="actionButton" type="button">
+                Clicca qui
+            </button>
+
+            <p id="resultMessage" class="result-message"></p>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
