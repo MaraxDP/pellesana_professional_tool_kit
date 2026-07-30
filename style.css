@@ -53,7 +53,8 @@
     --radius-md: 14px;
     --radius-sm: 8px;
 
-    --font-base: Inter, Manrope, "Helvetica Neue", Arial, sans-serif;
+    --font-heading: "Cinzel", serif;
+    --font-body: "Open Sans", sans-serif;
 
     --header-height: 76px;
 }
@@ -66,7 +67,8 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: var(--font-base);
+    font-family: var(--font-body);
+    font-weight: 400;
     background: var(--warm-white);
     color: var(--text);
     line-height: 1.65;
@@ -74,12 +76,28 @@ body {
 }
 
 h1, h2, h3, h4 {
-    font-family: var(--font-base);
-    font-weight: 700;
+    font-family: var(--font-heading);
+    font-weight: 600;
     color: var(--navy);
     margin: 0 0 16px;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
+    line-height: 1.25;
+    letter-spacing: 0.015em;
+}
+
+h1 {
+    font-size: clamp(30px, 4.4vw, 50px);
+}
+
+h2 {
+    font-size: clamp(25px, 3.2vw, 34px);
+}
+
+h3 {
+    font-size: clamp(20px, 2.4vw, 25px);
+}
+
+h4 {
+    font-size: clamp(17px, 1.8vw, 20px);
 }
 
 p {
@@ -101,8 +119,27 @@ ul, ol {
     list-style: none;
 }
 
-button, select {
-    font-family: inherit;
+button, input, select, textarea, table {
+    font-family: var(--font-body);
+}
+
+/* Gerarchia tipografica principale: titoli semantici e titoli UI. */
+.eyebrow,
+.brand__fallback,
+.protocol-card__title,
+.phases-guides__word,
+.phases__number,
+.phases__name,
+.phase-plan__title,
+.list-row__title,
+.plan-row__title,
+.video-editorial__eyebrow,
+.video-editorial__title,
+.modal__title,
+.modal__subtitle,
+.case-split__name {
+    font-family: var(--font-heading);
+    font-weight: 600;
 }
 
 
@@ -138,7 +175,7 @@ button, select {
     gap: 8px;
     margin: 0 0 12px;
     font-size: 12.5px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--navy);
@@ -202,7 +239,7 @@ button, select {
 /* Testo di riserva, non stilizzato come logo: compare solo se il file
    assets/img/logo/logo-protocollo-pelle-sana.png non è ancora presente. */
 .brand__fallback {
-    font-weight: 700;
+    font-weight: 600;
     color: var(--navy);
     font-size: 17px;
 }
@@ -293,7 +330,7 @@ button, select {
     padding: 14px 26px;
     border-radius: 100px;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: none;
     cursor: pointer;
     border: 1.5px solid transparent;
@@ -373,8 +410,8 @@ button, select {
 }
 
 .video-hero__title {
-    font-size: clamp(32px, 4.4vw, 52px);
-    font-weight: 800;
+    font-size: clamp(30px, 4.4vw, 50px);
+    font-weight: 600;
     margin: 0 0 16px;
 }
 
@@ -414,7 +451,7 @@ button, select {
     gap: 8px;
     background: linear-gradient(160deg, var(--ivory), var(--white));
     color: var(--navy-soft);
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .video-hero__media.is-fallback .video-hero__video {
@@ -444,21 +481,130 @@ button, select {
    6. IL PROTOCOLLO / TIMELINE
    ========================================================================= */
 
-.method-points {
+.protocol-copy {
+    max-width: 720px;
+    margin: 0 auto 40px;
+}
+
+.protocol-copy p {
+    margin: 0 0 16px;
+    color: var(--text);
+    font-size: 15.5px;
+}
+
+.protocol-copy p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Card accordion: Filosofia / Metodo / Obiettivo --- */
+
+.protocol-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    align-items: start;
+    gap: 18px;
     margin-bottom: 48px;
 }
 
-.method-points li {
+.protocol-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.protocol-card:hover {
+    border-color: var(--nude);
+    box-shadow: var(--shadow-card);
+}
+
+.protocol-card.is-open {
+    border-color: var(--nude);
+}
+
+.protocol-card__heading {
+    margin: 0;
+    font-weight: normal;
+}
+
+.protocol-card__trigger {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 18px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+}
+
+.protocol-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: var(--ivory);
     border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 18px;
-    font-weight: 600;
     color: var(--navy);
-    font-size: 14px;
+}
+
+.protocol-card__icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+.protocol-card__title {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--navy);
+}
+
+.protocol-card__chevron {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+    font-size: 13px;
+    transition: transform 0.25s ease;
+}
+
+.protocol-card.is-open .protocol-card__chevron {
+    transform: rotate(180deg);
+}
+
+.protocol-card__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
+}
+
+.protocol-card.is-open .protocol-card__panel {
+    grid-template-rows: 1fr;
+}
+
+.protocol-card__panel-inner {
+    overflow: hidden;
+    min-height: 0;
+}
+
+.protocol-card__panel-inner p {
+    margin: 0;
+    padding: 0 20px 20px 72px;
+    color: var(--text-soft);
+    font-size: 14.5px;
 }
 
 .phases-head {
@@ -503,7 +649,7 @@ button, select {
 .phases-guides__word {
     display: block;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--navy);
@@ -571,7 +717,7 @@ button, select {
 .phases__number {
     display: block;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 3px;
     color: var(--nude);
     margin-bottom: 6px;
@@ -611,7 +757,7 @@ button, select {
 .phase-plan__title {
     display: block;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--navy);
@@ -718,7 +864,7 @@ button, select {
     background: transparent;
     color: var(--text-soft);
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
@@ -787,7 +933,7 @@ button, select {
 
 .list-row__title {
     font-size: 16.5px;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--navy);
     margin: 0 0 4px;
 }
@@ -823,8 +969,8 @@ button, select {
     align-self: flex-start;
     background: var(--champagne);
     color: var(--navy);
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: 4px 10px;
@@ -851,8 +997,8 @@ button, select {
 
 .badge {
     display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     padding: 4px 10px;
@@ -902,7 +1048,7 @@ button, select {
 
 .plan-row__title {
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--navy);
     margin: 0 0 4px;
 }
@@ -924,7 +1070,7 @@ button, select {
 }
 
 .plan-row__meta dt {
-    font-size: 10.5px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--nude);
@@ -933,7 +1079,7 @@ button, select {
 
 .plan-row__meta dd {
     margin: 0;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--navy);
     font-size: 13px;
 }
@@ -1060,8 +1206,8 @@ button, select {
 
 .video-editorial__eyebrow {
     margin: 0 0 8px;
-    font-size: 11.5px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--nude);
@@ -1179,7 +1325,7 @@ button, select {
 
 .modal__subtitle {
     color: var(--nude);
-    font-weight: 700;
+    font-weight: 600;
     margin: 0 0 18px;
 }
 
@@ -1233,16 +1379,6 @@ button, select {
     flex-wrap: wrap;
     gap: 6px;
 }
-
-.note-flag {
-    background: var(--champagne);
-    color: var(--navy-dark);
-    font-size: 13px;
-    font-weight: 700;
-    padding: 10px 14px;
-    border-radius: var(--radius-sm);
-}
-
 
 /* =========================================================================
    10. RISULTATI / SPLIT PRIMA-DOPO
@@ -1307,8 +1443,8 @@ button, select {
     position: absolute;
     top: 12px;
     z-index: 2;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     background: rgba(33, 63, 94, 0.75);
@@ -1472,10 +1608,6 @@ button, select {
 }
 
 @media (max-width: 960px) {
-    .method-points {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .case-split {
         grid-template-columns: 1fr;
     }
@@ -1490,8 +1622,21 @@ button, select {
 }
 
 @media (max-width: 720px) {
-    .method-points {
+    .modal__actions {
+        flex-direction: column;
+    }
+
+    .modal__actions .btn {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    .protocol-cards {
         grid-template-columns: 1fr;
+    }
+
+    .protocol-card__panel-inner p {
+        padding-left: 20px;
     }
 
     .phases-head {

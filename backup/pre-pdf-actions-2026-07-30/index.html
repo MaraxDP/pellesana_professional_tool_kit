@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Protocollo Pelle Sana | FIDEST × InLab medical</title>
+    <meta name="description" content="Protocollo Pelle Sana: il metodo FIDEST con i prodotti professionali InLab. Piani di trattamento, attivi professionali, home care, risultati e formazione per estetiste e professioniste.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================================
+         HEADER / NAVIGAZIONE
+         ===================================================================== -->
+    <header class="site-header">
+        <div class="site-header__inner container">
+            <a class="brand" href="#hero" aria-label="Protocollo Pelle Sana — torna alla home">
+                <!-- LOGO UFFICIALE PROTOCOLLO PELLE SANA -->
+                <img
+                    src="assets/img/logo/logo-protocollo-pelle-sana.png"
+                    alt="Protocollo Pelle Sana"
+                    class="brand__logo"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"
+                >
+                <span class="brand__fallback" style="display:none;">Protocollo Pelle Sana</span>
+            </a>
+
+            <button
+                id="navToggle"
+                class="nav-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="siteNav"
+                aria-label="Apri/chiudi il menu di navigazione"
+            >
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav id="siteNav" class="site-nav" aria-label="Navigazione principale">
+                <a href="#hero">Home</a>
+                <a href="#metodo">Il Protocollo</a>
+                <a href="#piani">Piani di trattamento</a>
+                <a href="#schede-tecniche">Attivi professionali</a>
+                <a href="#home-care">Home Care</a>
+                <a href="#risultati">Risultati</a>
+                <a href="#formazione">Formazione e risorse</a>
+                <a href="#materiali">Libreria materiali</a>
+                <a href="#supporto">Supporto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =================================================================
+             1. HOME / PRESENTAZIONE — HERO VIDEO
+             ================================================================= -->
+        <section id="hero" class="video-hero">
+            <div class="container video-hero__inner">
+
+                <div class="video-hero__intro">
+                    <h1 class="video-hero__title">La tua pelle, una nuova storia.</h1>
+
+                    <p class="video-hero__desc">
+                        Un percorso professionale personalizzato che combina analisi, trattamenti,
+                        attivi, tecnologie e skincare domiciliare.
+                    </p>
+                </div>
+
+                <div class="video-hero__media">
+                    <video
+                        id="heroVideo"
+                        class="video-hero__video"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        preload="metadata"
+                        poster="assets/img/hero/hero-video-cover.jpg"
+                    >
+                        <source
+                            src="assets/video/pelle-sana-hero.mp4"
+                            type="video/mp4"
+                            onerror="this.closest('.video-hero__media').classList.add('is-fallback')"
+                        >
+                        Il tuo browser non supporta la riproduzione video. Il percorso Protocollo Pelle
+                        Sana è comunque descritto nella sezione "Il Protocollo" più sotto.
+                    </video>
+
+                    <div class="video-hero__fallback" aria-hidden="true">
+                        <span>Video in arrivo</span>
+                        <span class="video-hero__fallback-note">assets/video/pelle-sana-hero.mp4</span>
+                    </div>
+                </div>
+
+                <div class="video-hero__cta">
+                    <a class="btn btn--primary" href="#metodo">Scopri il protocollo</a>
+                    <a class="btn btn--outline" href="#piani">Esplora i piani</a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             2. IL PROTOCOLLO
+             ================================================================= -->
+        <section id="metodo" class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Il Protocollo</p>
+                    <p class="section-intro">
+                        Protocollo Pelle Sana è il sistema di estetica d'avanguardia firmato FIDEST × InLab
+                        medical per il trattamento professionale del viso: un percorso strutturato — Rivitalizza,
+                        Rinnova, Rigenera — pensato per restituire alla pelle nuova energia e capacità di
+                        funzionare al meglio nel tempo.
+                    </p>
+                </div>
+
+                <div class="protocol-copy">
+                    <p>
+                        La filosofia che lo guida nasce da un principio semplice: non limitarsi a correggere
+                        i segni visibili del tempo, ma stimolare i processi biologici della pelle affinché
+                        ritrovi equilibrio, funzionalità e capacità di rigenerarsi. Una combinazione
+                        personalizzata di attivi professionali, tecnologie estetiche e skincare domiciliare
+                        accompagna ogni percorso in modo progressivo, non invasivo e senza tempi di recupero.
+                    </p>
+                    <p>
+                        Non inseguiamo una perfezione artificiale e temporanea, ma una visione più evoluta
+                        della cura della pelle: la <strong>Skin Longevity</strong>. Preservare nel tempo una
+                        pelle sana, vitale e luminosa, rispettandone gli equilibri biologici e valorizzandone
+                        la naturale capacità di autorigenerazione — è l'estetica rigenerativa che ridefinisce
+                        il trattamento viso come percorso di miglioramento progressivo della qualità della pelle.
+                    </p>
+                </div>
+
+                <div class="protocol-cards" role="list">
+                    <div class="protocol-card" role="listitem">
+                        <h3 class="protocol-card__heading">
+                            <button
+                                type="button"
+                                class="protocol-card__trigger"
+                                id="protocolCardFilosofiaTrigger"
+                                aria-expanded="false"
+                                aria-controls="protocolCardFilosofiaPanel"
+                            >
+                                <span class="protocol-card__icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20C6 10 12 4 20 4c0 8-6 14-14 14H6z"/><path d="M6 20c3-5 7-9 13-12"/></svg>
+                                </span>
+                                <span class="protocol-card__title">Filosofia</span>
+                                <span class="protocol-card__chevron" aria-hidden="true">⌄</span>
+                            </button>
+                        </h3>
+                        <div
+                            id="protocolCardFilosofiaPanel"
+                            class="protocol-card__panel"
+                            role="region"
+                            aria-labelledby="protocolCardFilosofiaTrigger"
+                            aria-hidden="true"
+                        >
+                            <div class="protocol-card__panel-inner">
+                                <p>
+                                    Il Protocollo Pelle Sana nasce da una visione dell'estetica che mette al
+                                    centro la rigenerazione dei tessuti piuttosto che il semplice trattamento
+                                    dei segni dell'invecchiamento cutaneo. L'obiettivo è favorire una pelle più
+                                    sana, forte e funzionale nel tempo, lavorando sui naturali processi
+                                    biologici di autoriparazione.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="protocol-card" role="listitem">
+                        <h3 class="protocol-card__heading">
+                            <button
+                                type="button"
+                                class="protocol-card__trigger"
+                                id="protocolCardMetodoTrigger"
+                                aria-expanded="false"
+                                aria-controls="protocolCardMetodoPanel"
+                            >
+                                <span class="protocol-card__icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="15.5 8.5 13.2 13.2 8.5 15.5 10.8 10.8 15.5 8.5"/></svg>
+                                </span>
+                                <span class="protocol-card__title">Metodo</span>
+                                <span class="protocol-card__chevron" aria-hidden="true">⌄</span>
+                            </button>
+                        </h3>
+                        <div
+                            id="protocolCardMetodoPanel"
+                            class="protocol-card__panel"
+                            role="region"
+                            aria-labelledby="protocolCardMetodoTrigger"
+                            aria-hidden="true"
+                        >
+                            <div class="protocol-card__panel-inner">
+                                <p>
+                                    Ogni percorso viene costruito su misura attraverso un'analisi professionale
+                                    della pelle e un'anamnesi fotografica che consente di valutare parametri
+                                    specifici e monitorarne l'evoluzione trattamento dopo trattamento. Il
+                                    protocollo combina attivi professionali, tecnologie estetiche e skincare
+                                    domiciliare in un percorso personalizzato, non invasivo e senza tempi di
+                                    recupero.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="protocol-card" role="listitem">
+                        <h3 class="protocol-card__heading">
+                            <button
+                                type="button"
+                                class="protocol-card__trigger"
+                                id="protocolCardObiettivoTrigger"
+                                aria-expanded="false"
+                                aria-controls="protocolCardObiettivoPanel"
+                            >
+                                <span class="protocol-card__icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+                                </span>
+                                <span class="protocol-card__title">Obiettivo</span>
+                                <span class="protocol-card__chevron" aria-hidden="true">⌄</span>
+                            </button>
+                        </h3>
+                        <div
+                            id="protocolCardObiettivoPanel"
+                            class="protocol-card__panel"
+                            role="region"
+                            aria-labelledby="protocolCardObiettivoTrigger"
+                            aria-hidden="true"
+                        >
+                            <div class="protocol-card__panel-inner">
+                                <p>
+                                    Promuovere una pelle sana, vitale e luminosa nel tempo, rispettandone gli
+                                    equilibri biologici e stimolandone la naturale capacità rigenerativa. Non
+                                    inseguire una perfezione artificiale, ma costruire un miglioramento reale,
+                                    progressivo e duraturo della qualità della pelle.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phases-head">
+                    <h3 class="phases-head__title">Le 3 fasi del protocollo</h3>
+                    <p class="phases-head__intro">
+                        Un percorso progressivo, costruito per rivitalizzare, rinnovare e rigenerare
+                        la pelle nel tempo.
+                    </p>
+                </div>
+
+                <ul class="phases-guides" aria-label="I tre principi del Protocollo Pelle Sana">
+                    <li class="phases-guides__item">
+                        <span class="phases-guides__word">Rivitalizza</span>
+                        <span class="phases-guides__claim">Risveglia l'energia e la vitalità della pelle.</span>
+                    </li>
+                    <li class="phases-guides__item">
+                        <span class="phases-guides__word">Rinnova</span>
+                        <span class="phases-guides__claim">Migliora idratazione, compattezza e qualità cutanea.</span>
+                    </li>
+                    <li class="phases-guides__item">
+                        <span class="phases-guides__word">Rigenera</span>
+                        <span class="phases-guides__claim">Consolida i risultati e li mantiene nel tempo.</span>
+                    </li>
+                </ul>
+
+                <ol id="metodoTimeline" class="phases">
+                    <!-- Generato da script.js — renderMetodoTimeline() -->
+                </ol>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             3. PIANI DI TRATTAMENTO
+             ================================================================= -->
+        <section id="piani" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Piani di trattamento</p>
+                    <h2>Un piano per ogni problematica</h2>
+                    <p class="section-intro">
+                        Filtra i piani per problematica. Titolo, obiettivo e durata sono sempre visibili;
+                        apri ogni riga per i dettagli tecnici completi.
+                    </p>
+                </div>
+
+                <div id="piani-filters" class="filter-bar" role="group" aria-label="Filtra i piani per problematica"></div>
+                <div id="piani-list" class="list">
+                    <!-- Generato da script.js — renderTreatmentPlans() -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             4. ATTIVI PROFESSIONALI
+             ================================================================= -->
+        <section id="schede-tecniche" class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Attivi professionali</p>
+                    <h2>Gli attivi InLab del protocollo</h2>
+                    <p class="section-intro">
+                        Filtra per categoria e apri la scheda completa di ciascun prodotto professionale.
+                        Dati tratti dalle schede tecniche ufficiali InLab.
+                    </p>
+                </div>
+
+                <div id="schede-filters" class="filter-bar" role="group" aria-label="Filtra gli attivi professionali per categoria"></div>
+                <div id="schede-list" class="list">
+                    <!-- Generato da script.js — renderProfessionalProducts() -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             5. HOME CARE E PRODOTTI DA RIVENDITA
+             ================================================================= -->
+        <section id="home-care" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Home care</p>
+                    <h2>Prodotti da rivendita</h2>
+                    <p class="section-intro">
+                        La linea domiciliare InLab per il mantenimento quotidiano dei risultati
+                        ottenuti in cabina.
+                    </p>
+                </div>
+
+                <div id="homecare-filters" class="filter-bar" role="group" aria-label="Filtra i prodotti home care per categoria"></div>
+                <div id="homecare-list" class="list">
+                    <!-- Generato da script.js — renderRetailProducts() -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             6. RISULTATI
+             ================================================================= -->
+        <section id="risultati" class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Risultati</p>
+                    <h2>Risultati reali, percorsi reali</h2>
+                    <p class="section-intro">
+                        Trascina lo slider per confrontare la pelle prima e dopo il percorso.
+                        <strong>Contenuto in fase di completamento.</strong>
+                    </p>
+                </div>
+
+                <div id="casi-list" class="case-list">
+                    <!-- Generato da script.js — renderCaseStudies() -->
+                </div>
+
+                <p class="disclaimer">
+                    I risultati possono variare in base alle condizioni iniziali della pelle,
+                    alla risposta individuale e alla costanza nel seguire il percorso.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             7. FORMAZIONE E RISORSE
+             ================================================================= -->
+        <section id="formazione" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Formazione e risorse</p>
+                    <h2>Impara con la Master Trainer</h2>
+                    <p class="section-intro">
+                        Video introduttivi, video training, materiali marketing e contenuti sull'anamnesi.
+                        <strong>I contenuti verranno aggiunti a breve.</strong>
+                    </p>
+                </div>
+
+                <div id="formazione-tabs" class="tabs" role="tablist" aria-label="Aree di formazione e risorse"></div>
+                <div id="formazione-list" class="list">
+                    <!-- Generato da script.js — renderFormazione() -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             8. LIBRERIA MATERIALI
+             ================================================================= -->
+        <section id="materiali" class="section section--alt">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Libreria materiali</p>
+                    <h2>Documenti pronti all'uso</h2>
+                    <p class="section-intro">
+                        Brochure, listini, moduli, schede anamnesi e materiale stampabile.
+                    </p>
+                </div>
+
+                <div id="materiali-filters" class="filter-bar" role="group" aria-label="Filtra i materiali per categoria"></div>
+                <div id="materiali-list" class="list">
+                    <!-- Generato da script.js — renderResources() -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================
+             9. SUPPORTO
+             ================================================================= -->
+        <section id="supporto" class="section">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Supporto</p>
+                    <h2>Serve aiuto?</h2>
+                    <p class="section-intro">Qui trovi i riferimenti per ogni tipo di richiesta.</p>
+                </div>
+
+                <div class="support-grid">
+                    <div class="support-card">
+                        <h4>Referente commerciale</h4>
+                        <p class="support-card__placeholder">[Nome referente da inserire]</p>
+                        <p class="support-card__placeholder">[Telefono / email da inserire]</p>
+                    </div>
+                    <div class="support-card">
+                        <h4>Master Trainer</h4>
+                        <p>Annarita</p>
+                        <p class="support-card__placeholder">[Contatto Master Trainer da inserire]</p>
+                    </div>
+                    <div class="support-card">
+                        <h4>Assistenza tecnica piattaforma</h4>
+                        <p class="support-card__placeholder">[Email assistenza tecnica da inserire]</p>
+                    </div>
+                    <div class="support-card">
+                        <h4>Email</h4>
+                        <p class="support-card__placeholder">[indirizzo@email-da-inserire.it]</p>
+                    </div>
+                    <div class="support-card">
+                        <h4>WhatsApp</h4>
+                        <p class="support-card__placeholder">[Numero WhatsApp da inserire]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =====================================================================
+         MODAL GENERICO (piani, attivi professionali, home care, video training)
+         ===================================================================== -->
+    <dialog id="detailModal" class="modal">
+        <div class="modal__inner">
+            <button id="modalClose" type="button" class="modal__close" aria-label="Chiudi la scheda">×</button>
+            <div id="modalBody" class="modal__body">
+                <!-- Popolato dinamicamente da script.js -->
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Torna in alto -->
+    <button id="backToTop" type="button" class="back-to-top" aria-label="Torna all'inizio della pagina">↑</button>
+
+    <!-- =====================================================================
+         FOOTER
+         ===================================================================== -->
+    <footer class="site-footer">
+        <div class="container site-footer__inner">
+            <p>Protocollo Pelle Sana — FIDEST × InLab medical</p>
+            <p>&copy; <span id="currentYear"></span> FIDEST. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
