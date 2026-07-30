@@ -28,14 +28,12 @@
 // Etichette leggibili per le categorie usate nei filtri/tab
 const CATEGORY_LABELS = {
     // Piani di trattamento — problematiche
-    "prevenzione-skin-longevity": "Prevenzione & Skin Longevity",
-    "invecchiamento-avanzato": "Invecchiamento Cutaneo Avanzato",
-    "perdita-tono-compattezza": "Perdita di Tono e Compattezza",
-    "discromie-colorito-spento": "Discromie Cutanee e Colorito Spento",
-    "post-acne-texture": "Esiti Post-Acne e Irregolarità della Texture",
-    "pelle-sensibile": "Pelle Sensibile",
-    "sebo-pelle-acneica": "Eccesso di Sebo e Pelle a Tendenza Acneica",
-    "diradamento-capelli": "Diradamento e Indebolimento dei Capelli",
+    "prevenzione-skin-longevity": "Prevenzione e Skin Longevity",
+    "rughe-perdita-tono": "Rughe e Perdita di Tono",
+    "macchie-discromie": "Macchie e Discromie",
+    "cicatrici-esiti-post-acne": "Cicatrici ed Esiti Post Acne",
+    "colorito-spento": "Colorito Spento",
+    "texture-irregolare": "Texture Irregolare",
     // Attivi professionali
     "acidi-cosmetici": "Acidi Cosmetici",
     "biorivitalizzanti": "Biorivitalizzanti",
@@ -120,107 +118,206 @@ const METODO_FASI = [
 // Ordine fisso delle categorie mostrate nella barra filtri (oltre a "Tutti")
 const PIANI_CATEGORIES = [
     "prevenzione-skin-longevity",
-    "invecchiamento-avanzato",
-    "perdita-tono-compattezza",
-    "discromie-colorito-spento",
-    "post-acne-texture",
-    "pelle-sensibile",
-    "sebo-pelle-acneica",
-    "diradamento-capelli"
+    "rughe-perdita-tono",
+    "macchie-discromie",
+    "cicatrici-esiti-post-acne",
+    "colorito-spento",
+    "texture-irregolare"
 ];
-
-const TREATMENT_LEGEND = {
-    EXO: "Exobio Plus", ADRN: "ADRN Plus", NAD: "NAD Plus Glow", EXHA: "ExoHair Plus",
-    AI3: "Acido Ialuronico 3%", MIX: "Acido Ialuronico 1% + DMAE 1% + Silicio Organico 0,5%",
-    SO: "Silicio Organico", POLI: "Polivitaminico", GF: "Growth Factor GF#1",
-    "VIT C": "Vitamina C 10%", BTX: "Botxlike Argireline 10%", FE: "Flash Eye",
-    DPP: "Depigmenting Peeling Plus", TRAN: "Tranexamic Acid", OSPP: "Oily Skin Peeling Plus",
-    BRC: "Brightening Cocktail", AAP: "Antiaging Peeling Plus"
-};
-
-const TREATMENT_PRODUCT_IDS = {
-    EXO: "exobio-plus", ADRN: "adrn-plus", NAD: "nad-plus-glow", EXHA: "exohair-plus",
-    AI3: "hyaluronic-acid-3", MIX: "mix-ha-dmae-silicio", SO: "organic-silicio-6",
-    POLI: "polyvitaminic", GF: "growth-factor-gf1", "VIT C": "vitamin-c-10",
-    BTX: "botx-like-argireline-10", FE: "flash-eye", DPP: "depigmenting-peeling-plus",
-    TRAN: "tranexamic-acid", OSPP: "oily-skin-peeling-plus", BRC: "brightening-cocktail",
-    AAP: "antiaging-peeling-cocktail"
-};
 
 const treatmentPlans = [
     {
-        id: "protocollo-prevenzione", nome: "Protocollo Prevenzione", categorie: ["prevenzione-skin-longevity"],
-        obiettivo: "Preservare nel tempo vitalità, idratazione e qualità cutanea, sostenendo precocemente i naturali processi di rinnovamento.",
-        condizioniIniziali: "Pelle in buono stato generale, con primi segnali di disidratazione, stanchezza o perdita di luminosità e necessità di prevenzione evolutiva.",
-        durata: "8 mesi + mantenimento domiciliare", note: "La scelta tra AI3 e MIX viene definita dalla professionista in base alla valutazione cutanea.",
-        cicli: [
-            { titolo: "Preparazione rivitalizzante", periodo: "Primi 2 mesi", sedute: [
-                { label: "Seduta 1", fase: "B.R.", attivi: ["EXO", "ADRN"] }, { label: "Seduta 2", fase: "B.R.", attivi: ["EXO", "ADRN"] },
-                { label: "Seduta 3", fase: "B.R.", attivi: ["NAD", "NAD"] }, { label: "Seduta 4", fase: "B.R.", attivi: ["NAD", "NAD"] }
-            ]},
-            { titolo: "Ricostituente", periodo: "Secondi 6 mesi", sedute: [
-                { label: "Seduta 5", fase: "IDR", attivi: ["AI3 / MIX"] }, { label: "Dopo 21 gg", fase: "IDR", attivi: ["AI3 / MIX"] },
-                { label: "Seduta 7", fase: "VIT", attivi: ["POLI"] }, { label: "Seduta 8", fase: "VIT", attivi: ["POLI"] },
-                { label: "Seduta 9", fase: "PRO", attivi: ["GF"] }, { label: "Seduta 10", fase: "PRO", attivi: ["GF"] }
-            ]}
-        ],
-        homeCareIds: ["exobio-facial-cream", "exobio-eye-contour", "exobio-facial-serum", "adrn-pro-facial-cream", "adrn-pro-eye-contour", "adrn-pro-facial-serum"]
+        id: "plan-pelle-spenta",
+        nome: "Piano Luminosità",
+        categorie: ["colorito-spento"],
+        obiettivo: "Restituire luminosità e uniformità all'incarnato spento.",
+        condizioniIniziali: "Incarnato opaco, tono irregolare, pelle stanca e priva di vitalità.",
+        durata: "6-8 settimane",
+        numeroSedute: "4 sedute",
+        frequenza: "Ogni 10-14 giorni",
+        fasePreparatoria: "Detersione profonda + micro-esfoliazione con acidi cosmetici a bassa percentuale.",
+        attiviUtilizzabili: ["Vitamina C 10%", "Brightening Cocktail"],
+        tecnologiaAssociabile: "Dermapen / dermo-veicolazione",
+        trattamentoCosmetico: "NAD Plus Glow",
+        attiviIds: ["vitamin-c-10", "brightening-cocktail", "nad-plus-glow"],
+        homeCare: "Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-serum"],
+        risultatiAttesi: "Incarnato più luminoso e uniforme, pelle visibilmente più vitale.",
+        stato: "bozza"
     },
     {
-        id: "protocollo-lip-eye", nome: "Protocollo Lip Volume & Eye Care", categorie: ["prevenzione-skin-longevity"],
-        obiettivo: "Idratare e valorizzare l'area labbra e migliorare l'aspetto del contorno occhi con un percorso mirato e progressivo.",
-        condizioniIniziali: "Labbra disidratate o poco definite e contorno occhi segnato da secchezza, stanchezza, borse o occhiaie.",
-        durata: "2 mesi", note: "Trattamenti di nano needling effettuati con cadenza settimanale.",
-        cicli: [{ titolo: "Nano needling", periodo: "Cadenza settimanale in 2 mesi", sedute: Array.from({length: 8}, (_, i) => ({ label: `Seduta ${i + 1}`, fase: i < 8 ? "LABBRA / C. OCCHI" : "", attivi: ["AI3", "FE"] })) }],
-        homeCareIds: []
+        id: "plan-disidratazione",
+        nome: "Piano Idratazione Profonda",
+        categorie: ["colorito-spento", "texture-irregolare"],
+        obiettivo: "Ripristinare i livelli di idratazione e la funzione barriera.",
+        condizioniIniziali: "Pelle secca, tirante, con sensazione di disagio e desquamazione.",
+        durata: "6 settimane",
+        numeroSedute: "4 sedute",
+        frequenza: "Settimanale",
+        fasePreparatoria: "Detersione delicata, nessuna esfoliazione aggressiva.",
+        attiviUtilizzabili: ["Hyaluronic Acid 3%", "Mask of Biogel Exoderm"],
+        tecnologiaAssociabile: "Hydrapen / dermo-veicolazione",
+        trattamentoCosmetico: "Polyvitaminic",
+        attiviIds: ["hyaluronic-acid-3", "mask-biogel-exoderm", "polyvitaminic"],
+        homeCare: "Exobio Facial Cream",
+        homeCareIds: ["exobio-facial-cream"],
+        risultatiAttesi: "Pelle più morbida, idratata e confortevole, riduzione della tensione cutanea.",
+        stato: "bozza"
     },
     {
-        id: "protocollo-antiaging", nome: "Protocollo Antiaging", categorie: ["invecchiamento-avanzato"],
-        obiettivo: "Intervenire sui segni avanzati dell'invecchiamento sostenendo rivitalizzazione, idratazione, compattezza e qualità della texture.",
-        condizioniIniziali: "Pelle matura con rughe visibili, perdita di densità, disidratazione e riduzione della luminosità.",
-        durata: "8 mesi", note: "Le alternative indicate con la barra devono essere selezionate secondo la valutazione professionale.",
-        cicli: [
-            { titolo: "Preparazione rivitalizzante", periodo: "Primi 2 mesi", sedute: Array.from({length: 4}, (_, i) => ({ label: `Seduta ${i + 1}`, fase: "B.R. / ACIDI", attivi: ["EXO / NAD", "AAP"] })) },
-            { titolo: "Mantenimento ricostituzione", periodo: "Secondi 6 mesi", sedute: [
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / SO"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / SO"]},
-                {label:"Seduta 7",fase:"VIT",attivi:["VIT C"]},{label:"Seduta 8",fase:"VIT",attivi:["VIT C"]},
-                {label:"Seduta 9",fase:"PRO",attivi:["BTX"]},{label:"Seduta 10",fase:"PRO",attivi:["BTX"]}
-            ]}
-        ], homeCareIds: []
+        id: "plan-rughe-tono",
+        nome: "Piano Tono e Compattezza",
+        categorie: ["rughe-perdita-tono"],
+        obiettivo: "Attenuare le linee di espressione e migliorare tono ed elasticità.",
+        condizioniIniziali: "Rilassamento cutaneo, rughe sottili, perdita di tono su viso e collo.",
+        durata: "8-10 settimane",
+        numeroSedute: "5 sedute",
+        frequenza: "Ogni 10 giorni",
+        fasePreparatoria: "Detersione + peeling anti-age leggero per favorire la penetrazione degli attivi.",
+        attiviUtilizzabili: ["Botx Like Argireline 10%", "Mix 1% HA + DMAE + Silicio organico"],
+        tecnologiaAssociabile: "Dermapen",
+        trattamentoCosmetico: "ADRN Plus",
+        attiviIds: ["botx-like-argireline-10", "mix-ha-dmae-silicio", "adrn-plus"],
+        homeCare: "ADRN Pro Facial Cream",
+        homeCareIds: ["adrn-pro-facial-cream"],
+        risultatiAttesi: "Pelle più tonica e distesa, rughe sottili attenuate.",
+        stato: "bozza"
     },
     {
-        id: "protocollo-lifting-volume", nome: "Protocollo Lifting & Volume", categorie: ["perdita-tono-compattezza"],
-        obiettivo: "Migliorare tono, compattezza e percezione dei volumi attraverso una progressione rivitalizzante e ricostituente.",
-        condizioniIniziali: "Rilassamento cutaneo, perdita di compattezza e volumi meno definiti su viso e collo.",
-        durata: "8 mesi", note: "La scelta tra AI3 e SO viene definita dalla professionista in base alla condizione cutanea.",
-        cicli: [
-            { titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R.",attivi:["ADRN"]})) },
-            { titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / SO"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / SO"]},
-                {label:"Seduta 7",fase:"VIT",attivi:["POLI"]},{label:"Seduta 8",fase:"VIT",attivi:["POLI"]},
-                {label:"Seduta 9",fase:"PRO",attivi:["BTX"]},{label:"Seduta 10",fase:"PRO",attivi:["BTX"]}
-            ]}
-        ], homeCareIds:["adrn-pro-facial-cream","adrn-pro-eye-contour","adrn-pro-facial-serum"]
+        id: "plan-fotoinvecchiamento",
+        nome: "Piano Anti-Fotoinvecchiamento",
+        categorie: ["rughe-perdita-tono", "texture-irregolare"],
+        obiettivo: "Contrastare i segni indotti dall'esposizione solare e dai radicali liberi.",
+        condizioniIniziali: "Pelle disomogenea, texture irregolare, primi segni di fotoinvecchiamento.",
+        durata: "8 settimane",
+        numeroSedute: "4-5 sedute",
+        frequenza: "Ogni 10-14 giorni",
+        fasePreparatoria: "Detersione + esfoliazione con acidi antiossidanti.",
+        attiviUtilizzabili: ["Vitamin C 10%", "Growth Factor GF#1"],
+        tecnologiaAssociabile: "Dermapen",
+        trattamentoCosmetico: "Peptigenol Skin Antiox Ampoules",
+        attiviIds: ["vitamin-c-10", "growth-factor-gf1", "peptigenol-skin-antiox"],
+        homeCare: "ADRN Pro Facial Serum",
+        homeCareIds: ["adrn-pro-facial-serum"],
+        risultatiAttesi: "Texture più uniforme e maggiore protezione antiossidante percepita.",
+        stato: "bozza"
     },
     {
-        id:"protocollo-depigmentante",nome:"Protocollo Depigmentante & Illuminante",categorie:["discromie-colorito-spento"],
-        obiettivo:"Uniformare progressivamente l'incarnato e sostenere luminosità e qualità cutanea nel trattamento professionale delle discromie.",
-        condizioniIniziali:"Macchie, tono disomogeneo, colorito spento o iperpigmentazione visibile.",durata:"8 mesi",
-        note:"Le alternative EXO/NAD e DPP/TRAN devono essere selezionate secondo la valutazione professionale.",
-        cicli:[
-            {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R. / ACIDI",attivi:["EXO / NAD","DPP / TRAN"]}))},
-            {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3","BRC"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3","BRC"]},
-                {label:"Seduta 7",fase:"VIT",attivi:["VIT C","BRC"]},{label:"Seduta 8",fase:"VIT",attivi:["VIT C","BRC"]},
-                {label:"Seduta 9",fase:"PRO",attivi:["GF","BRC"]},{label:"Seduta 10",fase:"PRO",attivi:["GF","BRC"]}
-            ]}
-        ],homeCareIds:[]
+        id: "plan-macchie-discromie",
+        nome: "Piano Uniformità e Depigmentazione",
+        categorie: ["macchie-discromie"],
+        obiettivo: "Uniformare il tono della pelle e ridurre l'aspetto delle macchie.",
+        condizioniIniziali: "Macchie solari, melasma o iperpigmentazione post-infiammatoria.",
+        durata: "8-12 settimane",
+        numeroSedute: "5-6 sedute",
+        frequenza: "Ogni 14 giorni",
+        fasePreparatoria: "Detersione + peeling depigmentante a bassa concentrazione.",
+        attiviUtilizzabili: ["Tranexamic Acid", "Depigmenting Peeling Plus"],
+        tecnologiaAssociabile: "Dermo-veicolazione",
+        trattamentoCosmetico: "Brightening Cocktail",
+        attiviIds: ["tranexamic-acid", "depigmenting-peeling-plus", "brightening-cocktail"],
+        homeCare: "Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-serum"],
+        risultatiAttesi: "Tono più uniforme, riduzione visibile delle discromie nel tempo.",
+        stato: "bozza"
     },
-    {id:"protocollo-skin-repair",nome:"Protocollo Skin Repair",categorie:["post-acne-texture"],obiettivo:"Favorire il miglioramento progressivo della texture e dell'aspetto degli esiti post-acne.",condizioniIniziali:"Esiti post-acne, irregolarità superficiali e texture disomogenea.",durata:"Non specificata nel documento",cicli:[],homeCareIds:["exobio-facial-cream","exobio-eye-contour","exobio-facial-serum"],note:"Il documento ufficiale non riporta la sequenza tecnica delle sedute."},
-    {id:"protocollo-pelle-sensibile",nome:"Protocollo Pelle Sensibile",categorie:["pelle-sensibile"],obiettivo:"Sostenere comfort, equilibrio e qualità della pelle rispettandone la particolare reattività.",condizioniIniziali:"Pelle fragile, reattiva o soggetta a rossore e sensazioni di discomfort.",durata:"Non specificata nel documento",cicli:[],homeCareIds:["adrn-pro-facial-cream","adrn-pro-eye-contour","adrn-pro-facial-serum"],note:"Il documento ufficiale non riporta la sequenza tecnica delle sedute."},
-    {id:"protocollo-sebo-balance",nome:"Protocollo Sebo Balance",categorie:["sebo-pelle-acneica"],obiettivo:"Riequilibrare l'eccesso di sebo e migliorare progressivamente l'aspetto delle imperfezioni.",condizioniIniziali:"Pelle lucida, impura, con pori visibili e tendenza acneica.",durata:"Non specificata nel documento",cicli:[],homeCareIds:["exobio-facial-cream","exobio-eye-contour","exobio-facial-serum"],note:"Il documento ufficiale non riporta la sequenza tecnica delle sedute."},
-    {id:"protocollo-anti-hair-loss",nome:"Protocollo Anti Hair Loss",categorie:["diradamento-capelli"],obiettivo:"Sostenere vitalità del cuoio capelluto e qualità del capello in presenza di diradamento o indebolimento.",condizioniIniziali:"Capelli indeboliti o diradati e cuoio capelluto devitalizzato.",durata:"Non specificata nel documento",cicli:[],homeCareIds:[],note:"Il documento ufficiale non riporta sequenza tecnica né Home Care."}
+    {
+        id: "plan-texture-irregolare",
+        nome: "Piano Levigatezza",
+        categorie: ["texture-irregolare"],
+        obiettivo: "Migliorare la grana della pelle e ridurre la ruvidità superficiale.",
+        condizioniIniziali: "Texture irregolare, pori dilatati, superficie cutanea ruvida.",
+        durata: "6-8 settimane",
+        numeroSedute: "4 sedute",
+        frequenza: "Ogni 10 giorni",
+        fasePreparatoria: "Detersione profonda + scrub meccanico delicato.",
+        attiviUtilizzabili: ["Oily Skin Peeling Plus", "Organic Silicio 6%"],
+        tecnologiaAssociabile: "Dermapen",
+        trattamentoCosmetico: "Micro Peeling",
+        attiviIds: ["oily-skin-peeling-plus", "organic-silicio-6", "micro-peeling"],
+        homeCare: "Exobio Facial Cream",
+        homeCareIds: ["exobio-facial-cream"],
+        risultatiAttesi: "Grana della pelle più fine, superficie più levigata.",
+        stato: "bozza"
+    },
+    {
+        id: "plan-cicatrici-post-acne",
+        nome: "Piano Rigenerazione Post-Acne",
+        categorie: ["cicatrici-esiti-post-acne", "texture-irregolare"],
+        obiettivo: "Favorire la rigenerazione cutanea negli esiti cicatriziali post-acne.",
+        condizioniIniziali: "Esiti cicatriziali, discromie post-infiammatorie, texture irregolare.",
+        durata: "10-12 settimane",
+        numeroSedute: "6 sedute",
+        frequenza: "Ogni 14 giorni",
+        fasePreparatoria: "Detersione + peeling specifico per pelle impura/esiti da acne.",
+        attiviUtilizzabili: ["Antiaging Peeling Cocktail", "Oily Skin Peeling Plus"],
+        tecnologiaAssociabile: "Dermapen",
+        trattamentoCosmetico: "Growth Factor GF#1",
+        attiviIds: ["antiaging-peeling-cocktail", "oily-skin-peeling-plus", "growth-factor-gf1"],
+        homeCare: "Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-serum"],
+        risultatiAttesi: "Miglioramento della texture e dell'aspetto degli esiti cicatriziali.",
+        stato: "bozza"
+    },
+    {
+        id: "plan-pelle-matura",
+        nome: "Piano Pelle Matura",
+        categorie: ["rughe-perdita-tono", "colorito-spento"],
+        obiettivo: "Sostenere globalmente una pelle matura: tono, densità e luminosità.",
+        condizioniIniziali: "Perdita di densità e tono, rughe più marcate, incarnato spento.",
+        durata: "10-12 settimane",
+        numeroSedute: "6 sedute",
+        frequenza: "Ogni 10-14 giorni",
+        fasePreparatoria: "Detersione + preparazione con complesso vitaminico.",
+        attiviUtilizzabili: ["ADRN Plus", "Growth Factor GF#1"],
+        tecnologiaAssociabile: "Dermapen",
+        trattamentoCosmetico: "NAD Plus Glow",
+        attiviIds: ["adrn-plus", "growth-factor-gf1", "nad-plus-glow"],
+        homeCare: "ADRN Pro Facial Cream + ADRN Pro Eye Contour",
+        homeCareIds: ["adrn-pro-facial-cream", "adrn-pro-eye-contour"],
+        risultatiAttesi: "Pelle più densa, tonica e luminosa nel suo complesso.",
+        stato: "bozza"
+    },
+    {
+        id: "plan-pelle-impura",
+        nome: "Piano Riequilibrio Pelle Impura",
+        categorie: ["texture-irregolare"],
+        obiettivo: "Riequilibrare la produzione di sebo e ridurre le imperfezioni.",
+        condizioniIniziali: "Pelle grassa/impura, pori dilatati, tendenza acneica.",
+        durata: "6-8 settimane",
+        numeroSedute: "4-5 sedute",
+        frequenza: "Ogni 10 giorni",
+        fasePreparatoria: "Detersione profonda con schiuma purificante.",
+        attiviUtilizzabili: ["Oily Skin Peeling Plus", "White Mousse Cleansing Foam"],
+        tecnologiaAssociabile: "Dermapen",
+        trattamentoCosmetico: "Oily Skin Peeling Plus",
+        attiviIds: ["oily-skin-peeling-plus", "white-mousse-cleansing-foam"],
+        homeCare: "Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-serum"],
+        risultatiAttesi: "Pelle più equilibrata, minor untuosità e minori imperfezioni.",
+        stato: "bozza"
+    },
+    {
+        id: "plan-prevenzione-longevity",
+        nome: "Piano Skin Longevity",
+        categorie: ["prevenzione-skin-longevity"],
+        obiettivo: "Prevenire i segni dell'invecchiamento e mantenere la pelle in salute nel tempo.",
+        condizioniIniziali: "Pelle ancora sana, in fase di prevenzione, senza problematiche acute.",
+        durata: "Percorso continuativo",
+        numeroSedute: "4 sedute + richiami",
+        frequenza: "Ogni 3-4 settimane",
+        fasePreparatoria: "Detersione + analisi periodica dello stato cutaneo.",
+        attiviUtilizzabili: ["Exobio Plus", "Polyvitaminic"],
+        tecnologiaAssociabile: "Dermapen / LED",
+        trattamentoCosmetico: "Exobio Plus",
+        attiviIds: ["exobio-plus", "polyvitaminic"],
+        homeCare: "Exobio Facial Cream + Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-cream", "exobio-facial-serum"],
+        risultatiAttesi: "Mantenimento nel tempo della qualità e della vitalità cutanea.",
+        stato: "bozza"
+    }
 ];
+
 // -------------------------------------------------------------------------
 // ATTIVI PROFESSIONALI
 // Dati tratti dalle schede tecniche ufficiali InLab (FIDEST).
@@ -1156,110 +1253,73 @@ function initProtocolCards() {
    5. PIANI DI TRATTAMENTO (righe accordion + modal)
    ========================================================================= */
 
-function planCodes(plan) {
-    const codes = new Set();
-    (plan.cicli || []).forEach(ciclo => ciclo.sedute.forEach(seduta => {
-        seduta.attivi.forEach(group => group.split("/").forEach(code => codes.add(code.trim())));
-    }));
-    return [...codes].filter(code => TREATMENT_LEGEND[code]);
-}
-
-function treatmentTimelineHtml(plan) {
-    if (!plan.cicli.length) return `<p class="plan-source-note">${plan.note}</p>`;
-    return plan.cicli.map((ciclo, cycleIndex) => `
-        <section class="treatment-cycle" aria-labelledby="${plan.id}-cycle-${cycleIndex}">
-            <div class="treatment-cycle__head">
-                <span class="treatment-cycle__number">Ciclo ${cycleIndex + 1}</span>
-                <h4 id="${plan.id}-cycle-${cycleIndex}">${ciclo.titolo}</h4>
-                <p>${ciclo.periodo}</p>
-            </div>
-            <ol class="treatment-timeline">
-                ${ciclo.sedute.map(seduta => `
-                    <li class="treatment-timeline__item">
-                        <span class="treatment-timeline__marker" aria-hidden="true"></span>
-                        <div class="treatment-timeline__content">
-                            <span class="treatment-timeline__session">${seduta.label}</span>
-                            <span class="treatment-timeline__phase">${seduta.fase}</span>
-                            <div class="treatment-timeline__badges">${seduta.attivi.map(code => `<span class="treatment-code">${code}</span>`).join("")}</div>
-                        </div>
-                    </li>`).join("")}
-            </ol>
-        </section>`).join("");
-}
-
-function planLegendHtml(plan) {
-    const codes = planCodes(plan);
-    if (!codes.length) return "";
-    return `<div class="treatment-legend"><h4>Legenda delle sigle</h4><dl>
-        ${codes.map(code => `<div><dt>${code}</dt><dd>${TREATMENT_LEGEND[code]}</dd></div>`).join("")}
-    </dl></div>`;
-}
-
-function professionalProductsHtml(plan) {
-    const codes = planCodes(plan);
-    if (!codes.length) return "";
-    return `<div class="treatment-products"><h4>Prodotti professionali</h4><div class="detail-list__chips">
-        ${codes.map(code => {
-            const id = TREATMENT_PRODUCT_IDS[code];
-            return id ? `<button type="button" class="tag tag--link" data-open-product="${id}">${TREATMENT_LEGEND[code]}</button>` : "";
-        }).join("")}
-    </div></div>`;
-}
-
 function planDetailHtml(plan) {
-    const homeCareHtml = plan.homeCareIds.length
-        ? crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail")
-        : `<span class="plan-source-note">Non specificato nel documento ufficiale.</span>`;
     return `
-        <span class="tag">${labelFor(plan.categorie[0])}</span>
+        <span class="badge badge--${plan.stato === 'validato' ? 'validato' : 'bozza'}">${plan.stato === 'validato' ? 'Validato' : 'Bozza'}</span>
         <h3 class="modal__title">${plan.nome}</h3>
-        <p class="modal__subtitle">${plan.durata}</p>
-        <dl class="detail-list plan-overview">
+        <p class="modal__subtitle">${labelFor(plan.categorie[0])}</p>
+        <dl class="detail-list">
             <div><dt>Obiettivo</dt><dd>${plan.obiettivo}</dd></div>
             <div><dt>Condizioni iniziali</dt><dd>${plan.condizioniIniziali}</dd></div>
+            <div><dt>Durata</dt><dd>${plan.durata}</dd></div>
+            <div><dt>Numero di sedute</dt><dd>${plan.numeroSedute}</dd></div>
+            <div><dt>Frequenza</dt><dd>${plan.frequenza}</dd></div>
+            <div><dt>Fase preparatoria</dt><dd>${plan.fasePreparatoria}</dd></div>
+            <div><dt>Attivi utilizzabili</dt><dd class="detail-list__chips">${crossLinkChipsHtml(plan.attiviIds, professionalProducts, "open-product") || plan.attiviUtilizzabili.join(", ")}</dd></div>
+            <div><dt>Tecnologia associabile</dt><dd>${plan.tecnologiaAssociabile}</dd></div>
+            <div><dt>Trattamento cosmetico</dt><dd>${plan.trattamentoCosmetico}</dd></div>
+            <div><dt>Home care</dt><dd class="detail-list__chips">${crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail") || plan.homeCare}</dd></div>
+            <div><dt>Risultati attesi</dt><dd>${plan.risultatiAttesi}</dd></div>
         </dl>
-        <div class="treatment-plan__timeline"><h4>Timeline del trattamento</h4>${treatmentTimelineHtml(plan)}</div>
-        ${professionalProductsHtml(plan)}
-        <div class="treatment-homecare"><h4>Home Care</h4><div class="detail-list__chips">${homeCareHtml}</div></div>
-        ${planLegendHtml(plan)}
-        ${plan.cicli.length ? `<p class="plan-professional-note"><strong>Note professionali:</strong> ${plan.note}</p>` : ""}
     `;
 }
 
 function planRowHtml(plan) {
-    const homeCareHtml = plan.homeCareIds.length
-        ? crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail")
-        : `<span class="plan-source-note">Non specificato nel documento ufficiale.</span>`;
     return `
         <details class="plan-row">
-            <summary class="plan-row__summary" aria-label="Apri ${plan.nome}">
+            <summary class="plan-row__summary">
                 <div class="plan-row__summary-main">
+                    <span class="badge badge--${plan.stato === 'validato' ? 'validato' : 'bozza'}">${plan.stato === 'validato' ? 'Validato' : 'Bozza'}</span>
                     <span class="tag">${labelFor(plan.categorie[0])}</span>
                     <h3 class="plan-row__title">${plan.nome}</h3>
                     <p class="plan-row__objective">${plan.obiettivo}</p>
                 </div>
-                <dl class="plan-row__meta"><div><dt>Durata</dt><dd>${plan.durata}</dd></div></dl>
+                <dl class="plan-row__meta">
+                    <div><dt>Durata</dt><dd>${plan.durata}</dd></div>
+                    <div><dt>Sedute</dt><dd>${plan.numeroSedute}</dd></div>
+                </dl>
                 <span class="plan-row__chevron" aria-hidden="true">⌄</span>
             </summary>
             <div class="plan-row__content">
-                <dl class="detail-list plan-overview">
-                    <div><dt>Obiettivo</dt><dd>${plan.obiettivo}</dd></div>
+                <dl class="detail-list">
                     <div><dt>Condizioni iniziali</dt><dd>${plan.condizioniIniziali}</dd></div>
+                    <div><dt>Frequenza</dt><dd>${plan.frequenza}</dd></div>
+                    <div><dt>Fase preparatoria</dt><dd>${plan.fasePreparatoria}</dd></div>
+                    <div><dt>Attivi utilizzabili</dt><dd class="detail-list__chips">${crossLinkChipsHtml(plan.attiviIds, professionalProducts, "open-product") || plan.attiviUtilizzabili.join(", ")}</dd></div>
+                    <div><dt>Tecnologia associabile</dt><dd>${plan.tecnologiaAssociabile}</dd></div>
+                    <div><dt>Trattamento cosmetico</dt><dd>${plan.trattamentoCosmetico}</dd></div>
+                    <div><dt>Home care</dt><dd class="detail-list__chips">${crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail") || plan.homeCare}</dd></div>
+                    <div><dt>Risultati attesi</dt><dd>${plan.risultatiAttesi}</dd></div>
                 </dl>
-                <div class="treatment-plan__timeline"><h4>Timeline del trattamento</h4>${treatmentTimelineHtml(plan)}</div>
-                ${professionalProductsHtml(plan)}
-                <div class="treatment-homecare"><h4>Home Care</h4><div class="detail-list__chips">${homeCareHtml}</div></div>
-                ${planLegendHtml(plan)}
-                ${plan.cicli.length ? `<p class="plan-professional-note"><strong>Note professionali:</strong> ${plan.note}</p>` : ""}
+                <button type="button" class="btn btn--outline btn--small" data-plan-id="${plan.id}">Apri il piano completo</button>
             </div>
-        </details>`;
+        </details>
+    `;
 }
+
 function renderTreatmentPlans(filter) {
     const list = qs("#piani-list");
     if (!list) return;
     const items = (!filter || filter === "tutti") ? treatmentPlans : treatmentPlans.filter(p => p.categorie.includes(filter));
     list.innerHTML = items.map(planRowHtml).join("") || `<p class="empty-state">Nessun piano trovato per questo filtro.</p>`;
 
+    qsa("[data-plan-id]", list).forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const plan = treatmentPlans.find(p => p.id === btn.dataset.planId);
+            if (plan) openModal(planDetailHtml(plan));
+        });
+    });
     wireCrossLinks(list);
 }
 
