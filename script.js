@@ -1682,14 +1682,19 @@ function initHeroMobilePlayback() {
 
     video.muted = true;
     video.defaultMuted = true;
+    video.autoplay = true;
     video.loop = true;
     video.playsInline = true;
+    video.controls = false;
+    video.preload = "auto";
+    video.setAttribute("autoplay", "");
     video.setAttribute("muted", "");
+    video.setAttribute("loop", "");
     video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
     video.removeAttribute("controls");
 
     const tryPlayback = () => {
-        if (!window.matchMedia("(max-width: 720px)").matches) return;
         const playAttempt = video.play();
         if (playAttempt && typeof playAttempt.catch === "function") {
             playAttempt.catch(() => {});
@@ -1698,6 +1703,13 @@ function initHeroMobilePlayback() {
 
     video.addEventListener("loadedmetadata", tryPlayback);
     video.addEventListener("canplay", tryPlayback, { once: true });
+    video.addEventListener("ended", () => {
+        video.currentTime = 0;
+        tryPlayback();
+    });
+    video.addEventListener("pause", () => {
+        if (!document.hidden && video.ended) tryPlayback();
+    });
     window.addEventListener("pageshow", tryPlayback);
     document.addEventListener("visibilitychange", () => {
         if (!document.hidden) tryPlayback();
