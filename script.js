@@ -216,10 +216,66 @@ const treatmentPlans = [
             ]}
         ],homeCareIds:[]
     },
-    {id:"protocollo-skin-repair",nome:"Protocollo Skin Repair",categorie:["post-acne-texture"],obiettivo:"Favorire il miglioramento progressivo della texture e dell'aspetto degli esiti post-acne.",condizioniIniziali:"Esiti post-acne, irregolarità superficiali e texture disomogenea.",durata:"Non specificata nel documento",cicli:[],homeCareIds:["exobio-facial-cream","exobio-eye-contour","exobio-facial-serum"],note:"Il documento ufficiale non riporta la sequenza tecnica delle sedute."},
-    {id:"protocollo-pelle-sensibile",nome:"Protocollo Pelle Sensibile",categorie:["pelle-sensibile"],obiettivo:"Sostenere comfort, equilibrio e qualità della pelle rispettandone la particolare reattività.",condizioniIniziali:"Pelle fragile, reattiva o soggetta a rossore e sensazioni di discomfort.",durata:"Non specificata nel documento",cicli:[],homeCareIds:["adrn-pro-facial-cream","adrn-pro-eye-contour","adrn-pro-facial-serum"],note:"Il documento ufficiale non riporta la sequenza tecnica delle sedute."},
-    {id:"protocollo-sebo-balance",nome:"Protocollo Sebo Balance",categorie:["sebo-pelle-acneica"],obiettivo:"Riequilibrare l'eccesso di sebo e migliorare progressivamente l'aspetto delle imperfezioni.",condizioniIniziali:"Pelle lucida, impura, con pori visibili e tendenza acneica.",durata:"Non specificata nel documento",cicli:[],homeCareIds:["exobio-facial-cream","exobio-eye-contour","exobio-facial-serum"],note:"Il documento ufficiale non riporta la sequenza tecnica delle sedute."},
-    {id:"protocollo-anti-hair-loss",nome:"Protocollo Anti Hair Loss",categorie:["diradamento-capelli"],obiettivo:"Sostenere vitalità del cuoio capelluto e qualità del capello in presenza di diradamento o indebolimento.",condizioniIniziali:"Capelli indeboliti o diradati e cuoio capelluto devitalizzato.",durata:"Non specificata nel documento",cicli:[],homeCareIds:[],note:"Il documento ufficiale non riporta sequenza tecnica né Home Care."}
+    {
+        id:"protocollo-skin-repair",nome:"Protocollo Skin Repair",categorie:["post-acne-texture"],
+        obiettivo:"Favorire il miglioramento progressivo della texture e dell'aspetto degli esiti post-acne.",
+        condizioniIniziali:"Esiti post-acne, irregolarità superficiali e texture disomogenea.",durata:"8 mesi",
+        cicli:[
+            {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R. / ACIDI",attivi:["ADRN","TRAN"]}))},
+            {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / MIX"]},
+                {label:"Seduta 7",fase:"VIT",attivi:["VIT C"]},{label:"Seduta 8",fase:"VIT",attivi:["VIT C"]},
+                {label:"Seduta 9",fase:"PRO",attivi:["GF"]},{label:"Seduta 10",fase:"PRO",attivi:["GF"]}
+            ]}
+        ],
+        homeCareIds:["adrn-pro-facial-cream","adrn-pro-eye-contour","adrn-pro-facial-serum"],
+        note:"La scelta tra AI3 e MIX viene definita dalla professionista in base alla valutazione cutanea."
+    },
+    {
+        id:"protocollo-pelle-sensibile",nome:"Protocollo Pelle Sensibile",categorie:["pelle-sensibile"],
+        obiettivo:"Sostenere comfort, equilibrio e qualità della pelle rispettandone la particolare reattività.",
+        condizioniIniziali:"Pelle fragile, reattiva o soggetta a rossore e sensazioni di discomfort.",durata:"8 mesi",
+        cicli:[
+            {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R.",attivi:["ADRN"]}))},
+            {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / MIX"]},
+                {label:"Seduta 7",fase:"VIT",attivi:["POLI"]},{label:"Seduta 8",fase:"VIT",attivi:["POLI"]},
+                {label:"Seduta 9",fase:"PRO",attivi:["GF"]},{label:"Seduta 10",fase:"PRO",attivi:["GF"]}
+            ]}
+        ],
+        homeCareIds:["adrn-pro-facial-cream","adrn-pro-eye-contour","adrn-pro-facial-serum"],
+        note:"La scelta tra AI3 e MIX viene definita dalla professionista in base alla valutazione cutanea."
+    },
+    {
+        id:"protocollo-sebo-balance",nome:"Protocollo Sebo Balance",categorie:["sebo-pelle-acneica"],
+        obiettivo:"Riequilibrare l'eccesso di sebo e migliorare progressivamente l'aspetto delle imperfezioni.",
+        condizioniIniziali:"Pelle lucida, impura, con pori visibili e tendenza acneica.",durata:"8 mesi",
+        cicli:[
+            {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R. / ACIDI",attivi:["EXO","OSPP"]}))},
+            {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3"]},
+                {label:"Seduta 7",fase:"VIT",attivi:["POLI"]},{label:"Seduta 8",fase:"VIT",attivi:["POLI"]},
+                {label:"Seduta 9",fase:"PRO",attivi:["GF"]},{label:"Seduta 10",fase:"PRO",attivi:["GF"]}
+            ]}
+        ],
+        homeCareIds:["exobio-facial-cream","exobio-eye-contour","exobio-facial-serum"],
+        note:"L'impiego degli attivi segue la sequenza professionale indicata nel documento ufficiale."
+    },
+    {
+        id:"protocollo-anti-hair-loss",nome:"Protocollo Anti Hair Loss",categorie:["diradamento-capelli"],
+        obiettivo:"Sostenere vitalità del cuoio capelluto e qualità del capello in presenza di diradamento o indebolimento.",
+        condizioniIniziali:"Capelli indeboliti o diradati e cuoio capelluto devitalizzato.",durata:"8 mesi",
+        cicli:[
+            {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R. / ACIDI",attivi:["EXHA"]}))},
+            {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / MIX"]},
+                {label:"Seduta 7",fase:"VIT",attivi:["POLI"]},{label:"Seduta 8",fase:"VIT",attivi:["POLI"]},
+                {label:"Seduta 9",fase:"PRO",attivi:["GF"]},{label:"Seduta 10",fase:"PRO",attivi:["GF"]}
+            ]}
+        ],
+        homeCareIds:[],
+        note:"Il PDF non specifica un Home Care per questo protocollo; la scelta tra AI3 e MIX dipende dalla valutazione professionale."
+    }
 ];
 // -------------------------------------------------------------------------
 // ATTIVI PROFESSIONALI
@@ -1208,8 +1264,8 @@ function professionalProductsHtml(plan) {
 
 function planDetailHtml(plan) {
     const homeCareHtml = plan.homeCareIds.length
-        ? crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail")
-        : `<span class="plan-source-note">Non specificato nel documento ufficiale.</span>`;
+        ? `<div class="treatment-homecare"><h4>Home Care</h4><div class="detail-list__chips">${crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail")}</div></div>`
+        : "";
     return `
         <span class="tag">${labelFor(plan.categorie[0])}</span>
         <h3 class="modal__title">${plan.nome}</h3>
@@ -1220,7 +1276,7 @@ function planDetailHtml(plan) {
         </dl>
         <div class="treatment-plan__timeline"><h4>Timeline del trattamento</h4>${treatmentTimelineHtml(plan)}</div>
         ${professionalProductsHtml(plan)}
-        <div class="treatment-homecare"><h4>Home Care</h4><div class="detail-list__chips">${homeCareHtml}</div></div>
+        ${homeCareHtml}
         ${planLegendHtml(plan)}
         ${plan.cicli.length ? `<p class="plan-professional-note"><strong>Note professionali:</strong> ${plan.note}</p>` : ""}
     `;
@@ -1228,8 +1284,8 @@ function planDetailHtml(plan) {
 
 function planRowHtml(plan) {
     const homeCareHtml = plan.homeCareIds.length
-        ? crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail")
-        : `<span class="plan-source-note">Non specificato nel documento ufficiale.</span>`;
+        ? `<div class="treatment-homecare"><h4>Home Care</h4><div class="detail-list__chips">${crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail")}</div></div>`
+        : "";
     return `
         <details class="plan-row">
             <summary class="plan-row__summary" aria-label="Apri ${plan.nome}">
@@ -1248,7 +1304,7 @@ function planRowHtml(plan) {
                 </dl>
                 <div class="treatment-plan__timeline"><h4>Timeline del trattamento</h4>${treatmentTimelineHtml(plan)}</div>
                 ${professionalProductsHtml(plan)}
-                <div class="treatment-homecare"><h4>Home Care</h4><div class="detail-list__chips">${homeCareHtml}</div></div>
+                ${homeCareHtml}
                 ${planLegendHtml(plan)}
                 ${plan.cicli.length ? `<p class="plan-professional-note"><strong>Note professionali:</strong> ${plan.note}</p>` : ""}
             </div>
