@@ -1020,10 +1020,6 @@ button, input, select, textarea, table {
     padding: 40px 0;
 }
 
-.mobile-list-toggle {
-    display: none;
-}
-
 /* --- Righe prodotto (attivi professionali, home care, formazione, materiali) --- */
 
 .list-row {
@@ -2335,6 +2331,35 @@ button, input, select, textarea, table {
         margin-bottom: 22px;
     }
 
+    #schede-list,
+    #homecare-list,
+    #casi-list {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        overflow-x: auto;
+        overflow-y: visible;
+        padding: 2px 2px 10px;
+        scroll-padding-inline: 2px;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-inline: contain;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #schede-list::-webkit-scrollbar,
+    #homecare-list::-webkit-scrollbar,
+    #casi-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    #schede-list > .list-row,
+    #homecare-list > .list-row {
+        flex: 0 0 min(84vw, 340px);
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+    }
+
     .list-row {
         flex-direction: column;
         align-items: stretch;
@@ -2369,6 +2394,18 @@ button, input, select, textarea, table {
     #schede-list .list-row__side,
     #homecare-list .list-row__side {
         grid-column: 1 / -1;
+    }
+
+    #schede-list .list-row__text,
+    #homecare-list .list-row__text {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    #schede-list .list-row__meta,
+    #homecare-list .list-row__meta {
+        font-size: 12px;
+        line-height: 1.45;
     }
 
     .list-row__title {
@@ -2419,6 +2456,65 @@ button, input, select, textarea, table {
 
     .case-split__body {
         padding: 18px 16px;
+    }
+
+    #casi-list > .case-split {
+        display: block;
+        flex: 0 0 calc(100vw - 44px);
+        align-self: flex-start;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+    }
+
+    .case-split__body {
+        cursor: pointer;
+    }
+
+    .case-split__name {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .case-split__name::after {
+        content: "⌄";
+        flex: 0 0 auto;
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        color: var(--navy);
+        transition: transform 0.25s ease, background-color 0.25s ease;
+    }
+
+    .case-split.is-mobile-open .case-split__name::after {
+        transform: rotate(180deg);
+        background: var(--ivory);
+    }
+
+    .case-split:not(.is-mobile-open) .case-split__body > .case-split__row:nth-of-type(n + 3),
+    .case-split:not(.is-mobile-open) .case-testimonial {
+        display: none;
+    }
+
+    .case-split.is-mobile-open .case-split__body > .case-split__row,
+    .case-split.is-mobile-open .case-testimonial {
+        animation: mobile-card-reveal 0.28s ease both;
+    }
+
+    @keyframes mobile-card-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .ba-slider__range {
@@ -2486,31 +2582,6 @@ button, input, select, textarea, table {
         min-height: 48px;
     }
 
-    .mobile-disclosure-list:not(.is-mobile-expanded) > .mobile-disclosure-item:not(:first-child) {
-        display: none;
-    }
-
-    .mobile-list-toggle:not([hidden]) {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: min(100%, 360px);
-        min-height: 48px;
-        margin: 18px auto 0;
-        padding: 10px 16px;
-    }
-
-    .mobile-list-toggle__icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 28px;
-        height: 28px;
-        border: 1px solid currentColor;
-        border-radius: 50%;
-        font-size: 19px;
-        line-height: 1;
-    }
 }
 
 @media (max-width: 960px) and (orientation: landscape) {
