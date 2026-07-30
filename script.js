@@ -61,6 +61,52 @@ const CATEGORY_LABELS = {
     "materiale-stampabile": "Materiale stampabile"
 };
 
+// Identità cromatica globale degli attivi. Le categorie di filtro esistenti
+// restano invariate; questa mappa assegna a ogni prodotto la famiglia visiva
+// specifica prevista dal color coding del Protocollo Pelle Sana.
+const ACTIVE_COLOR_LABELS = {
+    "biorivitalizzanti": "Biorivitalizzanti",
+    "acidi-esfolianti": "Acidi esfolianti",
+    "acido-depigmentante": "Acido depigmentante",
+    "idratazione": "Idratazione",
+    "vitamine": "Vitamine",
+    "proteine": "Proteine",
+    "depigmentante": "Depigmentante",
+    "contorno-occhi": "Contorno occhi"
+};
+
+const ACTIVE_COLOR_BY_PRODUCT_ID = {
+    "exobio-plus": "biorivitalizzanti",
+    "adrn-plus": "biorivitalizzanti",
+    "exobio-adrn-plus": "biorivitalizzanti",
+    "nad-plus-glow": "biorivitalizzanti",
+    "exohair-plus": "biorivitalizzanti",
+    "depigmenting-peeling-plus": "acidi-esfolianti",
+    "antiaging-peeling-cocktail": "acidi-esfolianti",
+    "oily-skin-peeling-plus": "acidi-esfolianti",
+    "tranexamic-acid": "acido-depigmentante",
+    "hyaluronic-acid-3": "idratazione",
+    "mix-ha-dmae-silicio": "idratazione",
+    "organic-silicio-6": "idratazione",
+    "vitamin-c-10": "vitamine",
+    "polyvitaminic": "vitamine",
+    "botx-like-argireline-10": "proteine",
+    "growth-factor-gf1": "proteine",
+    "brightening-cocktail": "depigmentante",
+    "flash-eye": "contorno-occhi"
+};
+
+const ACTIVE_COLOR_BY_CODE = {
+    EXO: "biorivitalizzanti", ADRN: "biorivitalizzanti", NAD: "biorivitalizzanti", EXHA: "biorivitalizzanti",
+    DPP: "acidi-esfolianti", AAP: "acidi-esfolianti", OSPP: "acidi-esfolianti",
+    TRAN: "acido-depigmentante",
+    AI3: "idratazione", MIX: "idratazione", SO: "idratazione",
+    "VIT C": "vitamine", POLI: "vitamine",
+    BTX: "proteine", GF: "proteine",
+    BRC: "depigmentante",
+    FE: "contorno-occhi"
+};
+
 // Le 3 fasi del Protocollo Pelle Sana, allineate ai principi guida
 // RIVITALIZZA, RINNOVA, RIGENERA (vedi .phases-guides in index.html).
 // Il campo "piano" descrive l'eventuale sotto-timeline della fase, resa come
@@ -970,6 +1016,48 @@ function labelFor(slug) {
     return CATEGORY_LABELS[slug] || slug;
 }
 
+function activeColorClass(category) {
+    return category ? ` active-color active-color--${category}` : "";
+}
+
+function activeCategoryForProduct(productOrId) {
+    const id = typeof productOrId === "string" ? productOrId : productOrId?.id;
+    return ACTIVE_COLOR_BY_PRODUCT_ID[id] || "";
+}
+
+function activeCategoryForCodeGroup(codeGroup) {
+    return String(codeGroup)
+        .split("/")
+        .map(code => ACTIVE_COLOR_BY_CODE[code.trim()])
+        .find(Boolean) || "";
+}
+
+function activeCategoryForName(name) {
+    const normalized = String(name).toLowerCase().trim();
+    const product = professionalProducts.find(item => item.nome.toLowerCase() === normalized);
+    if (product) return activeCategoryForProduct(product);
+    if (normalized.includes("antiaging peeling")) return "acidi-esfolianti";
+    if (normalized.includes("depigmenting peeling")) return "acidi-esfolianti";
+    if (normalized.includes("oily skin peeling")) return "acidi-esfolianti";
+    if (normalized.includes("acido tranexamico") || normalized.includes("tranexamic acid")) return "acido-depigmentante";
+    if (normalized.startsWith("biorivitalizzanti")) return "biorivitalizzanti";
+    if (normalized.startsWith("acidi cosmetici")) return "acidi-esfolianti";
+    return "";
+}
+
+function activeNamesHtml(names) {
+    return String(names).split(",").map(name => {
+        const cleanName = name.trim();
+        return `<span class="active-name${activeColorClass(activeCategoryForName(cleanName))}">${cleanName}</span>`;
+    }).join("");
+}
+
+function activeTagHtml(product) {
+    const category = activeCategoryForProduct(product);
+    const label = ACTIVE_COLOR_LABELS[category] || labelFor(product.categoria[0]);
+    return `<span class="tag${activeColorClass(category)}">${label}</span>`;
+}
+
 // Collegamenti cliccabili tra sezioni (piani ↔ attivi professionali ↔ home
 // care): riusati sia nelle liste sia nel modal generico. Ogni chip apre la
 // scheda corrispondente nello stesso modal, senza aprirne uno nuovo.
@@ -977,7 +1065,8 @@ function crossLinkChipsHtml(ids, list, attr) {
     if (!ids || !ids.length) return "";
     return ids.map(id => {
         const item = list.find(p => p.id === id);
-        return item ? `<button type="button" class="tag tag--link" data-${attr}="${id}">${item.nome}</button>` : "";
+        const category = item ? activeCategoryForProduct(item) : "";
+        return item ? `<button type="button" class="tag tag--link${activeColorClass(category)}" data-${attr}="${id}">${item.nome}</button>` : "";
     }).join("");
 }
 
@@ -1022,7 +1111,8 @@ function buildFilterBar(container, categories, onFilter) {
     container.innerHTML = all.map((cat, i) => {
         const label = cat === "tutti" ? "Tutti" : labelFor(cat);
         const active = i === 0 ? " is-active" : "";
-        return `<button type="button" class="filter-chip${active}" data-filter="${cat}" aria-pressed="${i === 0}">${label}</button>`;
+        const colorCategory = cat === "acidi-cosmetici" ? "acidi-esfolianti" : (cat === "biorivitalizzanti" ? cat : "");
+        return `<button type="button" class="filter-chip${active}${activeColorClass(colorCategory)}" data-filter="${cat}" aria-pressed="${i === 0}">${label}</button>`;
     }).join("");
 
     qsa(".filter-chip", container).forEach(btn => {
@@ -1255,7 +1345,7 @@ function treatmentTimelineHtml(plan) {
                         <div class="treatment-timeline__content">
                             <span class="treatment-timeline__session">${seduta.label}</span>
                             <span class="treatment-timeline__phase">${seduta.fase}</span>
-                            <div class="treatment-timeline__badges">${seduta.attivi.map(code => `<span class="treatment-code">${code}</span>`).join("")}</div>
+                            <div class="treatment-timeline__badges">${seduta.attivi.map(code => `<span class="treatment-code${activeColorClass(activeCategoryForCodeGroup(code))}">${code}</span>`).join("")}</div>
                         </div>
                     </li>`).join("")}
             </ol>
@@ -1266,7 +1356,7 @@ function planLegendHtml(plan) {
     const codes = planCodes(plan);
     if (!codes.length) return "";
     return `<div class="treatment-legend"><h4>Legenda delle sigle</h4><dl>
-        ${codes.map(code => `<div><dt>${code}</dt><dd>${TREATMENT_LEGEND[code]}</dd></div>`).join("")}
+        ${codes.map(code => `<div class="${activeColorClass(ACTIVE_COLOR_BY_CODE[code]).trim()}"><dt>${code}</dt><dd>${TREATMENT_LEGEND[code]}</dd></div>`).join("")}
     </dl></div>`;
 }
 
@@ -1276,7 +1366,7 @@ function professionalProductsHtml(plan) {
     return `<div class="treatment-products"><h4>Prodotti professionali</h4><div class="detail-list__chips">
         ${codes.map(code => {
             const id = TREATMENT_PRODUCT_IDS[code];
-            return id ? `<button type="button" class="tag tag--link" data-open-product="${id}">${TREATMENT_LEGEND[code]}</button>` : "";
+            return id ? `<button type="button" class="tag tag--link${activeColorClass(ACTIVE_COLOR_BY_CODE[code])}" data-open-product="${id}">${TREATMENT_LEGEND[code]}</button>` : "";
         }).join("")}
     </div></div>`;
 }
@@ -1351,16 +1441,17 @@ function initPianiSection() {
 
 function productRowHtml(product) {
     const imgPath = `assets/img/products/professional/${product.id}.jpg`;
+    const category = activeCategoryForProduct(product);
     return `
-        <article class="list-row">
-            ${imgTag(imgPath, product.nome, "list-row__thumb")}
+        <article class="list-row${activeColorClass(category)}">
+            ${imgTag(imgPath, product.nome, `list-row__thumb${activeColorClass(category)}`)}
             <div class="list-row__body">
                 <h3 class="list-row__title">${product.nome}</h3>
                 <p class="list-row__text">${product.funzione}</p>
                 <p class="list-row__meta"><strong>Attivi:</strong> ${product.principiAttivi}</p>
             </div>
             <div class="list-row__side">
-                <span class="tag">${labelFor(product.categoria[0])}</span>
+                ${activeTagHtml(product)}
                 <button type="button" class="btn btn--ghost btn--small" data-product-id="${product.id}">Apri scheda</button>
             </div>
         </article>
@@ -1369,6 +1460,7 @@ function productRowHtml(product) {
 
 function productDetailHtml(product) {
     const imgPath = `assets/img/products/professional/${product.id}.jpg`;
+    const category = activeCategoryForProduct(product);
     const actions = [];
     if (product.pdfUrl) {
         actions.push(
@@ -1386,8 +1478,8 @@ function productDetailHtml(product) {
         : "";
 
     return `
-        ${imgTag(imgPath, product.nome, "modal__img")}
-        <span class="tag">${labelFor(product.categoria[0])}</span>
+        ${imgTag(imgPath, product.nome, `modal__img${activeColorClass(category)}`)}
+        ${activeTagHtml(product)}
         <h3 class="modal__title">${product.nome}</h3>
         <p class="modal__subtitle">${product.quantita}</p>
         <dl class="detail-list">
@@ -1513,7 +1605,7 @@ function caseSplitHtml(caseStudy) {
                 <p class="case-split__row"><strong>Problematica:</strong> ${caseStudy.problematicaIniziale}</p>
                 <p class="case-split__row"><strong>Durata percorso:</strong> ${caseStudy.durata}</p>
                 <p class="case-split__row"><strong>Piano effettuato:</strong> ${caseStudy.pianoEffettuato}</p>
-                <p class="case-split__row"><strong>Attivi:</strong> ${caseStudy.attivi}</p>
+                <p class="case-split__row case-split__row--actives"><strong>Attivi:</strong> <span class="active-name-list">${activeNamesHtml(caseStudy.attivi)}</span></p>
                 <p class="case-split__row"><strong>Tecnologie:</strong> ${caseStudy.tecnologie}</p>
                 <p class="case-split__row"><strong>Home care:</strong> ${caseStudy.homeCare}</p>
                 <p class="case-split__row"><strong>Osservazioni:</strong> ${caseStudy.osservazioni}</p>
@@ -1569,8 +1661,9 @@ function formazioneRowHtml(item) {
 }
 
 function videoTrainingItemHtml(item) {
+    const category = activeCategoryForName(item.title);
     return `
-        <article class="video-editorial__item">
+        <article class="video-editorial__item${activeColorClass(category)}">
             <button type="button" class="video-editorial__cover" data-video-id="${item.id}" aria-label="Guarda il video: ${item.title}">
                 <img src="${item.coverImage}" alt="Copertina del video ${item.title} — Protocollo Pelle Sana" loading="lazy">
                 <span class="video-editorial__play" aria-hidden="true"></span>
@@ -1660,8 +1753,9 @@ function initFormazioneSection() {
    ========================================================================= */
 
 function resourceRowHtml(resource) {
+    const category = activeCategoryForName(item.titolo);
     return `
-        <article class="list-row">
+        <article class="list-row${activeColorClass(category)}">
             <div class="list-row__body">
                 <h3 class="list-row__title">${resource.titolo}</h3>
                 <p class="list-row__text">${resource.descrizione}</p>

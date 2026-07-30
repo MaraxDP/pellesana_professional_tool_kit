@@ -31,7 +31,7 @@
 
 :root {
     /* Palette Protocollo Pelle Sana — il blu profondo è il colore dominante,
-       nude/champagne/sage sono accenti delicati. Nessun rosso in interfaccia. */
+       nude/champagne/sage e tinte pastello di categoria sono accenti identificativi. */
     --navy: #213f5e;
     --navy-dark: #16293d;
     --navy-soft: #3a5a7d;
@@ -45,6 +45,15 @@
     --text-soft: #6d7479;
     --border: #e8dfd9;
     --shadow: rgba(33, 63, 94, 0.08);
+
+    /* Color coding ufficiale delle categorie di attivi */
+    --active-biorivitalizzanti: #eadfce;
+    --active-acidi: #f1d2cf;
+    --active-idratazione: #d9e9f1;
+    --active-vitamine: #f2e4b6;
+    --active-proteine: #dcebc9;
+    --active-depigmentante: #ecd5df;
+    --active-contorno-occhi: #f5edc7;
 
     --shadow-soft: 0 16px 36px var(--shadow);
     --shadow-card: 0 4px 16px var(--shadow);
@@ -1107,6 +1116,112 @@ button, input, select, textarea, table {
 .tag--link:focus-visible {
     background: var(--champagne);
     border-color: var(--champagne);
+}
+
+/* Color coding globale: ogni famiglia usa un'unica tinta ufficiale. */
+.active-color--biorivitalizzanti {
+    --active-bg: var(--active-biorivitalizzanti);
+    --active-border: #cdb797;
+}
+
+.active-color--acidi-esfolianti,
+.active-color--acido-depigmentante {
+    --active-bg: var(--active-acidi);
+    --active-border: #d8a39e;
+}
+
+.active-color--idratazione {
+    --active-bg: var(--active-idratazione);
+    --active-border: #a9cadb;
+}
+
+.active-color--vitamine {
+    --active-bg: var(--active-vitamine);
+    --active-border: #d8c276;
+}
+
+.active-color--proteine {
+    --active-bg: var(--active-proteine);
+    --active-border: #abc98c;
+}
+
+.active-color--depigmentante {
+    --active-bg: var(--active-depigmentante);
+    --active-border: #cba7b7;
+}
+
+.active-color--contorno-occhi {
+    --active-bg: var(--active-contorno-occhi);
+    --active-border: #d8ca83;
+}
+
+.tag.active-color,
+.treatment-code.active-color {
+    background: var(--active-bg);
+    border-color: var(--active-border);
+    color: var(--navy-dark);
+}
+
+.tag--link.active-color:hover,
+.tag--link.active-color:focus-visible {
+    background: var(--active-bg);
+    border-color: var(--navy);
+}
+
+.list-row.active-color {
+    box-shadow: inset 4px 0 0 var(--active-border);
+}
+
+.list-row.active-color:hover {
+    box-shadow: inset 4px 0 0 var(--active-border), var(--shadow-card);
+}
+
+.list-row__thumb.active-color,
+.modal__img.active-color {
+    background: var(--active-bg);
+}
+
+.filter-chip.active-color:not(.is-active) {
+    background: var(--active-bg);
+    border-color: var(--active-border);
+}
+
+.filter-chip.active-color.is-active {
+    background: var(--active-bg);
+    border-color: var(--active-border);
+    color: var(--navy-dark);
+}
+
+.treatment-legend dl div.active-color {
+    border-bottom-color: var(--active-border);
+    box-shadow: inset 3px 0 0 var(--active-border);
+}
+
+.active-name-list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    vertical-align: middle;
+}
+
+.active-name {
+    display: inline-flex;
+    align-items: center;
+}
+
+.active-name.active-color {
+    min-height: 26px;
+    padding: 3px 8px;
+    border: 1px solid var(--active-border);
+    border-radius: 100px;
+    background: var(--active-bg);
+    color: var(--navy-dark);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.video-editorial__item.active-color {
+    box-shadow: inset 4px 0 0 var(--active-border);
 }
 
 .badge {
