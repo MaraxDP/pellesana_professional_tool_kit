@@ -485,7 +485,7 @@ button, select {
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
     list-style: none;
-    max-width: 780px;
+    max-width: 700px;
     margin: 28px auto 0;
     padding: 0;
     text-align: center;
@@ -516,12 +516,14 @@ button, select {
     color: var(--text-soft);
 }
 
-/* --- Timeline editoriale verticale --- */
+/* --- Timeline editoriale verticale (colonna unica) --- */
 
 .phases {
     position: relative;
-    max-width: 960px;
+    max-width: 700px;
     margin: 56px auto 0;
+    list-style: none;
+    padding: 0;
 }
 
 .phases::before {
@@ -529,19 +531,21 @@ button, select {
     position: absolute;
     top: 6px;
     bottom: 6px;
-    left: 50%;
+    left: 5px;
     width: 1px;
     background: var(--border);
-    transform: translateX(-50%);
 }
 
 .phases__item {
     position: relative;
-    width: 50%;
-    padding: 0 0 64px 48px;
+    padding: 0 0 48px 40px;
     opacity: 0;
     transform: translateY(22px);
     transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.phases__item:last-child {
+    padding-bottom: 0;
 }
 
 .phases__item.is-visible {
@@ -549,33 +553,15 @@ button, select {
     transform: none;
 }
 
-.phases__item--right {
-    left: 50%;
-    text-align: left;
-}
-
-.phases__item--left {
-    left: 0;
-    padding: 0 48px 64px 0;
-    text-align: right;
-}
-
 .phases__marker {
     position: absolute;
     top: 4px;
+    left: 0;
     width: 11px;
     height: 11px;
     border-radius: 50%;
     background: var(--warm-white);
     border: 2px solid var(--navy);
-}
-
-.phases__item--right .phases__marker {
-    left: -6px;
-}
-
-.phases__item--left .phases__marker {
-    right: -6px;
 }
 
 .phases__item:nth-child(even) .phases__marker {
@@ -608,20 +594,15 @@ button, select {
     margin: 0;
 }
 
-/* --- Card conclusiva (fase di mantenimento) --- */
+/* --- Fase conclusiva (mantenimento): marker pieno, nessun box --- */
 
-.phases__item--finale .phases__content {
-    background: var(--ivory);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 24px 28px;
+.phases__item--finale .phases__marker {
+    background: var(--navy);
 }
 
-/* --- Sotto-timeline di fase (piano di trattamento) --- */
+/* --- Sotto-timeline di fase: semplice elenco tipografico, senza card --- */
 
 .phase-plan {
-    display: block;
-    text-align: left;
     margin-top: 18px;
     padding-top: 18px;
     border-top: 1px dashed var(--border);
@@ -641,48 +622,44 @@ button, select {
     display: block;
     font-size: 13.5px;
     color: var(--text-soft);
-    margin-bottom: 12px;
+    margin-bottom: 4px;
 }
 
 .phase-plan__options {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .phase-plan__option {
-    flex: 1 1 170px;
-    min-width: 0;
-    background: var(--ivory);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 12px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.phase-plan__options > .phase-plan__option:last-child {
+    border-bottom: none;
 }
 
 .phase-plan__option-name {
-    display: block;
-    font-size: 13.5px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     color: var(--navy);
-    margin-bottom: 4px;
 }
 
 .phase-plan__option-freq {
-    display: block;
-    font-size: 13px;
+    font-size: 13.5px;
     color: var(--text-soft);
 }
 
 .phase-plan__divider {
-    flex: 0 0 auto;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    padding: 6px 0;
+    font-size: 13px;
+    font-style: italic;
     color: var(--nude);
 }
 
@@ -853,6 +830,23 @@ button, select {
     padding: 4px 10px;
     border-radius: 100px;
     white-space: nowrap;
+}
+
+/* Variante cliccabile di .tag, usata per i collegamenti tra piani, attivi
+   e home care (vedi wireCrossLinks in script.js). */
+.tag--link {
+    font-family: inherit;
+    cursor: pointer;
+    background: var(--ivory);
+    color: var(--navy);
+    border: 1px solid var(--border);
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.tag--link:hover,
+.tag--link:focus-visible {
+    background: var(--champagne);
+    border-color: var(--champagne);
 }
 
 .badge {
@@ -1215,6 +1209,31 @@ button, select {
     color: var(--text);
 }
 
+.detail-list__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.modal__related {
+    margin: 0 0 16px;
+}
+
+.modal__related-label {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--nude);
+    margin-bottom: 6px;
+}
+
+.modal__related-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
 .note-flag {
     background: var(--champagne);
     color: var(--navy-dark);
@@ -1483,25 +1502,6 @@ button, select {
         margin-top: 40px;
     }
 
-    .phases::before {
-        left: 20px;
-    }
-
-    .phases__item,
-    .phases__item--left,
-    .phases__item--right {
-        left: 0;
-        width: 100%;
-        text-align: left;
-        padding: 0 0 48px 52px;
-    }
-
-    .phases__item--left .phases__marker,
-    .phases__item--right .phases__marker {
-        left: 14px;
-        right: auto;
-    }
-
     .phases-guides {
         grid-template-columns: 1fr;
         gap: 18px;
@@ -1511,20 +1511,6 @@ button, select {
         border-left: none;
         border-top: 1px solid var(--border);
         padding-top: 16px;
-    }
-
-    .phase-plan__options {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .phase-plan__option {
-        flex-basis: auto;
-    }
-
-    .phase-plan__divider {
-        align-self: center;
-        padding: 2px 0;
     }
 
     .video-hero {

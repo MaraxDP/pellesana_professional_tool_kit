@@ -61,10 +61,11 @@ const CATEGORY_LABELS = {
 
 // Le 3 fasi del Protocollo Pelle Sana, allineate ai principi guida
 // RIVITALIZZA, RINNOVA, RIGENERA (vedi .phases-guides in index.html).
-// Il campo "piano" descrive l'eventuale sotto-timeline della fase:
-// - tipo "alternative": modalità alternative tra cui scegliere (fase 1)
-// - tipo "sequenza": blocchi temporali in successione (fase 2)
-// La fase di mantenimento non prevede una sotto-timeline (piano: null).
+// Il campo "piano" descrive l'eventuale sotto-timeline della fase, resa come
+// semplice elenco tipografico (nessuna card): "separatore" inserisce una
+// riga di raccordo tra le opzioni solo quando sono alternative tra loro
+// (fase 1); nella fase 2 le voci sono già in ordine cronologico, quindi
+// non serve alcun separatore. La fase di mantenimento non ha piano (null).
 const METODO_FASI = [
     {
         id: "preparazione",
@@ -73,9 +74,9 @@ const METODO_FASI = [
         sintesi: "La fase iniziale del percorso: si valuta la pelle e si preparano i tessuti ai trattamenti successivi.",
         dettaglio: "Comprende anamnesi professionale, valutazione iniziale della pelle e definizione del percorso personalizzato, seguite dal trattamento con acidi cosmetici e/o biorivitalizzanti in base alle esigenze cutanee.",
         piano: {
-            tipo: "alternative",
             titolo: "Primi 2 mesi",
             nota: "4 sedute o momenti di trattamento, secondo la modalità più indicata per la pelle della cliente:",
+            separatore: "oppure",
             opzioni: [
                 { nome: "Biorivitalizzanti + microneedling", frequenza: "1 seduta ogni 15–21 giorni" },
                 { nome: "Acidi cosmetici", frequenza: "Ciclo di 4–6 sedute, frequenza settimanale" }
@@ -89,7 +90,6 @@ const METODO_FASI = [
         sintesi: "Il ciclo di ricostituzione: una fase progressiva dedicata a migliorare idratazione, vitalità, compattezza e qualità generale della pelle.",
         dettaglio: "Il percorso prosegue per 6 mesi, con una seduta ogni circa 30 giorni.",
         piano: {
-            tipo: "sequenza",
             titolo: "Successivi 6 mesi",
             nota: "Tre blocchi di attivi, in ordine progressivo:",
             opzioni: [
@@ -139,7 +139,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["Vitamina C 10%", "Brightening Cocktail"],
         tecnologiaAssociabile: "Dermapen / dermo-veicolazione",
         trattamentoCosmetico: "NAD Plus Glow",
+        attiviIds: ["vitamin-c-10", "brightening-cocktail", "nad-plus-glow"],
         homeCare: "Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-serum"],
         risultatiAttesi: "Incarnato più luminoso e uniforme, pelle visibilmente più vitale.",
         stato: "bozza"
     },
@@ -156,7 +158,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["Hyaluronic Acid 3%", "Mask of Biogel Exoderm"],
         tecnologiaAssociabile: "Hydrapen / dermo-veicolazione",
         trattamentoCosmetico: "Polyvitaminic",
+        attiviIds: ["hyaluronic-acid-3", "mask-biogel-exoderm", "polyvitaminic"],
         homeCare: "Exobio Facial Cream",
+        homeCareIds: ["exobio-facial-cream"],
         risultatiAttesi: "Pelle più morbida, idratata e confortevole, riduzione della tensione cutanea.",
         stato: "bozza"
     },
@@ -173,7 +177,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["Botx Like Argireline 10%", "Mix 1% HA + DMAE + Silicio organico"],
         tecnologiaAssociabile: "Dermapen",
         trattamentoCosmetico: "ADRN Plus",
+        attiviIds: ["botx-like-argireline-10", "mix-ha-dmae-silicio", "adrn-plus"],
         homeCare: "ADRN Pro Facial Cream",
+        homeCareIds: ["adrn-pro-facial-cream"],
         risultatiAttesi: "Pelle più tonica e distesa, rughe sottili attenuate.",
         stato: "bozza"
     },
@@ -190,7 +196,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["Vitamin C 10%", "Growth Factor GF#1"],
         tecnologiaAssociabile: "Dermapen",
         trattamentoCosmetico: "Peptigenol Skin Antiox Ampoules",
+        attiviIds: ["vitamin-c-10", "growth-factor-gf1", "peptigenol-skin-antiox"],
         homeCare: "ADRN Pro Facial Serum",
+        homeCareIds: ["adrn-pro-facial-serum"],
         risultatiAttesi: "Texture più uniforme e maggiore protezione antiossidante percepita.",
         stato: "bozza"
     },
@@ -207,7 +215,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["Tranexamic Acid", "Depigmenting Peeling Plus"],
         tecnologiaAssociabile: "Dermo-veicolazione",
         trattamentoCosmetico: "Brightening Cocktail",
+        attiviIds: ["tranexamic-acid", "depigmenting-peeling-plus", "brightening-cocktail"],
         homeCare: "Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-serum"],
         risultatiAttesi: "Tono più uniforme, riduzione visibile delle discromie nel tempo.",
         stato: "bozza"
     },
@@ -224,7 +234,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["Oily Skin Peeling Plus", "Organic Silicio 6%"],
         tecnologiaAssociabile: "Dermapen",
         trattamentoCosmetico: "Micro Peeling",
+        attiviIds: ["oily-skin-peeling-plus", "organic-silicio-6", "micro-peeling"],
         homeCare: "Exobio Facial Cream",
+        homeCareIds: ["exobio-facial-cream"],
         risultatiAttesi: "Grana della pelle più fine, superficie più levigata.",
         stato: "bozza"
     },
@@ -241,7 +253,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["Antiaging Peeling Cocktail", "Oily Skin Peeling Plus"],
         tecnologiaAssociabile: "Dermapen",
         trattamentoCosmetico: "Growth Factor GF#1",
+        attiviIds: ["antiaging-peeling-cocktail", "oily-skin-peeling-plus", "growth-factor-gf1"],
         homeCare: "Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-serum"],
         risultatiAttesi: "Miglioramento della texture e dell'aspetto degli esiti cicatriziali.",
         stato: "bozza"
     },
@@ -258,7 +272,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["ADRN Plus", "Growth Factor GF#1"],
         tecnologiaAssociabile: "Dermapen",
         trattamentoCosmetico: "NAD Plus Glow",
+        attiviIds: ["adrn-plus", "growth-factor-gf1", "nad-plus-glow"],
         homeCare: "ADRN Pro Facial Cream + ADRN Pro Eye Contour",
+        homeCareIds: ["adrn-pro-facial-cream", "adrn-pro-eye-contour"],
         risultatiAttesi: "Pelle più densa, tonica e luminosa nel suo complesso.",
         stato: "bozza"
     },
@@ -275,7 +291,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["Oily Skin Peeling Plus", "White Mousse Cleansing Foam"],
         tecnologiaAssociabile: "Dermapen",
         trattamentoCosmetico: "Oily Skin Peeling Plus",
+        attiviIds: ["oily-skin-peeling-plus", "white-mousse-cleansing-foam"],
         homeCare: "Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-serum"],
         risultatiAttesi: "Pelle più equilibrata, minor untuosità e minori imperfezioni.",
         stato: "bozza"
     },
@@ -292,7 +310,9 @@ const treatmentPlans = [
         attiviUtilizzabili: ["Exobio Plus", "Polyvitaminic"],
         tecnologiaAssociabile: "Dermapen / LED",
         trattamentoCosmetico: "Exobio Plus",
+        attiviIds: ["exobio-plus", "polyvitaminic"],
         homeCare: "Exobio Facial Cream + Exobio Facial Serum",
+        homeCareIds: ["exobio-facial-cream", "exobio-facial-serum"],
         risultatiAttesi: "Mantenimento nel tempo della qualità e della vitalità cutanea.",
         stato: "bozza"
     }
@@ -324,6 +344,7 @@ const professionalProducts = [
         indicazioni: "Pelle spenta, priva di energia, in fase di prevenzione e mantenimento.",
         modalitaUtilizzo: "Uso professionale topico su viso, con applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/exobio-plus.pdf",
         videoUrl: ""
     },
@@ -338,6 +359,7 @@ const professionalProducts = [
         indicazioni: "Rughe, perdita di tono, pelle matura.",
         modalitaUtilizzo: "Uso professionale topico su viso, dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/adrn-plus.pdf",
         videoUrl: ""
     },
@@ -352,6 +374,7 @@ const professionalProducts = [
         indicazioni: "Pelle spenta, stanca, con segni di affaticamento e invecchiamento precoce.",
         modalitaUtilizzo: "Uso professionale topico su viso, dermapen/microneedling.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/nad-plus-glow.pdf",
         videoUrl: ""
     },
@@ -366,6 +389,7 @@ const professionalProducts = [
         indicazioni: "Capelli indeboliti, diradati, cuoio capelluto devitalizzato.",
         modalitaUtilizzo: "Uso professionale topico su cuoio capelluto.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/exohair-plus.pdf",
         videoUrl: ""
     },
@@ -380,6 +404,7 @@ const professionalProducts = [
         indicazioni: "Rughe sottili, perdita di tono, prima fase di preparazione della pelle.",
         modalitaUtilizzo: "Applicazione manuale su viso deterso; valutare neutralizzazione.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/antiaging-peeling-cocktail.pdf",
         videoUrl: ""
     },
@@ -394,6 +419,7 @@ const professionalProducts = [
         indicazioni: "Macchie, melasma, discromie.",
         modalitaUtilizzo: "Applicazione manuale su viso deterso; valutare neutralizzazione.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/depigmenting-peeling-plus.pdf",
         videoUrl: ""
     },
@@ -408,6 +434,7 @@ const professionalProducts = [
         indicazioni: "Pelle impura, acneica, pori dilatati.",
         modalitaUtilizzo: "Applicazione manuale su viso deterso; valutare neutralizzazione.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/oily-skin-peeling-plus.pdf",
         videoUrl: ""
     },
@@ -422,6 +449,7 @@ const professionalProducts = [
         indicazioni: "Disidratazione, pelle spenta, prevenzione delle rughe.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/hyaluronic-acid-3.pdf",
         videoUrl: ""
     },
@@ -436,6 +464,7 @@ const professionalProducts = [
         indicazioni: "Rughe, pelle secca, texture irregolare.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/organic-silicio-6.pdf",
         videoUrl: ""
     },
@@ -450,6 +479,7 @@ const professionalProducts = [
         indicazioni: "Rughe di espressione, perdita di tono.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/botx-like-argireline-10.pdf",
         videoUrl: ""
     },
@@ -464,6 +494,7 @@ const professionalProducts = [
         indicazioni: "Macchie, discromie, incarnato spento.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/brightening-cocktail.pdf",
         videoUrl: ""
     },
@@ -478,6 +509,7 @@ const professionalProducts = [
         indicazioni: "Pelle disidratata, stanca, in fase di mantenimento.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/polyvitaminic.pdf",
         videoUrl: ""
     },
@@ -492,6 +524,7 @@ const professionalProducts = [
         indicazioni: "Fotoinvecchiamento, macchie, incarnato spento.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/vitamin-c-10.pdf",
         videoUrl: ""
     },
@@ -506,6 +539,7 @@ const professionalProducts = [
         indicazioni: "Melasma, macchie post-acne, discromie.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/tranexamic-acid.pdf",
         videoUrl: ""
     },
@@ -520,6 +554,7 @@ const professionalProducts = [
         indicazioni: "Fotoinvecchiamento, macchie, cicatrici post-acne.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/growth-factor-gf1.pdf",
         videoUrl: ""
     },
@@ -534,6 +569,7 @@ const professionalProducts = [
         indicazioni: "Rughe, perdita di tono, flaccidità.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/mix-ha-dmae-silicio.pdf",
         videoUrl: ""
     },
@@ -548,6 +584,7 @@ const professionalProducts = [
         indicazioni: "Borse, occhiaie, segni di stanchezza perioculare.",
         modalitaUtilizzo: "Applicazione manuale o dermapen/hydrapen/dermo-veicolatore.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/flash-eye.pdf",
         videoUrl: ""
     },
@@ -562,6 +599,7 @@ const professionalProducts = [
         indicazioni: "Capelli sfibrati, secchi o trattati chimicamente.",
         modalitaUtilizzo: "Applicare alcune gocce sui capelli asciutti o bagnati.",
         avvertenze: "Non ingerire. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/regenerating-hair-serum.pdf",
         videoUrl: ""
     },
@@ -576,6 +614,7 @@ const professionalProducts = [
         indicazioni: "Disidratazione, pelle sensibile o con rosacea.",
         modalitaUtilizzo: "Applicare sul viso e lasciare in posa 15-30 minuti.",
         avvertenze: "Non usare su cute lesa. Evitare il contatto con gli occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/mask-biogel-exoderm.pdf",
         videoUrl: ""
     },
@@ -590,6 +629,7 @@ const professionalProducts = [
         indicazioni: "Fotoinvecchiamento, cicatrici post-acne, pelle stanca.",
         modalitaUtilizzo: "Massaggiare sulla pelle fino a completo assorbimento.",
         avvertenze: "Non ingerire. Evitare il contatto con gli occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/peptigenol-skin-antiox.pdf",
         videoUrl: ""
     },
@@ -604,6 +644,7 @@ const professionalProducts = [
         indicazioni: "Texture irregolare, fase di preparazione della pelle.",
         modalitaUtilizzo: "Massaggiare con movimenti circolari e risciacquare.",
         avvertenze: "Non ingerire. Evitare il contatto con gli occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/micro-peeling.pdf",
         videoUrl: ""
     },
@@ -618,6 +659,7 @@ const professionalProducts = [
         indicazioni: "Da usare al termine dei peeling con acidi.",
         modalitaUtilizzo: "Nebulizzare sul viso dopo aver protetto gli occhi, quindi risciacquare.",
         avvertenze: "Non ingerire. Evitare il contatto con gli occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/neutralizing-solution.pdf",
         videoUrl: ""
     },
@@ -632,6 +674,7 @@ const professionalProducts = [
         indicazioni: "Post-trattamento labbra.",
         modalitaUtilizzo: "Massaggiare sulle labbra fino a completo assorbimento.",
         avvertenze: "Non ingerire. Evitare il contatto con gli occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/repair-balm.pdf",
         videoUrl: ""
     },
@@ -646,6 +689,7 @@ const professionalProducts = [
         indicazioni: "Fase di preparazione, pelle impura.",
         modalitaUtilizzo: "Massaggiare delicatamente e risciacquare.",
         avvertenze: "Non ingerire. Evitare il contatto con gli occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/white-mousse-cleansing-foam.pdf",
         videoUrl: ""
     },
@@ -660,6 +704,7 @@ const professionalProducts = [
         indicazioni: "Complemento tecnologico ai trattamenti cosmetici, da abbinare secondo obiettivo.",
         modalitaUtilizzo: "Seguire le indicazioni del dispositivo per tempo di posa e colore.",
         avvertenze: "Consultare le istruzioni del dispositivo prima dell'uso.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/bioled-facial-mask.pdf",
         videoUrl: ""
     },
@@ -674,6 +719,7 @@ const professionalProducts = [
         indicazioni: "Post-trattamento labbra, home spa in cabina.",
         modalitaUtilizzo: "Applicare sulle labbra deterse per 15-20 minuti.",
         avvertenze: "Non usare in presenza di ferite o herpes labiale.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/golden-kiss-lip-mask.pdf",
         videoUrl: ""
     },
@@ -688,6 +734,7 @@ const professionalProducts = [
         indicazioni: "Borse, occhiaie, contorno occhi disidratato.",
         modalitaUtilizzo: "Applicare sotto l'area oculare e lasciare in posa 15-20 minuti.",
         avvertenze: "Non usare in presenza di ferite o irritazioni.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/golden-eye-patch.pdf",
         videoUrl: ""
     },
@@ -705,6 +752,7 @@ const professionalProducts = [
         indicazioni: "Pelle spenta e priva di energia con concomitante perdita di tono o pelle matura: indicato quando è utile agire sia sulla rivitalizzazione sia sulla ricostruzione della matrice dermica.",
         modalitaUtilizzo: "Uso professionale topico su viso, applicando in sequenza i due prodotti con dermapen/hydrapen/dermo-veicolatore, secondo protocollo abbinato.",
         avvertenze: "Non ingerire, non iniettare. Evitare il contatto con mucose, ferite e occhi.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/exobio-plus.pdf",
         videoUrl: ""
     },
@@ -721,6 +769,7 @@ const professionalProducts = [
         indicazioni: "Texture cutanea irregolare; trattamenti di dermo-veicolazione mirati su viso e corpo, in abbinamento agli attivi InLab.",
         modalitaUtilizzo: "Regolare velocità e profondità degli aghi in base all'area trattata e al protocollo scelto; utilizzare con cartucce sterili monouso.",
         avvertenze: "Consultare le istruzioni ufficiali del dispositivo prima dell'uso. Utilizzare esclusivamente cartucce sterili monouso.",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         pdfUrl: "assets/docs/schede-tecniche/dr-pen-ultima-a6.pdf",
         videoUrl: ""
     }
@@ -745,6 +794,7 @@ const retailProducts = [
         modalitaUso: "Applicare mattina e/o sera su viso deterso.",
         routine: "mattina-sera",
         prodottoComplementare: "Exobio Facial Serum",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         schedaUrl: "assets/docs/home-care/exobio-facial-cream.pdf"
     },
     {
@@ -758,6 +808,7 @@ const retailProducts = [
         modalitaUso: "Applicare mattina e sera sul contorno occhi deterso.",
         routine: "mattina-sera",
         prodottoComplementare: "Exobio Facial Cream",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         schedaUrl: "assets/docs/home-care/exobio-eye-contour.pdf"
     },
     {
@@ -771,6 +822,7 @@ const retailProducts = [
         modalitaUso: "Applicare mattina e/o sera prima della crema.",
         routine: "mattina-sera",
         prodottoComplementare: "Exobio Facial Cream",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         schedaUrl: "assets/docs/home-care/exobio-facial-serum.pdf"
     },
     {
@@ -784,6 +836,7 @@ const retailProducts = [
         modalitaUso: "Applicare mattina e/o sera su viso deterso.",
         routine: "mattina-sera",
         prodottoComplementare: "ADRN Pro Facial Serum",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         schedaUrl: "assets/docs/home-care/adrn-pro-facial-cream.pdf"
     },
     {
@@ -797,6 +850,7 @@ const retailProducts = [
         modalitaUso: "Applicare mattina e sera sul contorno occhi.",
         routine: "mattina-sera",
         prodottoComplementare: "ADRN Pro Facial Cream",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         schedaUrl: "assets/docs/home-care/adrn-pro-eye-contour.pdf"
     },
     {
@@ -810,6 +864,7 @@ const retailProducts = [
         modalitaUso: "Applicare mattina e/o sera prima della crema.",
         routine: "mattina-sera",
         prodottoComplementare: "ADRN Pro Facial Cream",
+        schedaDisponibile: false, // [VERIFICARE] impostare true quando il PDF reale è disponibile
         schedaUrl: "assets/docs/home-care/adrn-pro-facial-serum.pdf"
     }
 ];
@@ -975,6 +1030,51 @@ function labelFor(slug) {
     return CATEGORY_LABELS[slug] || slug;
 }
 
+// Collegamenti cliccabili tra sezioni (piani ↔ attivi professionali ↔ home
+// care): riusati sia nelle liste sia nel modal generico. Ogni chip apre la
+// scheda corrispondente nello stesso modal, senza aprirne uno nuovo.
+function crossLinkChipsHtml(ids, list, attr) {
+    if (!ids || !ids.length) return "";
+    return ids.map(id => {
+        const item = list.find(p => p.id === id);
+        return item ? `<button type="button" class="tag tag--link" data-${attr}="${id}">${item.nome}</button>` : "";
+    }).join("");
+}
+
+function relatedPlanChipsHtml(productId, idsField) {
+    const related = treatmentPlans.filter(p => (p[idsField] || []).includes(productId));
+    return related.map(p => `<button type="button" class="tag tag--link" data-open-plan="${p.id}">${p.nome}</button>`).join("");
+}
+
+function relatedPlansHtml(productId, idsField) {
+    const chips = relatedPlanChipsHtml(productId, idsField);
+    if (!chips) return "";
+    return `
+        <div class="modal__related">
+            <span class="modal__related-label">Utilizzato nei piani di trattamento</span>
+            <div class="modal__related-chips">${chips}</div>
+        </div>
+    `;
+}
+
+function wireCrossLinks(scope) {
+    qsa("[data-open-plan]", scope).forEach(el => el.addEventListener("click", (e) => {
+        e.preventDefault();
+        const plan = treatmentPlans.find(p => p.id === el.dataset.openPlan);
+        if (plan) openModal(planDetailHtml(plan));
+    }));
+    qsa("[data-open-product]", scope).forEach(el => el.addEventListener("click", (e) => {
+        e.preventDefault();
+        const product = professionalProducts.find(p => p.id === el.dataset.openProduct);
+        if (product) openModal(productDetailHtml(product));
+    }));
+    qsa("[data-open-retail]", scope).forEach(el => el.addEventListener("click", (e) => {
+        e.preventDefault();
+        const product = retailProducts.find(p => p.id === el.dataset.openRetail);
+        if (product) openModal(retailDetailHtml(product));
+    }));
+}
+
 // Costruisce una barra di filtri (pulsanti) dentro il container indicato
 function buildFilterBar(container, categories, onFilter) {
     if (!container) return;
@@ -1004,6 +1104,7 @@ function openModal(html, variant) {
     const body = qs("#modalBody");
     if (!dialog || !body) return;
     body.innerHTML = html;
+    wireCrossLinks(body);
     dialog.classList.toggle("modal--video", variant === "video");
     if (typeof dialog.showModal === "function") {
         dialog.showModal();
@@ -1088,8 +1189,8 @@ function renderMetodoTimeline() {
     const container = qs("#metodoTimeline");
     if (!container) return;
 
-    container.innerHTML = METODO_FASI.map((fase, i) => `
-        <li class="phases__item ${i % 2 === 0 ? "phases__item--right" : "phases__item--left"}${fase.finale ? " phases__item--finale" : ""}">
+    container.innerHTML = METODO_FASI.map(fase => `
+        <li class="phases__item${fase.finale ? " phases__item--finale" : ""}">
             <span class="phases__marker" aria-hidden="true"></span>
             <div class="phases__content">
                 <span class="phases__number">${fase.numero}</span>
@@ -1104,15 +1205,12 @@ function renderMetodoTimeline() {
     initPhasesScrollReveal(container);
 }
 
-// Sotto-timeline di una fase: modalità alternative (fase 1) oppure blocchi
-// temporali in sequenza (fase 2). Un separatore visivo ("oppure" / "→")
-// chiarisce se le voci sono alternative o progressive.
+// Sotto-timeline di una fase, resa come semplice elenco tipografico (senza
+// card): una riga per opzione, con un separatore testuale solo quando le
+// opzioni sono alternative tra loro (vedi piano.separatore).
 function phasePlanHtml(piano) {
-    const isSequenza = piano.tipo === "sequenza";
-    const divider = isSequenza ? "&rarr;" : "oppure";
-
     const optionsHtml = piano.opzioni.map((opzione, i) => `
-        ${i > 0 ? `<li class="phase-plan__divider" aria-hidden="true">${divider}</li>` : ""}
+        ${i > 0 && piano.separatore ? `<li class="phase-plan__divider" aria-hidden="true">${piano.separatore}</li>` : ""}
         <li class="phase-plan__option">
             <span class="phase-plan__option-name">${opzione.nome}</span>
             <span class="phase-plan__option-freq">${opzione.frequenza}</span>
@@ -1123,7 +1221,7 @@ function phasePlanHtml(piano) {
         <div class="phase-plan">
             <span class="phase-plan__title">${piano.titolo}</span>
             ${piano.nota ? `<span class="phase-plan__note">${piano.nota}</span>` : ""}
-            <ul class="phase-plan__options phase-plan__options--${piano.tipo}">
+            <ul class="phase-plan__options">
                 ${optionsHtml}
             </ul>
             ${piano.chiusura ? `<p class="phase-plan__closing">${piano.chiusura}</p>` : ""}
@@ -1170,10 +1268,10 @@ function planDetailHtml(plan) {
             <div><dt>Numero di sedute</dt><dd>${plan.numeroSedute}</dd></div>
             <div><dt>Frequenza</dt><dd>${plan.frequenza}</dd></div>
             <div><dt>Fase preparatoria</dt><dd>${plan.fasePreparatoria}</dd></div>
-            <div><dt>Attivi utilizzabili</dt><dd>${plan.attiviUtilizzabili.join(", ")}</dd></div>
+            <div><dt>Attivi utilizzabili</dt><dd class="detail-list__chips">${crossLinkChipsHtml(plan.attiviIds, professionalProducts, "open-product") || plan.attiviUtilizzabili.join(", ")}</dd></div>
             <div><dt>Tecnologia associabile</dt><dd>${plan.tecnologiaAssociabile}</dd></div>
             <div><dt>Trattamento cosmetico</dt><dd>${plan.trattamentoCosmetico}</dd></div>
-            <div><dt>Home care</dt><dd>${plan.homeCare}</dd></div>
+            <div><dt>Home care</dt><dd class="detail-list__chips">${crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail") || plan.homeCare}</dd></div>
             <div><dt>Risultati attesi</dt><dd>${plan.risultatiAttesi}</dd></div>
         </dl>
     `;
@@ -1200,10 +1298,10 @@ function planRowHtml(plan) {
                     <div><dt>Condizioni iniziali</dt><dd>${plan.condizioniIniziali}</dd></div>
                     <div><dt>Frequenza</dt><dd>${plan.frequenza}</dd></div>
                     <div><dt>Fase preparatoria</dt><dd>${plan.fasePreparatoria}</dd></div>
-                    <div><dt>Attivi utilizzabili</dt><dd>${plan.attiviUtilizzabili.join(", ")}</dd></div>
+                    <div><dt>Attivi utilizzabili</dt><dd class="detail-list__chips">${crossLinkChipsHtml(plan.attiviIds, professionalProducts, "open-product") || plan.attiviUtilizzabili.join(", ")}</dd></div>
                     <div><dt>Tecnologia associabile</dt><dd>${plan.tecnologiaAssociabile}</dd></div>
                     <div><dt>Trattamento cosmetico</dt><dd>${plan.trattamentoCosmetico}</dd></div>
-                    <div><dt>Home care</dt><dd>${plan.homeCare}</dd></div>
+                    <div><dt>Home care</dt><dd class="detail-list__chips">${crossLinkChipsHtml(plan.homeCareIds, retailProducts, "open-retail") || plan.homeCare}</dd></div>
                     <div><dt>Risultati attesi</dt><dd>${plan.risultatiAttesi}</dd></div>
                 </dl>
                 <button type="button" class="btn btn--outline btn--small" data-plan-id="${plan.id}">Apri il piano completo</button>
@@ -1225,6 +1323,7 @@ function renderTreatmentPlans(filter) {
             if (plan) openModal(planDetailHtml(plan));
         });
     });
+    wireCrossLinks(list);
 }
 
 function initPianiSection() {
@@ -1271,8 +1370,9 @@ function productDetailHtml(product) {
             <div><dt>Modalità di utilizzo</dt><dd>${product.modalitaUtilizzo}</dd></div>
             <div><dt>Avvertenze</dt><dd>${product.avvertenze}</dd></div>
         </dl>
+        ${relatedPlansHtml(product.id, "attiviIds")}
         <div class="modal__actions">
-            <a class="btn btn--ghost btn--small" href="${product.pdfUrl}" target="_blank" rel="noopener">Scheda tecnica ufficiale</a>
+            ${product.schedaDisponibile ? `<a class="btn btn--ghost btn--small" href="${product.pdfUrl}" target="_blank" rel="noopener">Scheda tecnica ufficiale</a>` : `<span class="note-flag">Scheda tecnica in arrivo</span>`}
             ${product.videoUrl ? `<a class="btn btn--ghost btn--small" href="${product.videoUrl}" target="_blank" rel="noopener">Video tecnico</a>` : `<span class="note-flag">Video tecnico non ancora disponibile</span>`}
         </div>
     `;
@@ -1331,13 +1431,13 @@ function retailDetailHtml(product) {
         <dl class="detail-list">
             <div><dt>Funzione</dt><dd>${product.funzione}</dd></div>
             <div><dt>Principi attivi</dt><dd>${product.principiAttivi}</dd></div>
-            <div><dt>Piano abbinato</dt><dd>${product.pianoAbbinato}</dd></div>
+            <div><dt>Piano abbinato</dt><dd class="detail-list__chips">${relatedPlanChipsHtml(product.id, "homeCareIds") || product.pianoAbbinato}</dd></div>
             <div><dt>Modalità d'uso</dt><dd>${product.modalitaUso}</dd></div>
             <div><dt>Routine</dt><dd>${product.routine === "mattina-sera" ? "Mattina e sera" : product.routine}</dd></div>
             <div><dt>Prodotto complementare</dt><dd>${product.prodottoComplementare}</dd></div>
         </dl>
         <div class="modal__actions">
-            <a class="btn btn--ghost btn--small" href="${product.schedaUrl}" target="_blank" rel="noopener">Scheda scaricabile</a>
+            ${product.schedaDisponibile ? `<a class="btn btn--ghost btn--small" href="${product.schedaUrl}" target="_blank" rel="noopener">Scheda scaricabile</a>` : `<span class="note-flag">Scheda in arrivo</span>`}
         </div>
     `;
 }
