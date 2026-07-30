@@ -1825,29 +1825,40 @@ button, input, select, textarea, table {
    11. SUPPORTO
    ========================================================================= */
 
-.support-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 18px;
-}
-
-.support-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 22px;
+.support-cta {
     text-align: center;
 }
 
-.support-card h4 {
-    font-size: 15px;
-    margin-bottom: 8px;
+.support-cta__content {
+    width: min(100%, 650px);
+    margin: 0 auto;
 }
 
-.support-card__placeholder {
+.support-cta__intro {
+    margin: 0 auto 30px;
+    color: var(--text-soft);
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+.support-cta__button {
+    min-height: 48px;
+}
+
+.support-cta__note {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 22px 0 0;
     color: var(--text-soft);
     font-size: 13px;
-    margin: 4px 0;
+}
+
+.support-cta__note span {
+    color: var(--nude);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 
@@ -2285,6 +2296,15 @@ button, input, select, textarea, table {
     .video-editorial__actions .btn {
         width: 100%;
         min-height: 44px;
+    }
+
+    .support-cta__intro {
+        font-size: 16px;
+    }
+
+    .support-cta__button {
+        width: min(100%, 320px);
+        min-height: 48px;
     }
 }
 
