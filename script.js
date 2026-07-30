@@ -1128,6 +1128,45 @@ function buildFilterBar(container, categories, onFilter) {
     });
 }
 
+// Riduce lo scorrimento nelle liste più estese esclusivamente su smartphone.
+// Il primo elemento resta visibile; gli altri sono rivelati manualmente.
+function setupMobileDisclosure(listId, showLabel, hideLabel) {
+    const list = qs(`#${listId}`);
+    if (!list) return;
+
+    const items = Array.from(list.children);
+    list.classList.add("mobile-disclosure-list");
+    list.classList.remove("is-mobile-expanded");
+    items.forEach(item => item.classList.add("mobile-disclosure-item"));
+
+    let toggle = qs(`[data-mobile-disclosure="${listId}"]`);
+    if (!toggle) {
+        toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.className = "mobile-list-toggle btn btn--outline";
+        toggle.dataset.mobileDisclosure = listId;
+        toggle.setAttribute("aria-controls", listId);
+        list.insertAdjacentElement("afterend", toggle);
+        toggle.addEventListener("click", () => {
+            list.classList.toggle("is-mobile-expanded");
+            updateMobileDisclosure(toggle, list, showLabel, hideLabel);
+        });
+    }
+
+    toggle.hidden = items.length <= 1;
+    updateMobileDisclosure(toggle, list, showLabel, hideLabel);
+}
+
+function updateMobileDisclosure(toggle, list, showLabel, hideLabel) {
+    const expanded = list.classList.contains("is-mobile-expanded");
+    const hiddenCount = Math.max(0, list.children.length - 1);
+    toggle.setAttribute("aria-expanded", String(expanded));
+    toggle.innerHTML = `
+        <span>${expanded ? hideLabel : `${showLabel} (${hiddenCount})`}</span>
+        <span class="mobile-list-toggle__icon" aria-hidden="true">${expanded ? "−" : "+"}</span>
+    `;
+}
+
 // Generic modal (dialog) handling
 function openModal(html, variant) {
     const dialog = qs("#detailModal");
@@ -1507,6 +1546,7 @@ function renderProfessionalProducts(filter) {
             if (product) openModal(productDetailHtml(product));
         });
     });
+    setupMobileDisclosure("schede-list", "Mostra altri attivi", "Riduci gli attivi");
 }
 
 function initSchedeTecnicheSection() {
@@ -1576,6 +1616,7 @@ function renderRetailProducts(filter) {
             if (product) openModal(retailDetailHtml(product));
         });
     });
+    setupMobileDisclosure("homecare-list", "Mostra altri prodotti", "Riduci i prodotti");
 }
 
 function initHomeCareSection() {
@@ -1620,6 +1661,7 @@ function renderCaseStudies() {
     if (!list) return;
     list.innerHTML = caseStudies.map(caseSplitHtml).join("");
     initBeforeAfterSliders();
+    setupMobileDisclosure("casi-list", "Mostra altri risultati", "Riduci i risultati");
 }
 
 function initBeforeAfterSliders() {
@@ -1638,13 +1680,14 @@ function initBeforeAfterSliders() {
    ========================================================================= */
 
 function formazioneRowHtml(item) {
+    const category = activeCategoryForName(item.titolo);
     const metaParts = [];
     if (item.durata) metaParts.push(item.durata);
     if (item.formato) metaParts.push(item.formato);
     const metaLine = metaParts.length ? metaParts.join(" · ") : (item.tipo === "video" ? "Video" : "Documento");
 
     return `
-        <article class="list-row">
+        <article class="list-row${activeColorClass(category)}">
             <div class="list-row__body">
                 <h3 class="list-row__title">${item.titolo}</h3>
                 <p class="list-row__text">${item.descrizione}</p>
@@ -1753,9 +1796,8 @@ function initFormazioneSection() {
    ========================================================================= */
 
 function resourceRowHtml(resource) {
-    const category = activeCategoryForName(item.titolo);
     return `
-        <article class="list-row${activeColorClass(category)}">
+        <article class="list-row">
             <div class="list-row__body">
                 <h3 class="list-row__title">${resource.titolo}</h3>
                 <p class="list-row__text">${resource.descrizione}</p>
