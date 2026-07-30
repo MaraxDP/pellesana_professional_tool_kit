@@ -817,30 +817,30 @@ const caseStudies = [
     {
         id: "caso-adriana",
         nome: "Adriana",
-        fotoPrima: "assets/img/case-studies/adriana-prima.jpg",
-        fotoDopo: "assets/img/case-studies/adriana-dopo.jpg",
-        problematicaIniziale: "Pelle matura con rughe periorbitali e frontali marcate, perdita di tono e densità cutanea, incarnato spento e texture superficiale irregolare.",
-        durata: "10 settimane",
-        pianoEffettuato: "Fase preparatoria con complesso vitaminico seguita dal Piano Pelle Matura del Protocollo Pelle Sana: 6 sedute a cadenza di 10-14 giorni, con monitoraggio progressivo e mantenimento domiciliare.",
-        attivi: "ADRN Plus, Growth Factor GF#1, trattamento cosmetico NAD Plus Glow",
-        tecnologie: "Dermapen (microneedling) per la veicolazione degli attivi",
-        homeCare: "ADRN Pro Facial Cream, ADRN Pro Eye Contour",
-        osservazioni: "Nel corso delle sedute la pelle ha mostrato una risposta progressiva e costante: texture più levigata, incarnato più uniforme e luminoso, maggiore compattezza percepita su zigomi e contorno occhi. Il miglioramento della qualità cutanea è risultato coerente con la costanza mantenuta nella routine domiciliare consigliata.",
-        testimonianza: "Ho iniziato questo percorso senza troppe aspettative, ma già dopo le prime sedute ho notato la pelle più morbida e riposata. Con il tempo il cambiamento è diventato evidente anche agli occhi di chi mi sta vicino. Quello che è cambiato di più, però, è come mi sento io: allo specchio non mi soffermo più sui segni del tempo, ma su quanto la mia pelle sia sana e curata. Un percorso fatto con calma, seduta dopo seduta, e ne è valsa davvero la pena."
+        fotoPrima: "assets/img/case-studies/adriana-prima-optimized.jpg",
+        fotoDopo: "assets/img/case-studies/adriana-dopo-optimized.jpg",
+        problematicaIniziale: "Inizialmente la paziente presentava un crono e foto-invecchiamento visibile, con rughe, discromie cutanee e imperfezioni legate all'età e alle abitudini quotidiane. Fin dai primi trattamenti si è registrato un incremento della luminosità e della compattezza della texture cutanea",
+        durata: "6 trattamenti in 2 mesi mezzo",
+        pianoEffettuato: "Con lei abbiamo realizzato un programma iniziale di 6 trattamenti seguendo il Piano Antiageing Pelle Matura del Protocollo Pelle Sana: 2 sedute di preparazione con acidi cosmetici a cadenza settimanale più 4 sedute di biorivitalizzanti con gli esosomi ogni 21 giorni. Le foto sono state scattate al temine di questa prima fase. Successivamente ha proseguito con il ciclo ricostituente di mantenimento",
+        attivi: "Antiaging Peeling Plus, Exobio Plus",
+        tecnologie: "Micro-needling con Dermapen per la veicolazione degli attivi nei trattamenti biorivtalizzanti",
+        homeCare: "Crema, siero e contorno occhi EXOBIO",
+        osservazioni: "Nel corso delle sedute la pelle ha mostrato una risposta progressiva e costante: texture più levigata, incarnato più uniforme e luminoso, maggiore compattezza percepita su guance, zigomi e contorno occhi. Il miglioramento della qualità cutanea è risultato coerente con la costanza mantenuta nle seguire il piano di trattamento professionale e domiciliare.",
+        testimonianza: "Sapevo che la mia pelle era segnata da rughe, macchie e imperfezioni dovute all’età e allo stile di vita. Ho iniziato questo percorso senza troppe aspettative, ma già dalle prime sedute la pelle è diventata più liscia e luminosa. Con il tempo, il cambiamento è stato evidente anche a chi mi sta vicino. La svolta vera, però, è interiore: oggi allo specchio non cerco più i segni del tempo, ma vedo un viso sano. Il trattamento non è stato impegnativo in termini di tempo e, seduta dopo seduta, posso dire che ne è valsa davvero la pena. Per questo ho scelto di proseguire con le sedute mensili di mantenimento, che continuano a preservare la salute e la bellezza della mia pelle."
     },
     {
         id: "caso-francesca",
         nome: "Francesca",
-        fotoPrima: "assets/img/case-studies/francesca-prima.jpg",
-        fotoDopo: "assets/img/case-studies/francesca-dopo.jpg",
-        problematicaIniziale: "Incarnato spento e disomogeneo, con discromie e un alone scuro persistente nella zona perioculare che accentuava un aspetto stanco del viso.",
+        fotoPrima: "assets/img/case-studies/francesca-prima-optimized.jpg",
+        fotoDopo: "assets/img/case-studies/francesca-dopo-optimized.jpg",
+        problematicaIniziale: "Il viso della cliente mostrava i classici segni di stanchezza e invecchiamento cutaneo precoce. Si evidenziava un incarnato opaco e disomogeneo, caratterizzato da discromie diffuse e da un'iperpigmentazione marcata nella zona perioculare. Strutturalmente, si riscontravano i primi segnali di lassità cutanea con una iniziale perdita di definizione dell'ovale facciale.",
         durata: "8 settimane",
-        pianoEffettuato: "Piano Luminosità del Protocollo Pelle Sana: 4 sedute a cadenza di 10-14 giorni, precedute da detersione profonda e micro-esfoliazione con acidi cosmetici a bassa percentuale.",
-        attivi: "Vitamina C 10%, Brightening Cocktail, trattamento cosmetico NAD Plus Glow",
-        tecnologie: "Dermapen e dermo-veicolazione per il rilascio mirato degli attivi",
-        homeCare: "Exobio Facial Serum",
-        osservazioni: "Seduta dopo seduta l'incarnato è apparso progressivamente più uniforme e luminoso, con una visibile riduzione dell'aspetto stanco nella zona perioculare. La pelle ha mostrato una texture più levigata e un tono complessivamente più fresco e riposato.",
-        testimonianza: "Non mi riconoscevo più quando mi guardavo allo specchio: la pelle mi sembrava sempre spenta, anche quando dormivo bene. Con questo percorso ho visto un cambiamento reale, non solo nelle foto ma ogni giorno: l'incarnato è più luminoso e uniforme, e finalmente non ho più quell'aria stanca sotto gli occhi. Mi sento più a mio agio con la mia pelle."
+        pianoEffettuato: "Il protocollo personalizzato ha mirato al ripristino della luminosità, dell'uniformità del tono e al rimodellamento dei contorni del viso utilizzando una formula mista tra il Piano Depigmentante e quello Lifting del Protocollo Pelle Sana: 1 seduta iniziale di acido esfoliante più 4 sedute di biorivitalizzanti a cadenza di 21 giorni con esosomi e dna di salmone.",
+        attivi: "Depigmenting Peeling Plus, Exobio Plus, Adrn Plus",
+        tecnologie: "Micro-needling con Dermapen per la veicolazione degli attivi nei trattamenti biorivtalizzanti",
+        homeCare: "Crema, siero e contorno occhi linea ADRN PLUS",
+        osservazioni: "Seduta dopo seduta l'incarnato è apparso progressivamente più uniforme e luminoso, con una visibile riduzione dell'aspetto stanco nella zona perioculare. La pelle ha mostrato una texture più levigata e un miglioramento del tono complessivo, con un ovale rimpolpato ed un aspetto più fresco e riposato.",
+        testimonianza: "Non mi riconoscevo più quando mi guardavo allo specchio: la pelle mi sembrava sempre spenta, anche quando dormivo bene. Con questo percorso ho visto un cambiamento reale, non solo nelle foto ma ogni giorno: l'incarnato è più luminoso e uniforme, ha ripreso una sua forma e finalmente non ho più quell'aria stanca sotto gli occhi. Mi sento più a mio agio con la mia pelle."
     }
 ];
 
@@ -1046,6 +1046,7 @@ function openModal(html, variant) {
     body.innerHTML = html;
     wireCrossLinks(body);
     dialog.classList.toggle("modal--video", variant === "video");
+    document.body.classList.add("modal-open");
     if (typeof dialog.showModal === "function") {
         dialog.showModal();
     } else {
@@ -1068,6 +1069,7 @@ function initModal() {
     // interrompe automaticamente qualsiasi video incorporato in riproduzione.
     dialog.addEventListener("close", () => {
         if (body) body.innerHTML = "";
+        document.body.classList.remove("modal-open");
     });
 }
 
@@ -1080,14 +1082,31 @@ function initNav() {
     const toggle = qs("#navToggle");
     const nav = qs("#siteNav");
     if (toggle && nav) {
+        const closeNav = () => {
+            nav.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+            document.body.classList.remove("nav-open");
+        };
+
         toggle.addEventListener("click", () => {
             const isOpen = nav.classList.toggle("is-open");
             toggle.setAttribute("aria-expanded", String(isOpen));
+            document.body.classList.toggle("nav-open", isOpen);
         });
         qsa("a", nav).forEach(a => a.addEventListener("click", () => {
-            nav.classList.remove("is-open");
-            toggle.setAttribute("aria-expanded", "false");
+            closeNav();
         }));
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && nav.classList.contains("is-open")) {
+                closeNav();
+                toggle.focus();
+            }
+        });
+
+        const desktopNav = window.matchMedia("(min-width: 1151px)");
+        desktopNav.addEventListener("change", event => {
+            if (event.matches) closeNav();
+        });
     }
 
     // Evidenzia la voce di menu attiva in base alla sezione visibile
@@ -1484,7 +1503,7 @@ function caseSplitHtml(caseStudy) {
         <article class="case-split">
             <div class="ba-slider" data-case-id="${caseStudy.id}">
                 <div class="ba-slider__after">${imgTag(caseStudy.fotoDopo, `${caseStudy.nome} — dopo`, "ba-slider__img")}</div>
-                <div class="ba-slider__before" style="width:50%;">${imgTag(caseStudy.fotoPrima, `${caseStudy.nome} — prima`, "ba-slider__img")}</div>
+                <div class="ba-slider__before">${imgTag(caseStudy.fotoPrima, `${caseStudy.nome} — prima`, "ba-slider__img")}</div>
                 <span class="ba-slider__label ba-slider__label--before">Prima</span>
                 <span class="ba-slider__label ba-slider__label--after">Dopo</span>
                 <input type="range" min="0" max="100" value="50" class="ba-slider__range" aria-label="Confronta prima e dopo — ${caseStudy.nome}">
@@ -1514,11 +1533,10 @@ function renderCaseStudies() {
 function initBeforeAfterSliders() {
     qsa(".ba-slider").forEach(slider => {
         const range = qs(".ba-slider__range", slider);
-        const before = qs(".ba-slider__before", slider);
-        if (!range || !before) return;
-        range.addEventListener("input", () => {
-            before.style.width = `${range.value}%`;
-        });
+        if (!range) return;
+        const updateSplit = () => slider.style.setProperty("--split", `${range.value}%`);
+        range.addEventListener("input", updateSplit);
+        updateSplit();
     });
 }
 
