@@ -1220,10 +1220,6 @@ button, input, select, textarea, table {
     font-weight: 600;
 }
 
-.video-editorial__item.active-color {
-    box-shadow: inset 4px 0 0 var(--active-border);
-}
-
 .badge {
     display: inline-block;
     font-size: 12px;
@@ -2275,10 +2271,13 @@ button, input, select, textarea, table {
     .video-hero__intro {
         position: absolute;
         inset: 0;
-        align-self: start;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         width: auto;
         min-width: 0;
-        padding: 38px 20px 32px;
+        padding: 24px 20px;
         text-align: center;
     }
 
@@ -2296,9 +2295,11 @@ button, input, select, textarea, table {
     }
 
     .video-hero__desc {
+        width: min(100%, 520px);
         margin: 0 auto;
         font-size: 16px;
         line-height: 1.55;
+        text-align: center;
     }
 
     .video-hero__cta {

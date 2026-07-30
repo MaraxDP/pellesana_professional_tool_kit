@@ -1736,9 +1736,8 @@ function formazioneRowHtml(item) {
 }
 
 function videoTrainingItemHtml(item) {
-    const category = activeCategoryForName(item.title);
     return `
-        <article class="video-editorial__item${activeColorClass(category)}">
+        <article class="video-editorial__item">
             <button type="button" class="video-editorial__cover" data-video-id="${item.id}" aria-label="Guarda il video: ${item.title}">
                 <img src="${item.coverImage}" alt="Copertina del video ${item.title} — Protocollo Pelle Sana" loading="lazy">
                 <span class="video-editorial__play" aria-hidden="true"></span>
