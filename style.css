@@ -945,6 +945,15 @@ button, input, select, textarea, table {
     margin-bottom: 32px;
 }
 
+.horizontal-scroll-hint {
+    display: none;
+}
+
+@keyframes horizontal-scroll-hint {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
 .filter-chip {
     padding: 8px 18px;
     border-radius: 100px;
@@ -2005,6 +2014,7 @@ button, input, select, textarea, table {
     }
 
     .phases__item,
+    .horizontal-scroll-hint__arrow,
     .modal[open] {
         opacity: 1;
         transform: none;
@@ -2330,6 +2340,25 @@ button, input, select, textarea, table {
     .filter-bar,
     .tabs {
         margin-bottom: 22px;
+    }
+
+    .horizontal-scroll-hint {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        margin: -8px 2px 10px;
+        color: var(--text-soft);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+    }
+
+    .horizontal-scroll-hint__arrow {
+        color: var(--nude);
+        font-size: 20px;
+        line-height: 1;
+        animation: horizontal-scroll-hint 1.4s ease-in-out infinite;
     }
 
     #schede-list,
