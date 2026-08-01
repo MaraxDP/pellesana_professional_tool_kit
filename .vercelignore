@@ -1,0 +1,10 @@
+# Backup di sviluppo: non servono nel sito pubblicato.
+backup/
+
+# Originali ad alta risoluzione non usati dall'applicazione.
+# Il sito carica le corrispondenti versioni *-optimized.jpg.
+assets/img/case-studies/adriana-prima.png
+assets/img/case-studies/adriana-dopo.png
+assets/img/case-studies/francesca-prima.png
+assets/img/case-studies/francesca-dopo.png
+
