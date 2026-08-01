@@ -107,34 +107,26 @@ const ACTIVE_COLOR_BY_CODE = {
     FE: "contorno-occhi"
 };
 
-// Le 3 fasi del Protocollo Pelle Sana, allineate ai principi guida
-// RIVITALIZZA, RINNOVA, RIGENERA (vedi .phases-guides in index.html).
-// Il campo "piano" descrive l'eventuale sotto-timeline della fase, resa come
-// semplice elenco tipografico (nessuna card): "separatore" inserisce una
-// riga di raccordo tra le opzioni solo quando sono alternative tra loro
-// (fase 1); nella fase 2 le voci sono già in ordine cronologico, quindi
-// non serve alcun separatore. La fase di mantenimento non ha piano (null).
+// Le 2 fasi del Protocollo Pelle Sana.
 const METODO_FASI = [
     {
         id: "preparazione",
-        numero: "01",
+        numero: "Fase 1",
         nome: "Preparazione",
         sintesi: "La fase iniziale del percorso: si valuta la pelle e si preparano i tessuti ai trattamenti successivi.",
         dettaglio: "Comprende anamnesi professionale, valutazione iniziale della pelle e definizione del percorso personalizzato, seguite dal trattamento con acidi cosmetici e/o biorivitalizzanti in base alle esigenze cutanee.",
         piano: {
-            titolo: "Primi 2 mesi",
-            nota: "4 sedute o momenti di trattamento, secondo la modalità più indicata per la pelle della cliente:",
-            separatore: "oppure",
+            titolo: "Cadenza dei trattamenti",
             opzioni: [
-                { nome: "Biorivitalizzanti + microneedling", frequenza: "1 seduta ogni 15–21 giorni" },
-                { nome: "Acidi cosmetici", frequenza: "Ciclo di 4–6 sedute, frequenza settimanale" }
+                { nome: "Acidi cosmetici (se ci sono)", frequenza: "Trattamento da ripetere con cadenza ogni 7–10 giorni" },
+                { nome: "Biorivitalizzanti con microneedling", frequenza: "Ogni 14–21 giorni, a seconda dello spessore e dello stato della pelle" }
             ]
         }
     },
     {
         id: "ricostituzione",
-        numero: "02",
-        nome: "Ricostituzione",
+        numero: "Fase 2",
+        nome: "Ricostituente",
         sintesi: "Il ciclo di ricostituzione: una fase progressiva dedicata a migliorare idratazione, vitalità, compattezza e qualità generale della pelle.",
         dettaglio: "Il percorso prosegue per 6 mesi, con una seduta ogni circa 30 giorni.",
         piano: {
@@ -145,17 +137,8 @@ const METODO_FASI = [
                 { nome: "Mese 3–4", frequenza: "Attivi vitaminici" },
                 { nome: "Mese 5–6", frequenza: "Attivi proteici" }
             ],
-            chiusura: "Il ciclo prevede trattamenti di microneedling mensili, personalizzati con attivi specifici per idratazione, vitamine e proteine."
+            chiusura: "Ricostituenti con microneedling: 1 seduta mensile, accompagnata da trattamenti cosmetici e/o con apparecchiature scelti dall’operatrice."
         }
-    },
-    {
-        id: "mantenimento",
-        numero: "03",
-        nome: "Mantenimento e monitoraggio",
-        sintesi: "La fase conclusiva, dedicata a consolidare i risultati nel tempo.",
-        dettaglio: "Il mantenimento consente di preservare i risultati ottenuti attraverso sedute di richiamo programmate, monitoraggio periodico della pelle e un protocollo home care mirato e personalizzato.",
-        finale: true,
-        piano: null
     }
 ];
 
