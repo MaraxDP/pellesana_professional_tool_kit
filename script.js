@@ -295,7 +295,7 @@ const treatmentPlans = [
         obiettivo:"Sostenere vitalità del cuoio capelluto e qualità del capello in presenza di diradamento o indebolimento.",
         condizioniIniziali:"Capelli indeboliti o diradati e cuoio capelluto devitalizzato.",durata:"8 mesi",
         cicli:[
-            {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R. / ACIDI",attivi:["EXHA"]}))},
+            {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R.",attivi:["EXHA"]}))},
             {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
                 {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / MIX"]},
                 {label:"Seduta 7",fase:"VIT",attivi:["POLI"]},{label:"Seduta 8",fase:"VIT",attivi:["POLI"]},
