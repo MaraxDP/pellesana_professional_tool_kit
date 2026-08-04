@@ -911,6 +911,7 @@ const videoTrainingItems = [
         category: "Video Training",
         youtubeUrl: "https://www.youtube.com/embed/coxE8pImY-4",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
+        procedurePdfUrl: "assets/documents/procedure-trattamento/procedura-acidi-cosmetici.pdf",
         coverImage: "assets/images/video-training/video-training-01.png",
         updatedAt: "2026-07-29"
     },
@@ -921,6 +922,7 @@ const videoTrainingItems = [
         category: "Video Training",
         youtubeUrl: "https://www.youtube.com/embed/Fs_qGJiIBK4",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
+        procedurePdfUrl: "assets/documents/procedure-trattamento/procedura-biorivitalizzazione-viso.pdf",
         coverImage: "assets/images/video-training/video-training-02.png",
         updatedAt: "2026-07-29"
     },
@@ -931,6 +933,7 @@ const videoTrainingItems = [
         category: "Video Training",
         youtubeUrl: "https://www.youtube.com/embed/gw-HXZdVps0",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
+        procedurePdfUrl: "assets/documents/procedure-trattamento/procedura-trattamento-viso-ricostituente.pdf",
         coverImage: "assets/images/video-training/video-training-03.png",
         updatedAt: "2026-07-29"
     },
@@ -941,6 +944,7 @@ const videoTrainingItems = [
         category: "Video Training",
         youtubeUrl: "https://www.youtube.com/embed/TwNs_nLP0uk",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
+        procedurePdfUrl: "",
         coverImage: "assets/images/video-training/video-training-04.png",
         updatedAt: "2026-07-29"
     },
@@ -951,6 +955,7 @@ const videoTrainingItems = [
         category: "Video Training",
         youtubeUrl: "https://www.youtube.com/embed/kJgfP5uzHUY",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
+        procedurePdfUrl: "assets/documents/procedure-trattamento/procedura-exohair-plus.pdf",
         coverImage: "assets/images/video-training/video-training-05.png",
         updatedAt: "2026-07-29"
     }
@@ -1744,6 +1749,7 @@ function videoTrainingItemHtml(item) {
                 <div class="video-editorial__actions">
                     <button type="button" class="btn btn--primary btn--small" data-video-id="${item.id}">Guarda il video</button>
                     ${item.downloadUrl ? `<a class="btn btn--outline btn--small" href="${item.downloadUrl}" download>Scarica il video</a>` : ""}
+                    ${item.procedurePdfUrl ? `<a class="btn btn--outline btn--small" href="${item.procedurePdfUrl}" download aria-label="Scarica la procedura ${item.title} in PDF">Scarica la procedura</a>` : ""}
                 </div>
             </div>
         </article>
@@ -1763,7 +1769,10 @@ function videoModalHtml(item) {
         <h3 class="modal__title">${item.title}</h3>
         <p class="modal__subtitle">${item.category}</p>
         <p class="list-row__text">${item.description}</p>
-        ${item.downloadUrl ? `<div class="modal__actions"><a class="btn btn--ghost btn--small" href="${item.downloadUrl}" download>Scarica il video</a></div>` : ""}
+        ${(item.downloadUrl || item.procedurePdfUrl) ? `<div class="modal__actions">
+            ${item.downloadUrl ? `<a class="btn btn--ghost btn--small" href="${item.downloadUrl}" download>Scarica il video</a>` : ""}
+            ${item.procedurePdfUrl ? `<a class="btn btn--ghost btn--small" href="${item.procedurePdfUrl}" download aria-label="Scarica la procedura ${item.title} in PDF">Scarica la procedura</a>` : ""}
+        </div>` : ""}
     `;
 }
 
