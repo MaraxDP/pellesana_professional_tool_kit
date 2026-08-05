@@ -1270,6 +1270,21 @@ function initHorizontalScrollControls() {
     });
 }
 
+function initInLabPartnerReveal() {
+    const content = qs("[data-inlab-reveal]");
+    if (!content) return;
+    if (!("IntersectionObserver" in window)) {
+        content.classList.add("is-visible");
+        return;
+    }
+    const observer = new IntersectionObserver(entries => {
+        if (!entries[0]?.isIntersecting) return;
+        content.classList.add("is-visible");
+        observer.disconnect();
+    }, { threshold: 0.18 });
+    observer.observe(content);
+}
+
 
 /* =========================================================================
    3. NAVIGAZIONE + TORNA IN ALTO
@@ -2051,6 +2066,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initFormazioneSection();
     initMaterialiSection();
     initHorizontalScrollControls();
+    initInLabPartnerReveal();
 
     window.addEventListener("pps:consent-changed", event => {
         if (event.detail?.externalContent) return;

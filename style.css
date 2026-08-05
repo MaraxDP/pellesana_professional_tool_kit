@@ -2095,6 +2095,92 @@ button, input, select, textarea, table {
 }
 
 /* =========================================================================
+   PARTNER TECNICO — INLAB
+   ========================================================================= */
+
+.inlab-partner {
+    position: relative;
+    overflow: hidden;
+    background: var(--ivory);
+}
+
+.inlab-partner::before,
+.inlab-partner::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: min(180px, 28vw);
+    border-top: 1px solid var(--border);
+    transform: translateX(-50%);
+}
+
+.inlab-partner::before { top: 32px; }
+.inlab-partner::after { bottom: 32px; }
+
+.inlab-partner__inner {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.inlab-partner__inner.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.inlab-partner__inner .eyebrow {
+    margin-bottom: 14px;
+}
+
+.inlab-partner__inner .eyebrow::before {
+    display: none;
+}
+
+.inlab-partner__inner h2 {
+    margin: 0 0 24px;
+    font-size: clamp(30px, 4vw, 44px);
+}
+
+.inlab-partner__copy {
+    max-width: 70ch;
+    margin: 0 auto 30px;
+}
+
+.inlab-partner__copy p {
+    margin: 0;
+    color: var(--text-soft);
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+.inlab-partner__copy p + p {
+    margin-top: 12px;
+}
+
+.inlab-partner__cta {
+    min-height: 46px;
+    transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+
+.inlab-partner__cta:hover {
+    transform: translateY(-2px);
+}
+
+.inlab-partner__logo {
+    display: block;
+    width: 132px;
+    max-width: 42vw;
+    height: auto;
+    margin: 30px auto 0;
+    opacity: 0.72;
+    filter: brightness(0) saturate(100%) invert(21%) sepia(24%) saturate(1234%) hue-rotate(169deg) brightness(91%) contrast(91%);
+}
+
+
+/* =========================================================================
    10. RISULTATI / SPLIT PRIMA-DOPO
    ========================================================================= */
 
@@ -2548,6 +2634,7 @@ button, input, select, textarea, table {
     }
 
     .phases__item,
+    .inlab-partner__inner,
     .protocol-principle__content,
     .protocol-principle__indicator::before,
     .protocol-principle__indicator::after,
@@ -2655,6 +2742,42 @@ button, input, select, textarea, table {
     .container {
         padding-right: 18px;
         padding-left: 18px;
+    }
+
+    .inlab-partner {
+        padding-top: 64px;
+        padding-bottom: 64px;
+    }
+
+    .inlab-partner::before { top: 24px; }
+    .inlab-partner::after { bottom: 24px; }
+
+    .inlab-partner__inner h2 {
+        margin-bottom: 20px;
+        font-size: clamp(27px, 8vw, 34px);
+    }
+
+    .inlab-partner__copy {
+        margin-bottom: 26px;
+    }
+
+    .inlab-partner__copy p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .inlab-partner__cta {
+        width: auto;
+        max-width: 100%;
+        min-height: 44px;
+        padding-right: 20px;
+        padding-left: 20px;
+        white-space: normal;
+    }
+
+    .inlab-partner__logo {
+        width: 112px;
+        margin-top: 26px;
     }
 
     .scroll-control,
