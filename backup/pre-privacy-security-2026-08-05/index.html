@@ -10,7 +10,6 @@
 
     <title>Protocollo Pelle Sana | FIDEST × InLab medical</title>
     <meta name="description" content="Protocollo Pelle Sana: il metodo FIDEST con i prodotti professionali InLab. Piani di trattamento, attivi professionali, home care, risultati e formazione per estetiste e professioniste.">
-    <meta name="robots" content="noindex, nofollow, noarchive">
 
     <!-- Anteprima per condivisione social -->
     <meta property="og:type" content="website">
@@ -35,7 +34,7 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet"
     >
-    <link rel="stylesheet" href="style.css?v=20260805-privacy-2">
+    <link rel="stylesheet" href="style.css?v=20260730-mobile-5">
 </head>
 
 <body>
@@ -51,9 +50,9 @@
                     src="assets/img/logo/logo-protocollo-pelle-sana.png"
                     alt="Protocollo Pelle Sana"
                     class="brand__logo"
-                    data-brand-logo
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';"
                 >
-                <span class="brand__fallback" hidden>Protocollo Pelle Sana</span>
+                <span class="brand__fallback" style="display:none;">Protocollo Pelle Sana</span>
             </a>
 
             <button
@@ -128,7 +127,7 @@
                         <source
                             src="assets/video/pelle_video.mp4"
                             type="video/mp4"
-                            data-hero-poster
+                            onerror="this.closest('.video-hero__media').classList.add('is-fallback')"
                         >
                         Il tuo browser non supporta la riproduzione video. Il percorso Protocollo Pelle
                         Sana è comunque descritto nella sezione "Il Protocollo" più sotto.
@@ -373,17 +372,6 @@
                     </p>
                 </div>
 
-                <details class="document-legend">
-                    <summary>Legenda stato documenti</summary>
-                    <div class="document-legend__items" aria-label="Legenda degli stati documentali">
-                        <span class="document-status document-status--available">Disponibile</span>
-                        <span class="document-status document-status--updated">Aggiornato</span>
-                        <span class="document-status document-status--review">In revisione</span>
-                        <span class="document-status document-status--validate">Da validare</span>
-                        <span class="document-status document-status--unavailable">Non disponibile</span>
-                    </div>
-                </details>
-
                 <div class="filter-scroll-wrapper">
                     <div id="materiali-filters" class="filter-bar filter-scroll-track" role="group" aria-label="Filtra i materiali per categoria"></div>
                 </div>
@@ -444,61 +432,12 @@
          ===================================================================== -->
     <footer class="site-footer">
         <div class="container site-footer__inner">
-            <div class="site-footer__identity">
-                <p>Protocollo Pelle Sana — FIDEST × InLab medical</p>
-                <p>Materiale professionale destinato alla rete autorizzata del Protocollo Pelle Sana.</p>
-            </div>
-            <nav class="site-footer__legal" aria-label="Informazioni legali">
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="cookie-policy.html">Cookie Policy</a>
-                <button type="button" data-cookie-settings>Gestisci preferenze cookie</button>
-            </nav>
-            <div class="site-footer__meta">
-                <p>Ultimo aggiornamento: 5 agosto 2026</p>
-                <p>&copy; <span id="currentYear"></span> FIDEST. Tutti i diritti riservati.</p>
-            </div>
+            <p>Protocollo Pelle Sana — FIDEST × InLab medical</p>
+            <p>&copy; <span id="currentYear"></span> FIDEST. Tutti i diritti riservati.</p>
         </div>
     </footer>
 
-    <section id="cookieBanner" class="consent-banner" aria-labelledby="cookieBannerTitle" hidden>
-        <div class="consent-banner__copy">
-            <h2 id="cookieBannerTitle">La tua scelta sui contenuti esterni</h2>
-            <p>Il sito usa solo funzionalità tecniche necessarie. I video YouTube vengono caricati esclusivamente con il tuo consenso.</p>
-            <p><a href="cookie-policy.html">Cookie Policy</a> · <a href="privacy-policy.html">Privacy Policy</a></p>
-        </div>
-        <div class="consent-banner__actions">
-            <button type="button" class="btn btn--outline" data-consent-accept>Accetta tutti</button>
-            <button type="button" class="btn btn--outline" data-consent-reject>Rifiuta non necessari</button>
-            <button type="button" class="btn btn--ghost" data-consent-customize>Personalizza</button>
-        </div>
-    </section>
-
-    <dialog id="cookiePreferences" class="consent-dialog" aria-labelledby="cookiePreferencesTitle">
-        <form method="dialog" class="consent-dialog__inner">
-            <header class="consent-dialog__head">
-                <div>
-                    <p class="eyebrow">Preferenze privacy</p>
-                    <h2 id="cookiePreferencesTitle">Gestisci il consenso</h2>
-                </div>
-                <button type="button" class="modal__close" data-consent-close aria-label="Chiudi">×</button>
-            </header>
-            <div class="consent-category">
-                <div><strong>Tecnici necessari</strong><p>Memorizzano la scelta effettuata e garantiscono il funzionamento del sito.</p></div>
-                <input type="checkbox" checked disabled aria-label="Cookie tecnici sempre attivi">
-            </div>
-            <label class="consent-category" for="consentExternal">
-                <div><strong>Contenuti esterni</strong><p>Consente il caricamento dei video tramite YouTube in modalità privacy avanzata.</p></div>
-                <input id="consentExternal" type="checkbox">
-            </label>
-            <div class="consent-dialog__actions">
-                <button type="button" class="btn btn--outline" data-consent-reject>Rifiuta non necessari</button>
-                <button type="button" class="btn btn--primary" data-consent-save>Salva preferenze</button>
-            </div>
-        </form>
-    </dialog>
-
-    <script src="consent.js?v=20260805-1"></script>
-    <script src="script.js?v=20260805-privacy-2"></script>
+    <script src="script.js?v=20260730-mobile-5"></script>
 
 </body>
 </html>

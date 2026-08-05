@@ -1,3 +1,6 @@
 # Metadati locali creati dalla CLI di Vercel.
 .vercel/
 
+# Sorgenti non destinati al repository pubblico o al deploy.
+assets/source-documents/
+assets/documents/source/

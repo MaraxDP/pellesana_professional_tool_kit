@@ -8,11 +8,3 @@ assets/img/case-studies/adriana-dopo.png
 assets/img/case-studies/francesca-prima.png
 assets/img/case-studies/francesca-dopo.png
 
-# Sorgenti e strumenti di generazione: non devono essere pubblicati.
-assets/source-documents/
-assets/documents/source/
-assets/documents/procedure-trattamento/
-scripts/
-
-# Documento non referenziato e non classificato per la pubblicazione.
-assets/docs/materiali/listino-inlab-italia.pdf

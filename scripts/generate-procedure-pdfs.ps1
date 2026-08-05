@@ -6,7 +6,7 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $sourceDir = Join-Path $ProjectRoot 'assets\source-documents\procedure-trattamento'
-$outputDir = Join-Path $ProjectRoot 'assets\documents\procedure-trattamento'
+$outputDir = Join-Path $ProjectRoot 'assets\documents\published\procedure-trattamento'
 $buildDir = Join-Path $env:TEMP 'pellesana-procedure-pdf-build'
 $logoPath = Join-Path $ProjectRoot 'assets\img\logo\logo-protocollo-pelle-sana.png'
 $browserCandidates = @(
@@ -27,7 +27,7 @@ $correctionsPath = Join-Path $PSScriptRoot 'procedure-text-corrections.json'
 $corrections = [Text.Encoding]::UTF8.GetString([IO.File]::ReadAllBytes($correctionsPath)) | ConvertFrom-Json
 
 New-Item -ItemType Directory -Force -Path $outputDir, $buildDir | Out-Null
-$browserProfile = Join-Path $buildDir 'browser-profile'
+$browserProfile = Join-Path $buildDir ('browser-profile-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force -Path $browserProfile | Out-Null
 
 function ConvertTo-DataUri([string]$Path, [string]$Mime) {
@@ -58,8 +58,9 @@ $css = @"
 @font-face{font-family:Cinzel;src:url('$cinzelBold') format('opentype');font-weight:700}
 @font-face{font-family:'Open Sans';src:url('$openRegular') format('truetype');font-weight:400}
 @font-face{font-family:'Open Sans';src:url('$openSemiBold') format('truetype');font-weight:600}
-@page{size:A4;margin:20mm 18mm 19mm;@bottom-left{content:'PROTOCOLLO PELLE SANA';font:600 7.5pt 'Open Sans';letter-spacing:1.2pt;color:#8d766d}@bottom-right{content:'PAGINA ' counter(page) ' / ' counter(pages);font:600 7.5pt 'Open Sans';color:#8d766d}}
+@page{size:A4;margin:20mm 18mm 19mm;@bottom-left{content:'DOCUMENTO OPERATIVO PROTOCOLLO PELLE SANA';font:600 6.8pt 'Open Sans';letter-spacing:.8pt;color:#8d766d}@bottom-center{content:'VERSIONE ______  |  ULTIMO AGGIORNAMENTO ______';font:400 6.4pt 'Open Sans';color:#9b8b83}@bottom-right{content:'PAGINA ' counter(page) ' / ' counter(pages);font:600 6.8pt 'Open Sans';color:#8d766d}}
 *{box-sizing:border-box}html{background:#eee}body{margin:0;color:#263b50;background:#fff;font:9.3pt/1.55 'Open Sans',sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.watermark{position:fixed;top:43%;left:50%;z-index:0;width:170mm;transform:translate(-50%,-50%) rotate(-32deg);color:rgba(33,63,94,.055);font:700 31pt/1 Cinzel,serif;letter-spacing:3pt;text-align:center;white-space:nowrap;pointer-events:none}.cover,.content{position:relative;z-index:1}
 .cover{height:257mm;display:flex;flex-direction:column;justify-content:center;position:relative;padding:12mm 10mm;background:linear-gradient(145deg,#fdfbf7 0%,#f7f0eb 60%,#ede1db 100%);page-break-after:always;overflow:hidden}
 .cover:before{content:'';position:absolute;width:145mm;height:145mm;border:1px solid rgba(195,168,157,.38);border-radius:50%;right:-72mm;top:-56mm}.cover:after{content:'';position:absolute;left:10mm;right:10mm;bottom:12mm;border-bottom:1px solid #c3a89d}
 .logo{width:46mm;height:auto;margin-bottom:23mm}.eyebrow{margin:0 0 4mm;color:#9b7e72;font-size:8pt;font-weight:600;letter-spacing:2.2pt;text-transform:uppercase}.cover h1{max-width:155mm;margin:0;color:#213f5e;font:700 25pt/1.22 Cinzel,serif;letter-spacing:.3pt}.rule{width:28mm;border-top:2px solid #c3a89d;margin:8mm 0}.cover-summary{max-width:145mm;color:#52677a;font-size:10pt}.cover-summary p{margin:1.8mm 0}.cover-summary p:first-child{font-weight:600;color:#213f5e}.cover-meta{position:absolute;bottom:18mm;left:10mm;color:#8d766d;font-size:7.5pt;letter-spacing:1.3pt;text-transform:uppercase}
@@ -159,7 +160,8 @@ foreach ($doc in $documents) {
         $summaryHtml = ($coverLines | ForEach-Object { "<p>$_</p>" }) -join "`n"
         $html = @"
 <!doctype html><html lang="it"><head><meta charset="utf-8"><title>$($doc.Title) - Protocollo Pelle Sana</title><style>$css</style></head><body>
-<section class="cover"><img class="logo" src="$logoUri" alt="Protocollo Pelle Sana"><p class="eyebrow">$($doc.Label)</p><h1>$($doc.Title)</h1><div class="rule"></div><div class="cover-summary">$summaryHtml</div><p class="cover-meta">Documento operativo professionale | Edizione 2026</p></section>
+<div class="watermark" aria-hidden="true">PROTOCOLLO PELLE SANA</div>
+<section class="cover"><img class="logo" src="$logoUri" alt="Protocollo Pelle Sana"><p class="eyebrow">$($doc.Label)</p><h1>$($doc.Title)</h1><div class="rule"></div><div class="cover-summary">$summaryHtml</div><p class="cover-meta">Documento operativo professionale | Versione da valorizzare | Ultimo aggiornamento da valorizzare</p></section>
 <main class="content"><header class="running-head"><img src="$logoUri" alt="Protocollo Pelle Sana"><span>$($doc.Title)</span></header>$($blocks -join "`n")</main>
 </body></html>
 "@
@@ -167,7 +169,7 @@ foreach ($doc in $documents) {
         [IO.File]::WriteAllText($htmlPath, $html, [Text.UTF8Encoding]::new($false))
         $pdfPath = Join-Path $outputDir $doc.Output
         $fileUrl = 'file:///' + ($htmlPath -replace '\\', '/')
-        & $browser --headless --disable-gpu --disable-software-rasterizer --no-pdf-header-footer --allow-file-access-from-files --user-data-dir="$browserProfile" --print-to-pdf="$pdfPath" $fileUrl | Out-Null
+        & $browser --headless=new --disable-gpu --no-pdf-header-footer --allow-file-access-from-files --user-data-dir="$browserProfile" --print-to-pdf="$pdfPath" $fileUrl | Out-Null
         if (-not (Test-Path -LiteralPath $pdfPath) -or (Get-Item $pdfPath).Length -lt 10000) { throw "PDF non generato correttamente: $($doc.Output)" }
         Write-Output "GENERATO $($doc.Output) $((Get-Item $pdfPath).Length) bytes"
     } finally {

@@ -875,25 +875,6 @@ const caseStudies = [
 
 const CASE_STUDY_DISCLAIMER = "I risultati possono variare in base alle condizioni iniziali della pelle, alla risposta individuale e alla costanza nel seguire il percorso.";
 
-// Registro documentale unico. Qualunque sezione mostri uno stesso documento
-// lo richiama tramite id, così stato e collegamenti non possono divergere.
-const DOCUMENTS = [
-    { id: "procedure-acidi", title: "Procedura Acidi Cosmetici", category: "procedure", format: "PDF", description: "Procedura professionale collegata al video training Acidi Cosmetici.", status: "Aggiornato", version: "", updatedAt: "2026-07-29", validatedBy: "", fileUrl: "assets/documents/published/procedure-trattamento/procedura-acidi-cosmetici.pdf" },
-    { id: "procedure-biorivitalizzazione", title: "Procedura Biorivitalizzazione Viso", category: "procedure", format: "PDF", description: "Procedura professionale collegata al video training Biorivitalizzazione Viso.", status: "Aggiornato", version: "", updatedAt: "2026-07-29", validatedBy: "", fileUrl: "assets/documents/published/procedure-trattamento/procedura-biorivitalizzazione-viso.pdf" },
-    { id: "procedure-ricostituente", title: "Procedura Trattamento Viso Ricostituente", category: "procedure", format: "PDF", description: "Procedura professionale collegata al video training Trattamento Viso Ricostituente.", status: "Aggiornato", version: "", updatedAt: "2026-07-29", validatedBy: "", fileUrl: "assets/documents/published/procedure-trattamento/procedura-trattamento-viso-ricostituente.pdf" },
-    { id: "procedure-exohair", title: "Procedura ExoHair Plus", category: "procedure", format: "PDF", description: "Procedura professionale collegata al video training ExoHair Plus.", status: "Aggiornato", version: "", updatedAt: "2026-07-29", validatedBy: "", fileUrl: "assets/documents/published/procedure-trattamento/procedura-exohair-plus.pdf" },
-    { id: "brochure", title: "Brochure Protocollo Pelle Sana", category: "brochure", format: "PDF", description: "Brochure di presentazione del protocollo per le clienti.", status: "Non disponibile", version: "", updatedAt: "", validatedBy: "", fileUrl: "" },
-    { id: "listino-professionale", title: "Listino prezzi professionale InLab Italia", category: "listini", format: "PDF", description: "Listino professionale InLab Italia con prodotti, formati e prezzi destinati agli operatori.", status: "Disponibile", version: "", updatedAt: "2026-07-30", validatedBy: "", fileUrl: "assets/docs/materiali/listino-prezzi-professionale.pdf" },
-    { id: "modulo-consenso", title: "Modulo di consenso trattamento", category: "moduli", format: "PDF", description: "Modulo da personalizzare con i dati del centro e sottoporre a verifica privacy e legale prima dell’uso.", status: "Da validare", version: "", updatedAt: "2026-07-27", validatedBy: "", fileUrl: "assets/docs/materiali/modulo-consenso.pdf" },
-    { id: "scheda-anamnesi", title: "Scheda Anamnesi Cliente", category: "schede-anamnesi", format: "PDF", description: "Scheda per la raccolta dei dati e la valutazione professionale della cliente.", status: "Da validare", version: "", updatedAt: "2026-07-27", validatedBy: "", fileUrl: "assets/docs/materiali/scheda-anamnesi-cliente.pdf" },
-    { id: "locandina", title: "Locandina stampabile in cabina", category: "materiale-stampabile", format: "PDF", description: "Materiale da stampare ed esporre in cabina estetica.", status: "Non disponibile", version: "", updatedAt: "", validatedBy: "", fileUrl: "" },
-    { id: "kit-social", title: "Kit visual social", category: "marketing", format: "ZIP", description: "Visual, Reel, caption e stories per i social.", status: "Non disponibile", version: "", updatedAt: "", validatedBy: "", fileUrl: "" },
-    { id: "locandina-open-day", title: "Locandina Open Day", category: "marketing", format: "PDF", description: "Materiale stampabile per eventi Open Day in cabina.", status: "Non disponibile", version: "", updatedAt: "", validatedBy: "", fileUrl: "" },
-    { id: "guida-anamnesi", title: "Guida alla raccolta anamnesi", category: "anamnesi", format: "PDF", description: "Come condurre un’anamnesi completa con la cliente.", status: "Non disponibile", version: "", updatedAt: "", validatedBy: "", fileUrl: "" }
-];
-
-const documentById = id => DOCUMENTS.find(documentItem => documentItem.id === id);
-
 // -------------------------------------------------------------------------
 // FORMAZIONE E RISORSE — 3 aree gestite da questo array (video introduttivi,
 // materiali marketing, anamnesi). L'area "Video Training" ha una sorgente
@@ -909,11 +890,11 @@ const formazioneItems = [
     { id: "form-05", area: "introduttivi", tipo: "video", titolo: "Piani di trattamento: dalla valutazione al percorso personalizzato", durata: "--:--", formato: "", descrizione: "Come leggere le problematiche della pelle, scegliere il protocollo più adatto e costruire una strategia di trattamento su misura.", url: "" },
 
     // B. Materiali marketing
-    { id: "form-07", area: "marketing", tipo: "documento", documentId: "kit-social" },
-    { id: "form-09", area: "marketing", tipo: "documento", documentId: "locandina-open-day" },
+    { id: "form-07", area: "marketing", tipo: "documento", titolo: "[Materiale da inserire] — Kit visual social", durata: "", formato: "ZIP", descrizione: "Visual, Reel, caption e stories pronte per i social.", url: "assets/docs/materiali/kit-social.zip", downloadUrl: "assets/docs/materiali/kit-social.zip" },
+    { id: "form-09", area: "marketing", tipo: "documento", titolo: "[Materiale da inserire] — Locandina Open Day", durata: "", formato: "PDF", descrizione: "Materiale stampabile per eventi Open Day in cabina.", url: "assets/docs/materiali/locandina-open-day.pdf", downloadUrl: "assets/docs/materiali/locandina-open-day.pdf" },
 
     // C. Anamnesi
-    { id: "form-10", area: "anamnesi", tipo: "documento", documentId: "guida-anamnesi" }
+    { id: "form-10", area: "anamnesi", tipo: "documento", titolo: "Guida alla raccolta anamnesi", durata: "", formato: "PDF", descrizione: "Come condurre un'anamnesi completa con la cliente.", url: "assets/docs/materiali/guida-anamnesi.pdf", downloadUrl: "assets/docs/materiali/guida-anamnesi.pdf" }
 ];
 
 // -------------------------------------------------------------------------
@@ -928,9 +909,9 @@ const videoTrainingItems = [
         title: "Acidi Cosmetici",
         description: "Panoramica operativa sull'utilizzo professionale degli acidi cosmetici.",
         category: "Video Training",
-        youtubeUrl: "https://www.youtube-nocookie.com/embed/coxE8pImY-4",
+        youtubeUrl: "https://www.youtube.com/embed/coxE8pImY-4",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
-        procedureDocumentId: "procedure-acidi",
+        procedurePdfUrl: "assets/documents/procedure-trattamento/procedura-acidi-cosmetici.pdf",
         coverImage: "assets/images/video-training/video-training-01.png",
         updatedAt: "2026-07-29"
     },
@@ -939,9 +920,9 @@ const videoTrainingItems = [
         title: "Biorivitalizzazione Viso",
         description: "Tecniche e indicazioni per i trattamenti biorivitalizzanti viso.",
         category: "Video Training",
-        youtubeUrl: "https://www.youtube-nocookie.com/embed/Fs_qGJiIBK4",
+        youtubeUrl: "https://www.youtube.com/embed/Fs_qGJiIBK4",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
-        procedureDocumentId: "procedure-biorivitalizzazione",
+        procedurePdfUrl: "assets/documents/procedure-trattamento/procedura-biorivitalizzazione-viso.pdf",
         coverImage: "assets/images/video-training/video-training-02.png",
         updatedAt: "2026-07-29"
     },
@@ -950,9 +931,9 @@ const videoTrainingItems = [
         title: "Trattamento Viso Ricostituente",
         description: "Sequenza operativa del trattamento professionale ricostituente.",
         category: "Video Training",
-        youtubeUrl: "https://www.youtube-nocookie.com/embed/gw-HXZdVps0",
+        youtubeUrl: "https://www.youtube.com/embed/gw-HXZdVps0",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
-        procedureDocumentId: "procedure-ricostituente",
+        procedurePdfUrl: "assets/documents/procedure-trattamento/procedura-trattamento-viso-ricostituente.pdf",
         coverImage: "assets/images/video-training/video-training-03.png",
         updatedAt: "2026-07-29"
     },
@@ -961,9 +942,9 @@ const videoTrainingItems = [
         title: "Lip Volume & EyeCare",
         description: "Protocollo professionale dedicato alla zona labbra e contorno occhi.",
         category: "Video Training",
-        youtubeUrl: "https://www.youtube-nocookie.com/embed/TwNs_nLP0uk",
+        youtubeUrl: "https://www.youtube.com/embed/TwNs_nLP0uk",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
-        procedureDocumentId: "",
+        procedurePdfUrl: "",
         coverImage: "assets/images/video-training/video-training-04.png",
         updatedAt: "2026-07-29"
     },
@@ -972,9 +953,9 @@ const videoTrainingItems = [
         title: "ExoHair Plus",
         description: "Indicazioni operative per l'utilizzo professionale di ExoHair Plus.",
         category: "Video Training",
-        youtubeUrl: "https://www.youtube-nocookie.com/embed/kJgfP5uzHUY",
+        youtubeUrl: "https://www.youtube.com/embed/kJgfP5uzHUY",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
-        procedureDocumentId: "procedure-exohair",
+        procedurePdfUrl: "assets/documents/procedure-trattamento/procedura-exohair-plus.pdf",
         coverImage: "assets/images/video-training/video-training-05.png",
         updatedAt: "2026-07-29"
     }
@@ -987,7 +968,13 @@ const FORMAZIONE_AREE = ["introduttivi", "training", "marketing", "anamnesi"];
 // schede anamnesi, materiale stampabile. PLACEHOLDER in attesa dei documenti
 // definitivi.
 // -------------------------------------------------------------------------
-const resources = DOCUMENTS.filter(documentItem => ["brochure", "listini", "moduli", "schede-anamnesi", "materiale-stampabile"].includes(documentItem.category));
+const resources = [
+    { id: "doc-01", titolo: "[Documento da inserire] — Brochure Protocollo Pelle Sana", categoria: "brochure", descrizione: "Brochure di presentazione del protocollo per le clienti.", formato: "PDF", dataAggiornamento: "2026-07-23", apriUrl: "assets/docs/materiali/brochure.pdf", scaricaUrl: "assets/docs/materiali/brochure.pdf" },
+    { id: "doc-02", titolo: "Listino prezzi professionale InLab Italia", categoria: "listini", descrizione: "Listino professionale InLab Italia con prodotti, formati e prezzi riservati agli operatori.", formato: "PDF", dataAggiornamento: "2026-07-30", apriUrl: "assets/docs/materiali/listino-prezzi-professionale.pdf", scaricaUrl: "assets/docs/materiali/listino-prezzi-professionale.pdf" },
+    { id: "doc-03", titolo: "Modulo di consenso trattamento", categoria: "moduli", descrizione: "Modulo completo di consenso informato: trattamento estetico professionale, dati anamnestici e utilizzo di fotografie e video. Da personalizzare con i dati del centro e sottoporre a verifica privacy/legale prima dell'uso.", formato: "PDF", dataAggiornamento: "2026-07-27", apriUrl: "assets/docs/materiali/modulo-consenso.pdf", scaricaUrl: "assets/docs/materiali/modulo-consenso.pdf" },
+    { id: "doc-04", titolo: "Scheda Anamnesi Cliente", categoria: "schede-anamnesi", descrizione: "Scheda per la raccolta dati, stile di vita, obiettivi, inestetismi e valutazione professionale della cliente, con piano di trattamento.", formato: "PDF", dataAggiornamento: "2026-07-27", apriUrl: "assets/docs/materiali/scheda-anamnesi-cliente.pdf", scaricaUrl: "assets/docs/materiali/scheda-anamnesi-cliente.pdf" },
+    { id: "doc-05", titolo: "[Documento da inserire] — Locandina stampabile in cabina", categoria: "materiale-stampabile", descrizione: "Materiale da stampare ed esporre in cabina estetica.", formato: "PDF", dataAggiornamento: "2026-07-23", apriUrl: "assets/docs/materiali/locandina.pdf", scaricaUrl: "assets/docs/materiali/locandina.pdf" }
+];
 
 
 /* =========================================================================
@@ -1010,70 +997,11 @@ const PLACEHOLDER_IMG = "data:image/svg+xml;utf8," + encodeURIComponent(
 function imgTag(src, alt, cls) {
     const safeAlt = alt || "";
     const classAttr = cls ? ` class="${cls}"` : "";
-    return `<img src="${src}" alt="${safeAlt}"${classAttr} loading="lazy" data-fallback-image>`;
-}
-
-function initImageFallbacks() {
-    document.addEventListener("error", event => {
-        const image = event.target;
-        if (!(image instanceof HTMLImageElement)) return;
-        if (image.matches("[data-fallback-image]") && image.src !== PLACEHOLDER_IMG) {
-            image.src = PLACEHOLDER_IMG;
-        }
-        if (image.matches("[data-brand-logo]")) {
-            image.hidden = true;
-            const fallback = image.nextElementSibling;
-            if (fallback) fallback.hidden = false;
-        }
-        if (image.matches("[data-hero-poster]")) {
-            image.closest(".video-hero__media")?.classList.add("is-fallback");
-        }
-    }, true);
+    return `<img src="${src}" alt="${safeAlt}"${classAttr} loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER_IMG}';">`;
 }
 
 function labelFor(slug) {
     return CATEGORY_LABELS[slug] || slug;
-}
-
-function statusClass(status) {
-    return {
-        "Disponibile": "available",
-        "Aggiornato": "updated",
-        "In revisione": "review",
-        "Da validare": "validate",
-        "Non disponibile": "unavailable"
-    }[status] || "unavailable";
-}
-
-function formatDocumentDate(value) {
-    if (!value) return "";
-    const parts = value.split("-");
-    return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : value;
-}
-
-function documentMetaHtml(documentItem) {
-    if (!documentItem) return "";
-    const details = [
-        documentItem.version ? `Versione ${documentItem.version}` : "",
-        documentItem.updatedAt ? `Aggiornato il ${formatDocumentDate(documentItem.updatedAt)}` : "",
-        documentItem.validatedBy ? `Validato da ${documentItem.validatedBy}` : ""
-    ].filter(Boolean);
-    return `
-        <div class="document-meta">
-            <span class="document-status document-status--${statusClass(documentItem.status)}">${documentItem.status}</span>
-            ${details.length ? `<span>${details.join(" · ")}</span>` : ""}
-        </div>
-        ${documentItem.status === "Da validare" ? `<p class="document-note">Documento non ancora destinato all’uso operativo.</p>` : ""}
-    `;
-}
-
-function documentActionsHtml(documentItem, buttonClass = "btn--ghost") {
-    if (!documentItem?.fileUrl) return "";
-    if (documentItem.status === "In revisione" && !documentItem.allowPreview) return "";
-    return `
-        <a class="btn ${buttonClass} btn--small" href="${documentItem.fileUrl}" target="_blank" rel="noopener noreferrer">Apri</a>
-        <a class="btn ${buttonClass} btn--small" href="${documentItem.fileUrl}" download>Scarica</a>
-    `;
 }
 
 function activeColorClass(category) {
@@ -1197,9 +1125,9 @@ function openModal(html, variant) {
     wireCrossLinks(body);
     dialog.classList.toggle("modal--video", variant === "video");
     document.body.classList.add("modal-open");
-    if (typeof dialog.showModal === "function" && !dialog.open) {
+    if (typeof dialog.showModal === "function") {
         dialog.showModal();
-    } else if (!dialog.open) {
+    } else {
         dialog.setAttribute("open", "open");
     }
 }
@@ -1220,53 +1148,6 @@ function initModal() {
     dialog.addEventListener("close", () => {
         if (body) body.innerHTML = "";
         document.body.classList.remove("modal-open");
-    });
-}
-
-function initHorizontalScrollControls() {
-    qsa(".filter-scroll-wrapper").forEach(wrapper => {
-        const track = qs(".filter-scroll-track", wrapper);
-        if (!track || wrapper.querySelector(".scroll-control")) return;
-
-        const previous = document.createElement("button");
-        previous.type = "button";
-        previous.className = "scroll-control scroll-control--previous";
-        previous.setAttribute("aria-label", "Scorri verso sinistra");
-        previous.textContent = "‹";
-
-        const next = document.createElement("button");
-        next.type = "button";
-        next.className = "scroll-control scroll-control--next";
-        next.setAttribute("aria-label", "Scorri verso destra");
-        next.textContent = "›";
-
-        wrapper.append(previous, next);
-
-        const updateControls = () => {
-            const hasOverflow = track.scrollWidth > track.clientWidth + 2;
-            wrapper.classList.toggle("has-horizontal-overflow", hasOverflow);
-            previous.disabled = !hasOverflow || track.scrollLeft <= 2;
-            next.disabled = !hasOverflow || track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
-        };
-
-        const scrollByPage = direction => {
-            track.scrollBy({ left: direction * Math.max(220, track.clientWidth * 0.72), behavior: "smooth" });
-        };
-
-        previous.addEventListener("click", () => scrollByPage(-1));
-        next.addEventListener("click", () => scrollByPage(1));
-        track.addEventListener("scroll", updateControls, { passive: true });
-        track.addEventListener("wheel", event => {
-            if (Math.abs(event.deltaY) <= Math.abs(event.deltaX) || track.scrollWidth <= track.clientWidth) return;
-            const atStart = track.scrollLeft <= 2;
-            const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
-            if ((event.deltaY < 0 && atStart) || (event.deltaY > 0 && atEnd)) return;
-            event.preventDefault();
-            track.scrollLeft += event.deltaY;
-        }, { passive: false });
-
-        new ResizeObserver(updateControls).observe(track);
-        updateControls();
     });
 }
 
@@ -1845,35 +1726,30 @@ function initHeroMobilePlayback() {
    ========================================================================= */
 
 function formazioneRowHtml(item) {
-    const linkedDocument = item.documentId ? documentById(item.documentId) : null;
-    const title = linkedDocument?.title || item.titolo;
-    const description = linkedDocument?.description || item.descrizione;
-    const format = linkedDocument?.format || item.formato;
-    const category = activeCategoryForName(title);
+    const category = activeCategoryForName(item.titolo);
     const metaParts = [];
     if (item.durata) metaParts.push(item.durata);
-    if (format) metaParts.push(format);
+    if (item.formato) metaParts.push(item.formato);
     const metaLine = metaParts.length ? metaParts.join(" · ") : (item.tipo === "video" ? "Video" : "Documento");
 
     return `
         <article class="list-row${activeColorClass(category)}">
             <div class="list-row__body">
-                <h3 class="list-row__title">${title}</h3>
-                <p class="list-row__text">${description}</p>
+                <h3 class="list-row__title">${item.titolo}</h3>
+                <p class="list-row__text">${item.descrizione}</p>
                 <p class="list-row__meta">${metaLine}</p>
-                ${documentMetaHtml(linkedDocument)}
             </div>
             <div class="list-row__actions">
-                ${linkedDocument ? documentActionsHtml(linkedDocument) : (item.url
-                    ? `<a class="btn btn--ghost btn--small" href="${item.url}" target="_blank" rel="noopener noreferrer">${item.tipo === "video" ? "Guarda" : "Apri"}</a>`
-                    : `<button type="button" class="btn btn--ghost btn--small" disabled>In arrivo</button>`)}
+                ${item.url
+                    ? `<a class="btn btn--ghost btn--small" href="${item.url}" target="_blank" rel="noopener">${item.tipo === "video" ? "Guarda" : "Apri"}</a>`
+                    : `<button type="button" class="btn btn--ghost btn--small" disabled>In arrivo</button>`}
+                ${item.downloadUrl ? `<a class="btn btn--ghost btn--small" href="${item.downloadUrl}" download>Scarica</a>` : ""}
             </div>
         </article>
     `;
 }
 
 function videoTrainingItemHtml(item) {
-    const procedureDocument = documentById(item.procedureDocumentId);
     return `
         <article class="video-editorial__item">
             <button type="button" class="video-editorial__cover" data-video-id="${item.id}" aria-label="Guarda il video: ${item.title}">
@@ -1884,11 +1760,10 @@ function videoTrainingItemHtml(item) {
                 <p class="video-editorial__eyebrow">${item.category}</p>
                 <h3 class="video-editorial__title">${item.title}</h3>
                 <p class="video-editorial__desc">${item.description}</p>
-                ${documentMetaHtml(procedureDocument)}
                 <div class="video-editorial__actions">
                     <button type="button" class="btn btn--primary btn--small" data-video-id="${item.id}">Guarda il video</button>
                     ${item.downloadUrl ? `<a class="btn btn--outline btn--small" href="${item.downloadUrl}" download>Scarica il video</a>` : ""}
-                    ${documentActionsHtml(procedureDocument, "btn--outline")}
+                    ${item.procedurePdfUrl ? `<a class="btn btn--outline btn--small" href="${item.procedurePdfUrl}" download aria-label="Scarica la procedura ${item.title} in PDF">Scarica la procedura</a>` : ""}
                 </div>
             </div>
         </article>
@@ -1896,7 +1771,6 @@ function videoTrainingItemHtml(item) {
 }
 
 function videoModalHtml(item) {
-    const procedureDocument = documentById(item.procedureDocumentId);
     return `
         <div class="video-frame">
             <iframe
@@ -1909,33 +1783,11 @@ function videoModalHtml(item) {
         <h3 class="modal__title">${item.title}</h3>
         <p class="modal__subtitle">${item.category}</p>
         <p class="list-row__text">${item.description}</p>
-        ${(item.downloadUrl || procedureDocument?.fileUrl) ? `<div class="modal__actions">
+        ${(item.downloadUrl || item.procedurePdfUrl) ? `<div class="modal__actions">
             ${item.downloadUrl ? `<a class="btn btn--ghost btn--small" href="${item.downloadUrl}" download>Scarica il video</a>` : ""}
-            ${documentActionsHtml(procedureDocument)}
+            ${item.procedurePdfUrl ? `<a class="btn btn--ghost btn--small" href="${item.procedurePdfUrl}" download aria-label="Scarica la procedura ${item.title} in PDF">Scarica la procedura</a>` : ""}
         </div>` : ""}
     `;
-}
-
-function externalContentPlaceholderHtml(item) {
-    return `
-        <div class="external-content-placeholder">
-            <p class="eyebrow">Contenuto esterno</p>
-            <h3 class="modal__title">${item.title}</h3>
-            <p>Per visualizzare il video è necessario autorizzare i contenuti esterni.</p>
-            <button type="button" class="btn btn--primary" data-authorize-video="${item.id}">Autorizza e guarda il video</button>
-        </div>
-    `;
-}
-
-function openTrainingVideo(item) {
-    const hasConsent = window.PPSConsent?.hasExternalContent();
-    openModal(hasConsent ? videoModalHtml(item) : externalContentPlaceholderHtml(item), "video");
-    if (hasConsent) return;
-    const authorizeButton = qs(`[data-authorize-video="${item.id}"]`, qs("#modalBody"));
-    authorizeButton?.addEventListener("click", () => {
-        window.PPSConsent?.save(true);
-        openModal(videoModalHtml(item), "video");
-    });
 }
 
 function renderVideoTraining(list) {
@@ -1944,7 +1796,7 @@ function renderVideoTraining(list) {
     qsa("[data-video-id]", list).forEach(el => {
         el.addEventListener("click", () => {
             const item = videoTrainingItems.find(v => v.id === el.dataset.videoId);
-            if (item) openTrainingVideo(item);
+            if (item) openModal(videoModalHtml(item), "video");
         });
     });
 }
@@ -1996,15 +1848,15 @@ function resourceRowHtml(resource) {
     return `
         <article class="list-row">
             <div class="list-row__body">
-                <h3 class="list-row__title">${resource.title}</h3>
-                <p class="list-row__text">${resource.description}</p>
-                <p class="list-row__meta">${resource.format}</p>
-                ${documentMetaHtml(resource)}
+                <h3 class="list-row__title">${resource.titolo}</h3>
+                <p class="list-row__text">${resource.descrizione}</p>
+                <p class="list-row__meta">${resource.formato} · Aggiornato il ${resource.dataAggiornamento}</p>
             </div>
             <div class="list-row__side">
-                <span class="tag">${labelFor(resource.category)}</span>
+                <span class="tag">${labelFor(resource.categoria)}</span>
                 <div class="list-row__actions">
-                    ${documentActionsHtml(resource)}
+                    <a class="btn btn--ghost btn--small" href="${resource.apriUrl}" target="_blank" rel="noopener">Apri</a>
+                    <a class="btn btn--ghost btn--small" href="${resource.scaricaUrl}" download>Scarica</a>
                 </div>
             </div>
         </article>
@@ -2014,7 +1866,7 @@ function resourceRowHtml(resource) {
 function renderResources(filter) {
     const list = qs("#materiali-list");
     if (!list) return;
-    const items = (!filter || filter === "tutti") ? resources : resources.filter(r => r.category === filter);
+    const items = (!filter || filter === "tutti") ? resources : resources.filter(r => r.categoria === filter);
     list.innerHTML = items.map(resourceRowHtml).join("") || `<p class="empty-state">Nessun documento trovato per questo filtro.</p>`;
 }
 
@@ -2035,7 +1887,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const yearEl = qs("#currentYear");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    initImageFallbacks();
     initModal();
     initNav();
     initBackToTop();
@@ -2050,11 +1901,4 @@ document.addEventListener("DOMContentLoaded", () => {
     initHeroMobilePlayback();
     initFormazioneSection();
     initMaterialiSection();
-    initHorizontalScrollControls();
-
-    window.addEventListener("pps:consent-changed", event => {
-        if (event.detail?.externalContent) return;
-        const modalBody = qs("#modalBody");
-        if (modalBody?.querySelector("iframe")) qs("#detailModal")?.close();
-    });
 });
