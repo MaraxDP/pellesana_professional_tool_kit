@@ -945,7 +945,7 @@ button, input, select, textarea, table {
     position: relative;
     max-width: 900px;
     margin: 38px auto 0;
-    padding: 0 28px 42px;
+    padding: 0 28px;
     text-align: center;
 }
 
@@ -953,15 +953,6 @@ button, input, select, textarea, table {
     color: var(--text-soft);
     font-size: 16px;
     line-height: 1.7;
-}
-
-.protocol-discovery__continuation {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 1px;
-    height: 30px;
-    background: var(--nude);
 }
 
 .phases-head {

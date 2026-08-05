@@ -1902,8 +1902,7 @@ function videoTrainingItemHtml(item) {
                 ${documentMetaHtml(procedureDocument)}
                 <div class="video-editorial__actions">
                     <button type="button" class="btn btn--primary btn--small" data-video-id="${item.id}">Guarda il video</button>
-                    ${item.downloadUrl ? `<a class="btn btn--outline btn--small" href="${item.downloadUrl}" download>Scarica il video</a>` : ""}
-                    ${documentActionsHtml(procedureDocument, "btn--outline")}
+                    ${procedureDocument?.fileUrl ? `<a class="btn btn--outline btn--small" href="${procedureDocument.fileUrl}" download aria-label="Scarica la procedura ${item.title} in PDF">Scarica la procedura</a>` : ""}
                 </div>
             </div>
         </article>
@@ -1924,9 +1923,8 @@ function videoModalHtml(item) {
         <h3 class="modal__title">${item.title}</h3>
         <p class="modal__subtitle">${item.category}</p>
         <p class="list-row__text">${item.description}</p>
-        ${(item.downloadUrl || procedureDocument?.fileUrl) ? `<div class="modal__actions">
-            ${item.downloadUrl ? `<a class="btn btn--ghost btn--small" href="${item.downloadUrl}" download>Scarica il video</a>` : ""}
-            ${documentActionsHtml(procedureDocument)}
+        ${procedureDocument?.fileUrl ? `<div class="modal__actions">
+            <a class="btn btn--ghost btn--small" href="${procedureDocument.fileUrl}" download aria-label="Scarica la procedura ${item.title} in PDF">Scarica la procedura</a>
         </div>` : ""}
     `;
 }
