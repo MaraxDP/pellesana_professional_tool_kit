@@ -213,6 +213,10 @@ button, input, select, textarea, table {
     color: var(--navy);
 }
 
+.mobile-only-break {
+    display: none;
+}
+
 
 /* =========================================================================
    3. HEADER / NAVIGAZIONE / TORNA IN ALTO
@@ -2733,6 +2737,10 @@ button, input, select, textarea, table {
     .container {
         padding-right: 18px;
         padding-left: 18px;
+    }
+
+    .mobile-only-break {
+        display: block;
     }
 
     .inlab-partner {
