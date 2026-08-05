@@ -1317,6 +1317,20 @@ function planCodes(plan) {
     return [...codes].filter(code => TREATMENT_LEGEND[code]);
 }
 
+function initProtocolDiscovery() {
+    qsa(".protocol-principle").forEach(item => {
+        const summary = qs("summary", item);
+        if (!summary) return;
+
+        const syncExpandedState = () => {
+            summary.setAttribute("aria-expanded", String(item.open));
+        };
+
+        syncExpandedState();
+        item.addEventListener("toggle", syncExpandedState);
+    });
+}
+
 function treatmentTimelineHtml(plan) {
     if (!plan.cicli.length) return `<p class="plan-source-note">${plan.note}</p>`;
     return plan.cicli.map((ciclo, cycleIndex) => `
@@ -1876,6 +1890,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initModal();
     initNav();
     initBackToTop();
+    initProtocolDiscovery();
     renderMetodoTimeline();
     initProtocolCards();
     initPianiSection();

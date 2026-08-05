@@ -148,6 +148,69 @@
              ================================================================= -->
         <section id="metodo" class="section section--alt">
             <div class="container">
+                <div class="protocol-discovery" aria-labelledby="protocol-discovery-title">
+                    <header class="protocol-discovery__head">
+                        <p class="eyebrow">Scopri il Protocollo</p>
+                        <h2 id="protocol-discovery-title">Un nuovo approccio alla qualità della pelle</h2>
+                    </header>
+
+                    <div class="protocol-discovery__intro">
+                        <p>
+                            Protocollo Pelle Sana è un sistema professionale di estetica avanzata dedicato al trattamento del viso, pensato per ridare nuova vitalità alla pelle attraverso il metodo delle <strong>3R</strong>: Rivitalizza, Rinnova, Rigenera.
+                        </p>
+                        <p>
+                            La sua filosofia nasce da un approccio evoluto alla cura della pelle: non limitarsi a nascondere i segni del tempo, ma stimolare i naturali meccanismi biologici del tessuto cutaneo, favorendone equilibrio, funzionalità e capacità di autoriparazione. Il percorso si sviluppa attraverso trattamenti progressivi, non invasivi e senza tempi di recupero.
+                        </p>
+                    </div>
+
+                    <ol class="protocol-discovery__three-r" aria-label="Metodo delle 3R">
+                        <li><span aria-hidden="true">01</span><strong>Rivitalizza</strong></li>
+                        <li><span aria-hidden="true">02</span><strong>Rinnova</strong></li>
+                        <li><span aria-hidden="true">03</span><strong>Rigenera</strong></li>
+                    </ol>
+
+                    <aside class="protocol-discovery__longevity">
+                        <p class="protocol-discovery__label">Skin longevity</p>
+                        <p>
+                            Al centro del Protocollo Pelle Sana non c’è la ricerca di una perfezione artificiale e temporanea, ma il concetto di <strong>skin longevity</strong>: preservare nel tempo una pelle sana, vitale, luminosa e forte, rispettandone gli equilibri biologici e sostenendone la naturale capacità rigenerativa.
+                        </p>
+                    </aside>
+
+                    <div class="protocol-discovery__principles">
+                        <details class="protocol-principle">
+                            <summary aria-expanded="false" aria-controls="protocol-principle-philosophy">
+                                <span>Filosofia</span><span class="protocol-principle__indicator" aria-hidden="true"></span>
+                            </summary>
+                            <div id="protocol-principle-philosophy" class="protocol-principle__content">
+                                <p>La filosofia del protocollo pone l’attenzione sulla rigenerazione e sul benessere dei tessuti, andando oltre il semplice trattamento dei segni visibili dell’invecchiamento.</p>
+                            </div>
+                        </details>
+                        <details class="protocol-principle">
+                            <summary aria-expanded="false" aria-controls="protocol-principle-method">
+                                <span>Metodo</span><span class="protocol-principle__indicator" aria-hidden="true"></span>
+                            </summary>
+                            <div id="protocol-principle-method" class="protocol-principle__content">
+                                <p>Il metodo viene costruito su misura a partire dall’anamnesi e dall’analisi fotografica del volto, valutato attraverso parametri specifici che vengono monitorati trattamento dopo trattamento.</p>
+                            </div>
+                        </details>
+                        <details class="protocol-principle">
+                            <summary aria-expanded="false" aria-controls="protocol-principle-goal">
+                                <span>Obiettivo</span><span class="protocol-principle__indicator" aria-hidden="true"></span>
+                            </summary>
+                            <div id="protocol-principle-goal" class="protocol-principle__content">
+                                <p>L’obiettivo è dare priorità alla salute e alla vitalità della pelle, adattando progressivamente il percorso alle sue reali esigenze.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="protocol-discovery__cycles">
+                        <p>
+                            Il programma combina due cicli mirati e complementari: una prima fase di <strong>Rivitalizzazione</strong>, dedicata alla preparazione e al riequilibrio della pelle, e una seconda fase di <strong>Ricostituzione</strong>, studiata per sostenerne nel tempo qualità, compattezza e funzionalità. Due fasi che agiscono in sinergia per aiutare la pelle a fare ciò che sa fare meglio: <strong>rigenerarsi</strong>.
+                        </p>
+                        <span class="protocol-discovery__continuation" aria-hidden="true"></span>
+                    </div>
+                </div>
+
                 <div class="phases-head">
                     <p class="eyebrow">Il Protocollo</p>
                     <h2 class="phases-head__title">Le fasi del protocollo</h2>
@@ -176,7 +239,9 @@
                     </p>
                 </div>
 
-                <div id="piani-filters" class="filter-bar" role="group" aria-label="Filtra i piani per problematica"></div>
+                <div class="filter-scroll-wrapper">
+                    <div id="piani-filters" class="filter-bar filter-scroll-track" role="group" aria-label="Filtra i piani per problematica"></div>
+                </div>
                 <div id="piani-list" class="list">
                     <!-- Generato da script.js — renderTreatmentPlans() -->
                 </div>
@@ -198,7 +263,9 @@
                     </p>
                 </div>
 
-                <div id="schede-filters" class="filter-bar" role="group" aria-label="Filtra gli attivi professionali per categoria"></div>
+                <div class="filter-scroll-wrapper">
+                    <div id="schede-filters" class="filter-bar filter-scroll-track" role="group" aria-label="Filtra gli attivi professionali per categoria"></div>
+                </div>
                 <p class="horizontal-scroll-hint" aria-hidden="true">
                     <span>Scorri per vedere altro</span>
                     <span class="horizontal-scroll-hint__arrow">→</span>
@@ -224,7 +291,9 @@
                     </p>
                 </div>
 
-                <div id="homecare-filters" class="filter-bar" role="group" aria-label="Filtra i prodotti home care per categoria"></div>
+                <div class="filter-scroll-wrapper">
+                    <div id="homecare-filters" class="filter-bar filter-scroll-track" role="group" aria-label="Filtra i prodotti home care per categoria"></div>
+                </div>
                 <p class="horizontal-scroll-hint" aria-hidden="true">
                     <span>Scorri per vedere altro</span>
                     <span class="horizontal-scroll-hint__arrow">→</span>
@@ -280,7 +349,9 @@
                     </p>
                 </div>
 
-                <div id="formazione-tabs" class="tabs" role="tablist" aria-label="Aree di formazione e risorse"></div>
+                <div class="filter-scroll-wrapper">
+                    <div id="formazione-tabs" class="tabs filter-scroll-track" role="tablist" aria-label="Aree di formazione e risorse"></div>
+                </div>
                 <div id="formazione-list" class="list">
                     <!-- Generato da script.js — renderFormazione() -->
                 </div>
@@ -301,7 +372,9 @@
                     </p>
                 </div>
 
-                <div id="materiali-filters" class="filter-bar" role="group" aria-label="Filtra i materiali per categoria"></div>
+                <div class="filter-scroll-wrapper">
+                    <div id="materiali-filters" class="filter-bar filter-scroll-track" role="group" aria-label="Filtra i materiali per categoria"></div>
+                </div>
                 <div id="materiali-list" class="list">
                     <!-- Generato da script.js — renderResources() -->
                 </div>
