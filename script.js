@@ -882,6 +882,7 @@ const DOCUMENTS = [
     { id: "procedure-biorivitalizzazione", title: "Procedura Biorivitalizzazione Viso", category: "procedure", format: "PDF", description: "Procedura professionale collegata al video training Biorivitalizzazione Viso.", status: "Aggiornato", version: "", updatedAt: "2026-07-29", validatedBy: "", fileUrl: "assets/documents/published/procedure-trattamento/procedura-biorivitalizzazione-viso.pdf" },
     { id: "procedure-ricostituente", title: "Procedura Trattamento Viso Ricostituente", category: "procedure", format: "PDF", description: "Procedura professionale collegata al video training Trattamento Viso Ricostituente.", status: "Aggiornato", version: "", updatedAt: "2026-07-29", validatedBy: "", fileUrl: "assets/documents/published/procedure-trattamento/procedura-trattamento-viso-ricostituente.pdf" },
     { id: "procedure-exohair", title: "Procedura ExoHair Plus", category: "procedure", format: "PDF", description: "Procedura professionale collegata al video training ExoHair Plus.", status: "Aggiornato", version: "", updatedAt: "2026-07-29", validatedBy: "", fileUrl: "assets/documents/published/procedure-trattamento/procedura-exohair-plus.pdf" },
+    { id: "procedure-lip-volume-eye-care", title: "Procedura Lip Volume & EyeCare", category: "procedure", format: "PDF", description: "Procedura professionale collegata al video training Lip Volume & EyeCare.", status: "Aggiornato", version: "", updatedAt: "2026-08-06", validatedBy: "", fileUrl: "assets/documents/published/procedure-trattamento/procedura-lip-volume-eye-care.pdf" },
     { id: "brochure", title: "Brochure Protocollo Pelle Sana", category: "brochure", format: "PDF", description: "Brochure di presentazione del protocollo per le clienti.", status: "Non disponibile", version: "", updatedAt: "", validatedBy: "", fileUrl: "" },
     { id: "listino-professionale", title: "Listino prezzi professionale InLab Italia", category: "listini", format: "PDF", description: "Listino professionale InLab Italia con prodotti, formati e prezzi destinati agli operatori.", status: "Disponibile", version: "", updatedAt: "2026-07-30", validatedBy: "", fileUrl: "assets/docs/materiali/listino-prezzi-professionale.pdf" },
     { id: "modulo-consenso", title: "Modulo di consenso trattamento", category: "moduli", format: "PDF", description: "Modulo da personalizzare con i dati del centro e sottoporre a verifica privacy e legale prima dell’uso.", status: "Da validare", version: "", updatedAt: "2026-07-27", validatedBy: "", fileUrl: "assets/docs/materiali/modulo-consenso.pdf" },
@@ -963,7 +964,7 @@ const videoTrainingItems = [
         category: "Video Training",
         youtubeUrl: "https://www.youtube-nocookie.com/embed/TwNs_nLP0uk",
         downloadUrl: "", // INSERIRE QUI IL LINK DIRETTO PER IL DOWNLOAD DEL VIDEO
-        procedureDocumentId: "",
+        procedureDocumentId: "procedure-lip-volume-eye-care",
         coverImage: "assets/images/video-training/video-training-04.png",
         updatedAt: "2026-07-29"
     },

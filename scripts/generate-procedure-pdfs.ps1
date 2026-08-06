@@ -1,5 +1,6 @@
 param(
-    [string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot)
+    [string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot),
+    [string]$Only = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -21,8 +22,11 @@ $documents = @(
     @{ Source = 'procedura-acidi-cosmetici.docx'; Output = 'procedura-acidi-cosmetici.pdf'; Title = 'Acidi Cosmetici'; Label = 'Procedura professionale' },
     @{ Source = 'procedura-biorivitalizzazione-viso.docx'; Output = 'procedura-biorivitalizzazione-viso.pdf'; Title = 'Biorivitalizzazione Viso'; Label = 'Procedura professionale' },
     @{ Source = 'procedura-trattamento-viso-ricostituente.docx'; Output = 'procedura-trattamento-viso-ricostituente.pdf'; Title = 'Trattamento Viso Ricostituente'; Label = 'Procedura professionale' },
-    @{ Source = 'procedura-exohair-plus.docx'; Output = 'procedura-exohair-plus.pdf'; Title = 'ExoHair Plus'; Label = 'Procedura professionale cuoio capelluto' }
+    @{ Source = 'procedura-exohair-plus.docx'; Output = 'procedura-exohair-plus.pdf'; Title = 'ExoHair Plus'; Label = 'Procedura professionale cuoio capelluto' },
+    @{ Source = 'procedura-lip-volume-eye-care.docx'; Output = 'procedura-lip-volume-eye-care.pdf'; Title = 'LIP VOLUME & EYE CARE'; Subtitle = 'Trattamento combinato per labbra e contorno occhi'; Label = 'Procedura professionale' }
 )
+if ($Only) { $documents = @($documents | Where-Object Output -eq $Only) }
+if (-not $documents.Count) { throw "Nessun documento corrisponde a: $Only" }
 $correctionsPath = Join-Path $PSScriptRoot 'procedure-text-corrections.json'
 $corrections = [Text.Encoding]::UTF8.GetString([IO.File]::ReadAllBytes($correctionsPath)) | ConvertFrom-Json
 
@@ -65,7 +69,7 @@ $css = @"
 .cover:before{content:'';position:absolute;width:145mm;height:145mm;border:1px solid rgba(195,168,157,.38);border-radius:50%;right:-72mm;top:-56mm}.cover:after{content:'';position:absolute;left:10mm;right:10mm;bottom:12mm;border-bottom:1px solid #c3a89d}
 .logo{width:46mm;height:auto;margin-bottom:23mm}.eyebrow{margin:0 0 4mm;color:#9b7e72;font-size:8pt;font-weight:600;letter-spacing:2.2pt;text-transform:uppercase}.cover h1{max-width:155mm;margin:0;color:#213f5e;font:700 25pt/1.22 Cinzel,serif;letter-spacing:.3pt}.rule{width:28mm;border-top:2px solid #c3a89d;margin:8mm 0}.cover-summary{max-width:145mm;color:#52677a;font-size:10pt}.cover-summary p{margin:1.8mm 0}.cover-summary p:first-child{font-weight:600;color:#213f5e}.cover-meta{position:absolute;bottom:18mm;left:10mm;color:#8d766d;font-size:7.5pt;letter-spacing:1.3pt;text-transform:uppercase}
 .running-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d9c9c1;padding-bottom:3mm;margin-bottom:8mm}.running-head img{width:30mm}.running-head span{font-size:7pt;letter-spacing:1.5pt;text-transform:uppercase;color:#9b7e72}
-.content{padding:0}.section-title{margin:8mm 0 3.5mm;padding:3.2mm 4mm;border-left:2px solid #c3a89d;background:#f8f3ef;color:#213f5e;font:700 13pt/1.3 Cinzel,serif;break-after:avoid}.subheading{margin:5mm 0 2mm;color:#213f5e;font:700 10.5pt/1.35 Cinzel,serif;break-after:avoid}.body-copy{margin:0 0 3mm;orphans:3;widows:3}.bullet{position:relative;margin:0 0 2.5mm;padding-left:5mm;break-inside:avoid}.bullet:before{content:'';position:absolute;left:0;top:2.2mm;width:1.8mm;height:1.8mm;border-radius:50%;background:#c3a89d}.step{margin:3.2mm 0;padding:3.5mm 4mm;border:1px solid #ded2cc;border-radius:2.5mm;background:#fcfaf7;break-inside:avoid}.step strong{color:#213f5e}.source-image{display:block;max-width:155mm;max-height:85mm;width:auto;height:auto;margin:4mm auto 5mm;object-fit:contain;break-inside:avoid}.source-image.small{max-height:35mm}.data-table{width:100%;border-collapse:collapse;margin:4mm 0;break-inside:avoid}.data-table td{padding:2.5mm 3mm;border:1px solid #ded2cc;vertical-align:top}.data-table tr:nth-child(odd){background:#faf6f2}.note{padding:4mm;border-left:2px solid #c3a89d;background:#f8f3ef}.page-break{page-break-before:always}
+.content{padding:0}.section-title{margin:8mm 0 3.5mm;padding:3.2mm 4mm;border-left:2px solid #c3a89d;background:#f8f3ef;color:#213f5e;font:700 13pt/1.3 Cinzel,serif;break-after:avoid}.subheading{margin:5mm 0 2mm;color:#213f5e;font:700 10.5pt/1.35 Cinzel,serif;break-after:avoid}.body-copy{margin:0 0 3mm;orphans:3;widows:3}.bullet{position:relative;margin:0 0 2.5mm;padding-left:5mm;break-inside:avoid}.bullet:before{content:'';position:absolute;left:0;top:2.2mm;width:1.8mm;height:1.8mm;border-radius:50%;background:#c3a89d}.step{margin:3.2mm 0;padding:3.5mm 4mm;border:1px solid #ded2cc;border-radius:2.5mm;background:#fcfaf7;break-inside:avoid}.step strong{color:#213f5e}.source-image{display:block;max-width:155mm;max-height:85mm;width:auto;height:auto;margin:4mm auto 5mm;object-fit:contain;break-inside:avoid}.source-image.small{max-height:35mm}.data-table{width:100%;border-collapse:collapse;margin:4mm 0;break-inside:avoid}.data-table td{padding:2.5mm 3mm;border:1px solid #ded2cc;vertical-align:top}.data-table tr:nth-child(odd){background:#faf6f2}.note{padding:4mm;border-left:2px solid #c3a89d;background:#f8f3ef}.page-break{page-break-before:always}.active-list{display:flex;gap:3mm;flex-wrap:wrap;margin-top:5mm}.active-list span{padding:2mm 3.5mm;border:1px solid #d9c9c1;border-radius:99px;color:#213f5e;background:rgba(255,255,255,.55);font-size:8pt;font-weight:600}.timeline-step{position:relative;margin:4mm 0;padding:4mm 4mm 4mm 14mm;border:1px solid #ded2cc;border-radius:2.5mm;background:#fcfaf7;break-inside:avoid}.timeline-number{position:absolute;left:3.5mm;top:3.5mm;width:7mm;height:7mm;border-radius:50%;background:#213f5e;color:#fff;font:600 8pt/7mm 'Open Sans';text-align:center}.timeline-step strong{color:#213f5e}
 "@
 
 $wNs = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'
@@ -92,6 +96,7 @@ foreach ($doc in $documents) {
 
         $blocks = [System.Collections.Generic.List[string]]::new()
         $coverLines = [System.Collections.Generic.List[string]]::new()
+        $timelineNumber = 0
         # I sorgenti usano caselle di testo e contenitori OpenXML annidati:
         # selezioniamo ogni paragrafo del body in ordine documentale.
         $bodyNodes = $xml.SelectNodes('//w:body//w:p', $mgr)
@@ -116,6 +121,38 @@ foreach ($doc in $documents) {
             }
             $plain = (($textParts -join '') -replace '[\u00A0\s]+', ' ').Trim()
             $plain = Edit-ProofreadText $plain
+            if ($doc.Source -eq 'procedura-lip-volume-eye-care.docx') {
+                $lipCorrections = [ordered]@{
+                    'IL trattamento COMBINATO' = 'Il trattamento combinato'
+                    'Trattamento rimpolpante LABBRA' = 'Trattamento rimpolpante labbra'
+                    'Trattamento perfezionante del CONTORNO OCCHI' = 'Trattamento perfezionante del contorno occhi'
+                    'mirato a migliora' = 'mirato a migliorare'
+                    'Nanoneedling' = 'nanoneedling'
+                    'nano-needling' = 'nanoneedling'
+                    'Nano Needling' = 'Nanoneedling'
+                    '5ml' = '5 ml'
+                    '15gg' = '15 giorni'
+                    'una apposita siringa' = 'un__APOSTROPHE__apposita siringa'
+                    '0.5 ml' = '0,5 ml'
+                    'Acido ialuronico 3%' = 'Acido Ialuronico 3%'
+                    'acido ialuronico' = 'Acido Ialuronico'
+                    'Contorno Occhi' = 'contorno occhi'
+                    'ADRN pro' = 'ADRN Pro'
+                    'dermapen' = 'Dermapen'
+                    'ago NANO' = 'cartuccia nano'
+                    'ferite, e con gli occhi' = 'ferite e con gli occhi'
+                    'i patches dagli occhi' = 'i patch dagli occhi'
+                    'Con la siringa estraiamo' = 'Con la siringa, estrarre'
+                    'ed applicalo sulle labbra' = 'e applicarlo sulle labbra'
+                }
+                foreach ($item in $lipCorrections.GetEnumerator()) { $plain = $plain.Replace($item.Key, $item.Value) }
+                $rightApostrophe = [char]0x2019
+                $aGrave = [char]0x00E0
+                $plain = $plain.Replace('__APOSTROPHE__', [string]$rightApostrophe)
+                $plain = $plain.Replace("dall' umidit${aGrave}", "dall${rightApostrophe}umidit${aGrave}")
+                $plain = $plain.Replace("profondit${aGrave} a 0.5", "profondit${aGrave} a 0,5")
+                $plain = $plain.Replace("l${rightApostrophe}cartuccia nano", 'la cartuccia nano')
+            }
             if ($doc.Source -eq 'procedura-acidi-cosmetici.docx' -and $plain -eq 'Benefici estetici dei trattamenti BIORIVITALIZZANTI') {
                 $plain = 'Benefici estetici dei trattamenti con ACIDI COSMETICI'
             }
@@ -127,12 +164,21 @@ foreach ($doc in $documents) {
             } elseif ($plain) {
                 $encoded = ConvertTo-HtmlText $plain
                 $isList = $style -match 'elenco'
-                $isMajor = $plain -match '^(Gli acidi cosmetici|I trattamenti (RICOSTITUENTI|di Biorivitalizzazione cutanea)|Il Trattamento|Benefici estetici|Modo d.uso e avvertenze|Conservazione|Preparazione al trattamento|Protocollo di trattamento|Cosa NON fare)'
+                if ($doc.Source -eq 'procedura-lip-volume-eye-care.docx' -and $plain -eq 'Effetto Plumping Naturale: Volume visibilmente aumentato senza stravolgerne i tratti.') { $blocks.Add('<h2 class="section-title">Benefici del trattamento labbra</h2>') }
+                if ($doc.Source -eq 'procedura-lip-volume-eye-care.docx' -and $plain -eq 'Sguardo subito riposato e fresco, come dopo un lungo sonno rigenerante.') { $blocks.Add('<h2 class="section-title">Benefici del trattamento contorno occhi</h2>') }
+                $isMajor = $plain -match '^(Gli acidi cosmetici|I trattamenti (RICOSTITUENTI|di Biorivitalizzazione cutanea)|Il [Tt]rattamento|Trattamento (rimpolpante|perfezionante)|ACIDO IALURONICO 3%|FLASH EYE|Benefici estetici|Modo d.uso e avvertenze|Conservazione|Preparazione al trattamento|Protocollo di trattamento|Cosa NON fare)'
                 $isSub = (-not $isList) -and $plain.Length -lt 72 -and ($style -match 'Titolo|k3ksmc' -or $plain -cmatch '^[A-Z0-9% +\-]{5,}$')
                 $colonAt = $plain.IndexOf(':')
                 $isStep = $isList -and $colonAt -gt 0 -and $colonAt -lt 42
+                $isLipStep = $doc.Source -eq 'procedura-lip-volume-eye-care.docx' -and $plain -match '^(FIALA FLASH EYE|DERMAPEN|GOLDEN EYE PATCH|FIALA ACIDO IALURONICO 3%|GOLDEN KISS LIP MASK|FASE FINALE):'
                 if ($isMajor) { $blocks.Add("<h2 class=`"section-title`">$encoded</h2>") }
                 elseif ($isSub) { $blocks.Add("<h3 class=`"subheading`">$encoded</h3>") }
+                elseif ($isLipStep) {
+                    $timelineNumber++
+                    $lead = ConvertTo-HtmlText $plain.Substring(0, $colonAt + 1)
+                    $rest = ConvertTo-HtmlText $plain.Substring($colonAt + 1).Trim()
+                    $blocks.Add("<div class=`"timeline-step`"><span class=`"timeline-number`">$timelineNumber</span><strong>$lead</strong> $rest</div>")
+                }
                 elseif ($isStep) {
                     $lead = ConvertTo-HtmlText $plain.Substring(0, $colonAt + 1)
                     $rest = ConvertTo-HtmlText $plain.Substring($colonAt + 1).Trim()
@@ -157,7 +203,11 @@ foreach ($doc in $documents) {
             }
         }
 
-        $summaryHtml = ($coverLines | ForEach-Object { "<p>$_</p>" }) -join "`n"
+        if ($doc.Source -eq 'procedura-lip-volume-eye-care.docx') {
+            $summaryHtml = "<p>$($doc.Subtitle)</p><div class=`"active-list`"><span>Acido Ialuronico 3%</span><span>Flash Eye</span></div>"
+        } else {
+            $summaryHtml = ($coverLines | ForEach-Object { "<p>$_</p>" }) -join "`n"
+        }
         $html = @"
 <!doctype html><html lang="it"><head><meta charset="utf-8"><title>$($doc.Title) - Protocollo Pelle Sana</title><style>$css</style></head><body>
 <div class="watermark" aria-hidden="true">PROTOCOLLO PELLE SANA</div>
