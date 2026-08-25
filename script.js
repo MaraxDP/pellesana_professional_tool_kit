@@ -188,7 +188,7 @@ const treatmentPlans = [
                 { label: "Seduta 3", fase: "B.R.", attivi: ["NAD", "NAD"] }, { label: "Seduta 4", fase: "B.R.", attivi: ["NAD", "NAD"] }
             ]},
             { titolo: "Ricostituente", periodo: "Secondi 6 mesi", sedute: [
-                { label: "Seduta 5", fase: "IDR", attivi: ["AI3 / MIX"] }, { label: "Dopo 21 gg", fase: "IDR", attivi: ["AI3 / MIX"] },
+                { label: "Seduta 5", fase: "IDR", attivi: ["AI3 / MIX"] }, { label: "Seduta 6", fase: "IDR", attivi: ["AI3 / MIX"] },
                 { label: "Seduta 7", fase: "VIT", attivi: ["POLI"] }, { label: "Seduta 8", fase: "VIT", attivi: ["POLI"] },
                 { label: "Seduta 9", fase: "PRO", attivi: ["GF"] }, { label: "Seduta 10", fase: "PRO", attivi: ["GF"] }
             ]}
@@ -211,7 +211,7 @@ const treatmentPlans = [
         cicli: [
             { titolo: "Preparazione rivitalizzante", periodo: "Primi 2 mesi", sedute: Array.from({length: 4}, (_, i) => ({ label: `Seduta ${i + 1}`, fase: "B.R. / ACIDI", attivi: ["EXO / NAD", "AAP"] })) },
             { titolo: "Mantenimento ricostituzione", periodo: "Secondi 6 mesi", sedute: [
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / SO"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / SO"]},
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / SO"]},{label:"Seduta 6",fase:"IDR",attivi:["AI3 / SO"]},
                 {label:"Seduta 7",fase:"VIT",attivi:["VIT C"]},{label:"Seduta 8",fase:"VIT",attivi:["VIT C"]},
                 {label:"Seduta 9",fase:"PRO",attivi:["BTX"]},{label:"Seduta 10",fase:"PRO",attivi:["BTX"]}
             ]}
@@ -225,7 +225,7 @@ const treatmentPlans = [
         cicli: [
             { titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R.",attivi:["ADRN"]})) },
             { titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / SO"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / SO"]},
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / SO"]},{label:"Seduta 6",fase:"IDR",attivi:["AI3 / SO"]},
                 {label:"Seduta 7",fase:"VIT",attivi:["POLI"]},{label:"Seduta 8",fase:"VIT",attivi:["POLI"]},
                 {label:"Seduta 9",fase:"PRO",attivi:["BTX"]},{label:"Seduta 10",fase:"PRO",attivi:["BTX"]}
             ]}
@@ -239,7 +239,7 @@ const treatmentPlans = [
         cicli:[
             {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R. / ACIDI",attivi:["EXO / NAD","DPP / TRAN"]}))},
             {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3","BRC"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3","BRC"]},
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3","BRC"]},{label:"Seduta 6",fase:"IDR",attivi:["AI3","BRC"]},
                 {label:"Seduta 7",fase:"VIT",attivi:["VIT C","BRC"]},{label:"Seduta 8",fase:"VIT",attivi:["VIT C","BRC"]},
                 {label:"Seduta 9",fase:"PRO",attivi:["GF","BRC"]},{label:"Seduta 10",fase:"PRO",attivi:["GF","BRC"]}
             ]}
@@ -247,12 +247,12 @@ const treatmentPlans = [
     },
     {
         id:"protocollo-skin-repair",nome:"Protocollo Skin Repair",categorie:["post-acne-texture"],
-        obiettivo:"Favorire il miglioramento progressivo della texture e dell'aspetto degli esiti post-acne.",
+        obiettivo:"Favorire il miglioramento progressivo della texture della pelle danneggiata dagli esiti post-acne.",
         condizioniIniziali:"Esiti post-acne, irregolarità superficiali e texture disomogenea.",durata:"8 mesi",
         cicli:[
             {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R. / ACIDI",attivi:["ADRN","TRAN"]}))},
             {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / MIX"]},
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Seduta 6",fase:"IDR",attivi:["AI3 / MIX"]},
                 {label:"Seduta 7",fase:"VIT",attivi:["VIT C"]},{label:"Seduta 8",fase:"VIT",attivi:["VIT C"]},
                 {label:"Seduta 9",fase:"PRO",attivi:["GF"]},{label:"Seduta 10",fase:"PRO",attivi:["GF"]}
             ]}
@@ -267,7 +267,7 @@ const treatmentPlans = [
         cicli:[
             {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R.",attivi:["ADRN"]}))},
             {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / MIX"]},
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Seduta 6",fase:"IDR",attivi:["AI3 / MIX"]},
                 {label:"Seduta 7",fase:"VIT",attivi:["POLI"]},{label:"Seduta 8",fase:"VIT",attivi:["POLI"]},
                 {label:"Seduta 9",fase:"PRO",attivi:["GF"]},{label:"Seduta 10",fase:"PRO",attivi:["GF"]}
             ]}
@@ -282,7 +282,7 @@ const treatmentPlans = [
         cicli:[
             {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R. / ACIDI",attivi:["EXO","OSPP"]}))},
             {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3"]},
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3"]},{label:"Seduta 6",fase:"IDR",attivi:["AI3"]},
                 {label:"Seduta 7",fase:"VIT",attivi:["POLI"]},{label:"Seduta 8",fase:"VIT",attivi:["POLI"]},
                 {label:"Seduta 9",fase:"PRO",attivi:["GF"]},{label:"Seduta 10",fase:"PRO",attivi:["GF"]}
             ]}
@@ -297,7 +297,7 @@ const treatmentPlans = [
         cicli:[
             {titolo:"Preparazione rivitalizzante",periodo:"Primi 2 mesi",sedute:Array.from({length:4},(_,i)=>({label:`Seduta ${i+1}`,fase:"B.R.",attivi:["EXHA"]}))},
             {titolo:"Mantenimento ricostituzione",periodo:"Secondi 6 mesi",sedute:[
-                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Dopo 21 gg",fase:"IDR",attivi:["AI3 / MIX"]},
+                {label:"Seduta 5",fase:"IDR",attivi:["AI3 / MIX"]},{label:"Seduta 6",fase:"IDR",attivi:["AI3 / MIX"]},
                 {label:"Seduta 7",fase:"VIT",attivi:["POLI"]},{label:"Seduta 8",fase:"VIT",attivi:["POLI"]},
                 {label:"Seduta 9",fase:"PRO",attivi:["GF"]},{label:"Seduta 10",fase:"PRO",attivi:["GF"]}
             ]}
