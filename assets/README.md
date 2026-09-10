@@ -8,17 +8,9 @@ del placeholder "Immagine in arrivo".
 
 ## Logo
 
-- `assets/img/logo/logo-protocollo-pelle-sana.png` — file usato nell'header.
-  È stato generato automaticamente da `logo_ps.jpg` (ritaglio dello spazio
-  vuoto + sfondo nero reso trasparente), perché il JPG originale è un poster
-  a piena pagina su sfondo nero e il formato JPG non supporta la trasparenza.
-  Essendo derivato da un JPEG, ha una qualità leggermente inferiore a un
-  export vettoriale: **se in futuro sarà disponibile un export ufficiale
-  in PNG/SVG a sfondo trasparente** (da Illustrator/Figma/Canva), sostituire
-  questo file mantenendo lo stesso nome — comparirà automaticamente al posto
-  di quello attuale, senza toccare il codice.
-- `assets/img/logo/logo_ps.jpg` — file originale caricato (poster completo,
-  sfondo nero), mantenuto come riferimento/sorgente.
+- `assets/img/logo/logo-protocollo-pelle-sana.png` — logo ufficiale fornito il 10 settembre 2026, usato nella home, nelle pagine informative e nella generazione dei PDF delle procedure.
+- `assets/img/social/protocollo-pelle-sana-social.png` — stessa immagine per le anteprime social (1983 × 793 pixel).
+- `assets/img/logo/logo_ps.jpg` — vecchio poster conservato come riferimento storico, non usato dal sito.
 
 ## Hero video (home)
 
