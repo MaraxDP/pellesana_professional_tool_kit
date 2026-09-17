@@ -1963,9 +1963,131 @@ function renderVideoTraining(list) {
     });
 }
 
+// Ogni voce raggruppa tutte le slide di un carosello, nell'ordine di pubblicazione.
+const marketingGraphics = [{
+    id: "protocollo-pelle-sana",
+    title: "Cos’è il Protocollo Pelle Sana?",
+    description: "Un percorso personalizzato per la pelle: il metodo e la filosofia del Protocollo Pelle Sana.",
+    images: [1, 2, 3, 4, 5].map(number => ({
+        url: `assets/marketing/grafiche/protocollo-pelle-sana/${number}.png`,
+        preview: `assets/marketing/grafiche/protocollo-pelle-sana/${number}.preview.jpg`,
+        alt: ["Cos’è il Protocollo Pelle Sana, davvero?", "Un percorso, non un trattamento isolato", "Il metodo delle 3R: Rivitalizza, Rinnova, Rigenera", "Lavora insieme alla tua pelle", "Il giusto supporto per la tua pelle"][number - 1]
+    }))
+}];
+
+function renderMarketing(list) {
+    list.className = "marketing-library";
+    list.innerHTML = `
+        <div class="tabs" role="group" aria-label="Tipi di materiali marketing">
+            <button type="button" class="tab-btn is-active" data-marketing="grafiche" aria-pressed="true">Grafiche</button>
+            <button type="button" class="tab-btn" data-marketing="reels" aria-pressed="false">Reels</button>
+        </div>
+        <div data-marketing-content></div>`;
+    const content = list.querySelector("[data-marketing-content]");
+    function showCategory(category) {
+        list.querySelectorAll("[data-marketing]").forEach(button => {
+            const active = button.dataset.marketing === category;
+            button.classList.toggle("is-active", active);
+            button.setAttribute("aria-pressed", String(active));
+        });
+        if (category === "reels") {
+            content.innerHTML = '<p class="empty-state">I reels scaricabili saranno disponibili qui.</p>';
+            return;
+        }
+        content.innerHTML = marketingGraphics.map(item => `
+            <article class="marketing-card" aria-labelledby="marketing-${item.id}">
+                <div class="marketing-preview" role="region" aria-roledescription="carosello" aria-label="${item.title}">
+                    <img src="${item.images[0].preview || item.images[0].url}" alt="${item.images[0].alt}" loading="lazy" width="3375" height="4219">
+                    <div class="marketing-navigation">
+                        <button type="button" class="btn btn--ghost btn--small" data-previous aria-label="Immagine precedente">←</button>
+                        <span data-counter aria-live="polite" aria-atomic="true">1 / ${item.images.length}</span>
+                        <button type="button" class="btn btn--ghost btn--small" data-next aria-label="Immagine successiva">→</button>
+                    </div>
+                </div>
+                <div class="marketing-details">
+                    <p class="eyebrow">Carosello · ${item.images.length} immagini · PNG</p>
+                    <h3 id="marketing-${item.id}">${item.title}</h3>
+                    <p>${item.description}</p>
+                    <p class="marketing-hint">Sfoglia le immagini con le frecce o scorri sull’anteprima.</p>
+                    <div class="marketing-actions">
+                        <a class="btn btn--outline btn--small" data-download href="${item.images[0].url}" download="${item.id}-01.png">Scarica immagine</a>
+                        <button type="button" class="btn btn--primary btn--small" data-download-all>Scarica tutte</button>
+                    </div>
+                    <p class="marketing-hint">Le immagini vengono scaricate separatamente. Se il browser limita il download multiplo, usa “Scarica immagine” per ogni slide.</p>
+                    <p class="marketing-status" role="status"></p>
+                </div>
+            </article>`).join("");
+        content.querySelectorAll(".marketing-card").forEach((card, itemIndex) => {
+            const item = marketingGraphics[itemIndex];
+            let current = 0;
+            const preview = card.querySelector(".marketing-preview img");
+            const download = card.querySelector("[data-download]");
+            function changeSlide(step) {
+                current = (current + step + item.images.length) % item.images.length;
+                preview.src = item.images[current].preview || item.images[current].url;
+                preview.alt = item.images[current].alt;
+                card.querySelector("[data-counter]").textContent = `${current + 1} / ${item.images.length}`;
+                download.href = item.images[current].url;
+                download.download = `${item.id}-${String(current + 1).padStart(2, "0")}.png`;
+            }
+            card.querySelector("[data-previous]").addEventListener("click", () => changeSlide(-1));
+            card.querySelector("[data-next]").addEventListener("click", () => changeSlide(1));
+            const region = card.querySelector(".marketing-preview");
+            region.tabIndex = 0;
+            region.addEventListener("keydown", event => {
+                if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+                event.preventDefault();
+                changeSlide(event.key === "ArrowRight" ? 1 : -1);
+            });
+            let touchStart;
+            preview.addEventListener("touchstart", event => {
+                touchStart = event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+            }, { passive: true });
+            preview.addEventListener("touchend", event => {
+                if (!touchStart) return;
+                const dx = event.changedTouches[0].clientX - touchStart.x;
+                const dy = event.changedTouches[0].clientY - touchStart.y;
+                if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) changeSlide(dx < 0 ? 1 : -1);
+                touchStart = null;
+            }, { passive: true });
+            preview.addEventListener("touchcancel", () => { touchStart = null; });
+            card.querySelector("[data-download-all]").addEventListener("click", async event => {
+                const button = event.currentTarget;
+                button.disabled = true;
+                const status = card.querySelector(".marketing-status");
+                status.textContent = "Avvio del download delle immagini…";
+                try {
+                    for (const [index, image] of item.images.entries()) {
+                        if (!card.isConnected) return;
+                        const link = document.createElement("a");
+                        link.href = image.url;
+                        link.download = `${item.id}-${String(index + 1).padStart(2, "0")}.png`;
+                        document.body.append(link);
+                        link.click();
+                        link.remove();
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                    }
+                    status.textContent = "Download richiesti. Controlla i file scaricati e consenti i download multipli se il browser lo richiede.";
+                } finally {
+                    button.disabled = false;
+                }
+            });
+        });
+    }
+    list.querySelectorAll("[data-marketing]").forEach(button => {
+        button.addEventListener("click", () => showCategory(button.dataset.marketing));
+    });
+    showCategory("grafiche");
+}
+
 function renderFormazione(area) {
     const list = qs("#formazione-list");
     if (!list) return;
+
+    if (area === "marketing") {
+        renderMarketing(list);
+        return;
+    }
 
     if (area === "training") {
         list.className = "video-editorial";

@@ -135,3 +135,21 @@ Pages). Se un'immagine non viene trovata, il sito mostra automaticamente un
 placeholder elegante ("Immagine in arrivo") invece dell'icona di immagine
 rotta: nessun errore in console, nessuna modifica al codice necessaria dopo
 aver caricato i file nei percorsi indicati sopra.
+
+## Materiali marketing — Grafiche e Reels
+
+Il tab Materiali marketing usa `marketingGraphics` in `script.js` e il renderer
+`renderMarketing`. Le precedenti voci marketing in `formazioneItems` non vengono
+più mostrate. Reels presenta uno stato vuoto in attesa dei primi video.
+
+Ogni elemento di `marketingGraphics` è un carosello: `id` univoco, `title`,
+`description` e `images` in ordine. Ogni immagine contiene `url` (originale),
+`preview` (anteprima leggera facoltativa) e `alt` (descrizione).
+Il primo carosello si trova in `assets/marketing/grafiche/protocollo-pelle-sana/`:
+`1.png`–`5.png` sono gli originali, `1.preview.jpg`–`5.preview.jpg` le anteprime.
+
+Per aggiungere un carosello, creare una nuova cartella e aggiungere una voce
+all'elenco. Pubblicare sia i file sia il codice aggiornato. Non sovrascrivere gli
+originali per creare le anteprime. Il download singolo segue la slide corrente;
+“Scarica tutte” richiede download separati senza ZIP. Il browser può bloccare i
+download multipli: il comando singolo resta sempre disponibile.
