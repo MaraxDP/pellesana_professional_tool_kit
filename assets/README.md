@@ -153,3 +153,11 @@ all'elenco. Pubblicare sia i file sia il codice aggiornato. Non sovrascrivere gl
 originali per creare le anteprime. Il download singolo segue la slide corrente;
 “Scarica tutte” richiede download separati senza ZIP. Il browser può bloccare i
 download multipli: il comando singolo resta sempre disponibile.
+
+### Reels
+
+L'elenco `marketingReels` in `script.js` contiene una voce per video con `id`,
+`title`, `description`, `url` (originale), `preview` (MP4 H.264/AAC per il browser)
+e `poster` (fotogramma JPG). I file sono in `assets/marketing/reels/`.
+Il player carica il video solo su richiesta, senza autoplay; il download mantiene
+il file originale. Per nuovi video aggiungere i file e una voce all'elenco.

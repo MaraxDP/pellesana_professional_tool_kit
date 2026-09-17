@@ -1975,6 +1975,15 @@ const marketingGraphics = [{
     }))
 }];
 
+const marketingReels = [{
+    id: "pps-retail-1",
+    title: "Pelle Sana – Home care",
+    description: "Il reel dedicato alla skincare domiciliare del Protocollo Pelle Sana, pronto da scaricare e condividere.",
+    url: "assets/marketing/reels/pps_retail_1.mp4",
+    preview: "assets/marketing/reels/pps_retail_1.preview.mp4",
+    poster: "assets/marketing/reels/pps_retail_1.jpg"
+}];
+
 function renderMarketing(list) {
     list.className = "marketing-library";
     list.innerHTML = `
@@ -1991,7 +2000,33 @@ function renderMarketing(list) {
             button.setAttribute("aria-pressed", String(active));
         });
         if (category === "reels") {
-            content.innerHTML = '<p class="empty-state">I reels scaricabili saranno disponibili qui.</p>';
+            content.innerHTML = marketingReels.map(item => `
+                <article class="marketing-card" aria-labelledby="marketing-${item.id}">
+                    <div class="marketing-preview">
+                        <video class="marketing-reel" controls playsinline preload="none" poster="${item.poster}" aria-label="${item.title}">
+                            <source src="${item.preview}" type="video/mp4">
+                            Il browser non supporta la riproduzione. Usa il pulsante Scarica reel.
+                        </video>
+                        <p class="marketing-hint" data-video-error hidden>Anteprima non disponibile. Puoi comunque scaricare il reel.</p>
+                    </div>
+                    <div class="marketing-details">
+                        <p class="eyebrow">Reel · MP4</p>
+                        <h3 id="marketing-${item.id}">${item.title}</h3>
+                        <p>${item.description}</p>
+                        <div class="marketing-actions">
+                            <a class="btn btn--primary btn--small" href="${item.url}" download>Scarica reel</a>
+                        </div>
+                        <p class="marketing-hint">Download del video originale · 63 MB</p>
+                    </div>
+                </article>`).join("") || '<p class="empty-state">I reels scaricabili saranno disponibili qui.</p>';
+            content.querySelectorAll("video").forEach(video => {
+                const showError = () => { video.parentElement.querySelector("[data-video-error]").hidden = false; };
+                video.addEventListener("error", showError);
+                video.querySelector("source").addEventListener("error", showError);
+                video.addEventListener("play", () => {
+                    content.querySelectorAll("video").forEach(other => { if (other !== video) other.pause(); });
+                });
+            });
             return;
         }
         content.innerHTML = marketingGraphics.map(item => `
