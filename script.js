@@ -1979,7 +1979,7 @@ const marketingGraphics = [{
 
 const marketingReels = [{
     id: "pps-retail-1",
-    title: "Pelle Sana – Home care",
+    title: "PELLE SANA - REEL 1",
     description: "Il reel dedicato alla skincare domiciliare del Protocollo Pelle Sana, pronto da scaricare e condividere.",
     url: "assets/marketing/reels/pps_retail_1.mp4",
     preview: "assets/marketing/reels/pps_retail_1.preview.mp4",
