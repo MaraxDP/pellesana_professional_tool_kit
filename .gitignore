@@ -4,3 +4,6 @@
 # Sorgenti non destinati al repository pubblico o al deploy.
 assets/source-documents/
 assets/documents/source/
+
+.vercel
+.env*

@@ -1981,7 +1981,17 @@ const marketingReels = [{
     description: "Il reel dedicato alla skincare domiciliare del Protocollo Pelle Sana, pronto da scaricare e condividere.",
     url: "assets/marketing/reels/pps_retail_1.mp4",
     preview: "assets/marketing/reels/pps_retail_1.preview.mp4",
-    poster: "assets/marketing/reels/pps_retail_1.jpg"
+    poster: "assets/marketing/reels/pps_retail_1.jpg",
+    size: "63 MB"
+}, {
+    id: "reel-2-pellesana",
+    title: "Pelle Sana – Reel 2",
+    description: "Il secondo reel di Pelle Sana, pronto da scaricare e condividere.",
+    url: "assets/marketing/reels/Reel2_pellesana.mp4",
+    preview: "assets/marketing/reels/Reel2_pellesana.preview.mp4",
+    poster: "assets/marketing/reels/Reel2_pellesana.jpg",
+    size: "25 MB",
+    downloadLabel: "Download del video Full HD"
 }];
 
 function renderMarketing(list) {
@@ -2003,8 +2013,8 @@ function renderMarketing(list) {
             content.innerHTML = marketingReels.map(item => `
                 <article class="marketing-card" aria-labelledby="marketing-${item.id}">
                     <div class="marketing-preview">
-                        <video class="marketing-reel" controls playsinline preload="none" poster="${item.poster}" aria-label="${item.title}">
-                            <source src="${item.preview}" type="video/mp4">
+                        <video class="marketing-reel" controls playsinline preload="${item.poster ? "none" : "metadata"}"${item.poster ? ` poster="${item.poster}"` : ""} aria-label="${item.title}">
+                            <source src="${item.preview || item.url}" type="video/mp4">
                             Il browser non supporta la riproduzione. Usa il pulsante Scarica reel.
                         </video>
                         <p class="marketing-hint" data-video-error hidden>Anteprima non disponibile. Puoi comunque scaricare il reel.</p>
@@ -2016,7 +2026,7 @@ function renderMarketing(list) {
                         <div class="marketing-actions">
                             <a class="btn btn--primary btn--small" href="${item.url}" download>Scarica reel</a>
                         </div>
-                        <p class="marketing-hint">Download del video originale · 63 MB</p>
+                        <p class="marketing-hint">${item.downloadLabel || "Download del video originale"} · ${item.size}</p>
                     </div>
                 </article>`).join("") || '<p class="empty-state">I reels scaricabili saranno disponibili qui.</p>';
             content.querySelectorAll("video").forEach(video => {

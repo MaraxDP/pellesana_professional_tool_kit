@@ -14,5 +14,9 @@ assets/documents/source/
 assets/documents/procedure-trattamento/
 scripts/
 
+# Pacchetti di consegna locali, estranei al sito.
+consegna-piani-trattamento/
+consegna-piani-trattamento.zip
+
 # Documento non referenziato e non classificato per la pubblicazione.
 assets/docs/materiali/listino-inlab-italia.pdf
