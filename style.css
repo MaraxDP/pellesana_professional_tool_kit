@@ -26,7 +26,17 @@
    ========================================================================= */
 
 .marketing-library { display: grid; gap: 24px; }
-.marketing-library [data-marketing-content] { display: grid; gap: 24px; }
+.marketing-library [data-marketing-content] { display: grid; gap: 12px; }
+.marketing-row { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: 20px; padding: 16px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.marketing-thumbnail { display: block; width: 64px; height: 80px; object-fit: cover; border-radius: var(--radius-sm); }
+.marketing-row__details { min-width: 0; }
+.marketing-row__details h3 { margin: 0 0 6px; font-size: 1.05rem; overflow-wrap: anywhere; }
+.marketing-row__details p { margin: 0; }
+.marketing-row .marketing-actions { margin: 0; gap: 8px; }
+.marketing-row .marketing-status { grid-column: 2 / -1; margin: 0; }
+.marketing-modal-content { clear: both; padding-top: 12px; }
+.marketing-modal-content .marketing-card { padding: 0; border: 0; border-radius: 0; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 24px; }
+.marketing-modal-content .marketing-reel, .marketing-modal-content .marketing-preview img { max-height: 55vh; max-height: 55dvh; }
 .marketing-card {
     display: grid;
     grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
@@ -48,6 +58,12 @@
 .marketing-status:empty { display: none; }
 .marketing-actions button:disabled { opacity: 0.65; cursor: wait; }
 @media (max-width: 640px) {
+    .marketing-row { grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 12px; }
+    .marketing-thumbnail { width: 48px; height: 60px; }
+    .marketing-row .marketing-actions { grid-column: 1 / -1; flex-direction: row; }
+    .marketing-row .marketing-actions .btn { flex: 1; }
+    .marketing-row .marketing-status { grid-column: 1 / -1; }
+    .marketing-modal-content .marketing-card { grid-template-columns: minmax(0, 1fr); }
     .marketing-card { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 16px; }
     .marketing-preview { width: 100%; max-width: 360px; margin-inline: auto; }
     .marketing-actions { flex-direction: column; }

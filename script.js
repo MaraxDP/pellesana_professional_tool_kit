@@ -1194,6 +1194,7 @@ function openModal(html, variant) {
     const dialog = qs("#detailModal");
     const body = qs("#modalBody");
     if (!dialog || !body) return;
+    dialog.removeAttribute("aria-label");
     body.innerHTML = html;
     wireCrossLinks(body);
     dialog.classList.toggle("modal--video", variant === "video");
@@ -1966,6 +1967,7 @@ function renderVideoTraining(list) {
 // Ogni voce raggruppa tutte le slide di un carosello, nell'ordine di pubblicazione.
 const marketingGraphics = [{
     id: "protocollo-pelle-sana",
+    size: "31 MB totali",
     title: "Cos’è il Protocollo Pelle Sana?",
     description: "Un percorso personalizzato per la pelle: il metodo e la filosofia del Protocollo Pelle Sana.",
     images: [1, 2, 3, 4, 5].map(number => ({
@@ -1994,6 +1996,124 @@ const marketingReels = [{
     downloadLabel: "Download del video Full HD"
 }];
 
+function openMarketingPreview(item, category) {
+    openModal('<div class="marketing-modal-content"></div>', 'video');
+    const content = qs('.marketing-modal-content', qs('#modalBody'));
+    qs('#detailModal').setAttribute('aria-label', item.title);
+    if (category === "reels") {
+        content.innerHTML = `
+            <article class="marketing-card" aria-labelledby="marketing-preview-${item.id}">
+                <div class="marketing-preview">
+                    <video class="marketing-reel" controls playsinline preload="${item.poster ? "none" : "metadata"}"${item.poster ? ` poster="${item.poster}"` : ""} aria-label="${item.title}">
+                        <source src="${item.preview || item.url}" type="video/mp4">
+                        Il browser non supporta la riproduzione. Usa il pulsante Scarica reel.
+                    </video>
+                    <p class="marketing-hint" data-video-error hidden>Anteprima non disponibile. Puoi comunque scaricare il reel.</p>
+                </div>
+                <div class="marketing-details">
+                    <p class="eyebrow">Reel · MP4</p>
+                    <h3 id="marketing-preview-${item.id}">${item.title}</h3>
+                    <p>${item.description}</p>
+                    <div class="marketing-actions">
+                        <a class="btn btn--primary btn--small" href="${item.url}" download>Scarica reel</a>
+                    </div>
+                    <p class="marketing-hint">${item.downloadLabel || "Download del video originale"} · ${item.size}</p>
+                </div>
+            </article>`;
+        content.querySelectorAll("video").forEach(video => {
+            const showError = () => { video.parentElement.querySelector("[data-video-error]").hidden = false; };
+            video.addEventListener("error", showError);
+            video.querySelector("source").addEventListener("error", showError);
+            video.addEventListener("play", () => {
+                content.querySelectorAll("video").forEach(other => { if (other !== video) other.pause(); });
+            });
+        });
+        return;
+    }
+    content.innerHTML = `
+        <article class="marketing-card" aria-labelledby="marketing-preview-${item.id}">
+            <div class="marketing-preview" role="region" aria-roledescription="carosello" aria-label="${item.title}">
+                <img src="${item.images[0].preview || item.images[0].url}" alt="${item.images[0].alt}" loading="lazy" width="3375" height="4219">
+                <div class="marketing-navigation">
+                    <button type="button" class="btn btn--ghost btn--small" data-previous aria-label="Immagine precedente">←</button>
+                    <span data-counter aria-live="polite" aria-atomic="true">1 / ${item.images.length}</span>
+                    <button type="button" class="btn btn--ghost btn--small" data-next aria-label="Immagine successiva">→</button>
+                </div>
+            </div>
+            <div class="marketing-details">
+                <p class="eyebrow">Carosello · ${item.images.length} immagini · PNG</p>
+                <h3 id="marketing-preview-${item.id}">${item.title}</h3>
+                <p>${item.description}</p>
+                <p class="marketing-hint">Sfoglia le immagini con le frecce o scorri sull’anteprima.</p>
+                <div class="marketing-actions">
+                    <a class="btn btn--outline btn--small" data-download href="${item.images[0].url}" download="${item.id}-01.png">Scarica immagine</a>
+                    <button type="button" class="btn btn--primary btn--small" data-download-all>Scarica tutte</button>
+                </div>
+                <p class="marketing-hint">Le immagini vengono scaricate separatamente. Se il browser limita il download multiplo, usa “Scarica immagine” per ogni slide.</p>
+                <p class="marketing-status" role="status"></p>
+            </div>
+        </article>`;
+    content.querySelectorAll(".marketing-card").forEach(card => {
+        let current = 0;
+        const preview = card.querySelector(".marketing-preview img");
+        const download = card.querySelector("[data-download]");
+        function changeSlide(step) {
+            current = (current + step + item.images.length) % item.images.length;
+            preview.src = item.images[current].preview || item.images[current].url;
+            preview.alt = item.images[current].alt;
+            card.querySelector("[data-counter]").textContent = `${current + 1} / ${item.images.length}`;
+            download.href = item.images[current].url;
+            download.download = `${item.id}-${String(current + 1).padStart(2, "0")}.png`;
+        }
+        card.querySelector("[data-previous]").addEventListener("click", () => changeSlide(-1));
+        card.querySelector("[data-next]").addEventListener("click", () => changeSlide(1));
+        const region = card.querySelector(".marketing-preview");
+        region.tabIndex = 0;
+        region.addEventListener("keydown", event => {
+            if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+            event.preventDefault();
+            changeSlide(event.key === "ArrowRight" ? 1 : -1);
+        });
+        let touchStart;
+        preview.addEventListener("touchstart", event => {
+            touchStart = event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+        }, { passive: true });
+        preview.addEventListener("touchend", event => {
+            if (!touchStart) return;
+            const dx = event.changedTouches[0].clientX - touchStart.x;
+            const dy = event.changedTouches[0].clientY - touchStart.y;
+            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) changeSlide(dx < 0 ? 1 : -1);
+            touchStart = null;
+        }, { passive: true });
+        preview.addEventListener("touchcancel", () => { touchStart = null; });
+        bindMarketingDownloads(card, item);
+    });
+}
+
+function bindMarketingDownloads(card, item) {
+    card.querySelector("[data-download-all]").addEventListener("click", async event => {
+        const button = event.currentTarget;
+        button.disabled = true;
+        const status = card.querySelector(".marketing-status");
+        status.textContent = "Avvio del download delle immagini…";
+        try {
+            for (const [index, image] of item.images.entries()) {
+                if (!card.isConnected) return;
+                const link = document.createElement("a");
+                link.href = image.url;
+                link.download = `${item.id}-${String(index + 1).padStart(2, "0")}.png`;
+                document.body.append(link);
+                link.click();
+                link.remove();
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            status.textContent = "Download richiesti. Controlla i file scaricati e consenti i download multipli se il browser lo richiede.";
+        } finally {
+            button.disabled = false;
+        }
+    });
+}
+
 function renderMarketing(list) {
     list.className = "marketing-library";
     list.innerHTML = `
@@ -2002,127 +2122,38 @@ function renderMarketing(list) {
             <button type="button" class="tab-btn" data-marketing="reels" aria-pressed="false">Reels</button>
         </div>
         <div data-marketing-content></div>`;
-    const content = list.querySelector("[data-marketing-content]");
+    const content = list.querySelector('[data-marketing-content]');
     function showCategory(category) {
-        list.querySelectorAll("[data-marketing]").forEach(button => {
+        list.querySelectorAll('[data-marketing]').forEach(button => {
             const active = button.dataset.marketing === category;
-            button.classList.toggle("is-active", active);
-            button.setAttribute("aria-pressed", String(active));
+            button.classList.toggle('is-active', active);
+            button.setAttribute('aria-pressed', String(active));
         });
-        if (category === "reels") {
-            content.innerHTML = marketingReels.map(item => `
-                <article class="marketing-card" aria-labelledby="marketing-${item.id}">
-                    <div class="marketing-preview">
-                        <video class="marketing-reel" controls playsinline preload="${item.poster ? "none" : "metadata"}"${item.poster ? ` poster="${item.poster}"` : ""} aria-label="${item.title}">
-                            <source src="${item.preview || item.url}" type="video/mp4">
-                            Il browser non supporta la riproduzione. Usa il pulsante Scarica reel.
-                        </video>
-                        <p class="marketing-hint" data-video-error hidden>Anteprima non disponibile. Puoi comunque scaricare il reel.</p>
-                    </div>
-                    <div class="marketing-details">
-                        <p class="eyebrow">Reel · MP4</p>
-                        <h3 id="marketing-${item.id}">${item.title}</h3>
-                        <p>${item.description}</p>
-                        <div class="marketing-actions">
-                            <a class="btn btn--primary btn--small" href="${item.url}" download>Scarica reel</a>
-                        </div>
-                        <p class="marketing-hint">${item.downloadLabel || "Download del video originale"} · ${item.size}</p>
-                    </div>
-                </article>`).join("") || '<p class="empty-state">I reels scaricabili saranno disponibili qui.</p>';
-            content.querySelectorAll("video").forEach(video => {
-                const showError = () => { video.parentElement.querySelector("[data-video-error]").hidden = false; };
-                video.addEventListener("error", showError);
-                video.querySelector("source").addEventListener("error", showError);
-                video.addEventListener("play", () => {
-                    content.querySelectorAll("video").forEach(other => { if (other !== video) other.pause(); });
-                });
-            });
-            return;
-        }
-        content.innerHTML = marketingGraphics.map(item => `
-            <article class="marketing-card" aria-labelledby="marketing-${item.id}">
-                <div class="marketing-preview" role="region" aria-roledescription="carosello" aria-label="${item.title}">
-                    <img src="${item.images[0].preview || item.images[0].url}" alt="${item.images[0].alt}" loading="lazy" width="3375" height="4219">
-                    <div class="marketing-navigation">
-                        <button type="button" class="btn btn--ghost btn--small" data-previous aria-label="Immagine precedente">←</button>
-                        <span data-counter aria-live="polite" aria-atomic="true">1 / ${item.images.length}</span>
-                        <button type="button" class="btn btn--ghost btn--small" data-next aria-label="Immagine successiva">→</button>
-                    </div>
-                </div>
-                <div class="marketing-details">
-                    <p class="eyebrow">Carosello · ${item.images.length} immagini · PNG</p>
+        const reels = category === 'reels';
+        const items = reels ? marketingReels : marketingGraphics;
+        content.innerHTML = items.map(item => `
+            <article class="marketing-row" aria-labelledby="marketing-${item.id}">
+                <img class="marketing-thumbnail" src="${reels ? item.poster : (item.images[0].preview || item.images[0].url)}" alt="" loading="lazy" width="64" height="80">
+                <div class="marketing-row__details">
                     <h3 id="marketing-${item.id}">${item.title}</h3>
-                    <p>${item.description}</p>
-                    <p class="marketing-hint">Sfoglia le immagini con le frecce o scorri sull’anteprima.</p>
-                    <div class="marketing-actions">
-                        <a class="btn btn--outline btn--small" data-download href="${item.images[0].url}" download="${item.id}-01.png">Scarica immagine</a>
-                        <button type="button" class="btn btn--primary btn--small" data-download-all>Scarica tutte</button>
-                    </div>
-                    <p class="marketing-hint">Le immagini vengono scaricate separatamente. Se il browser limita il download multiplo, usa “Scarica immagine” per ogni slide.</p>
-                    <p class="marketing-status" role="status"></p>
+                    <p class="marketing-hint">${reels ? `Reel · MP4 · ${item.size}` : `Carosello · ${item.images.length} immagini · PNG · ${item.size}`}</p>
                 </div>
-            </article>`).join("");
-        content.querySelectorAll(".marketing-card").forEach((card, itemIndex) => {
-            const item = marketingGraphics[itemIndex];
-            let current = 0;
-            const preview = card.querySelector(".marketing-preview img");
-            const download = card.querySelector("[data-download]");
-            function changeSlide(step) {
-                current = (current + step + item.images.length) % item.images.length;
-                preview.src = item.images[current].preview || item.images[current].url;
-                preview.alt = item.images[current].alt;
-                card.querySelector("[data-counter]").textContent = `${current + 1} / ${item.images.length}`;
-                download.href = item.images[current].url;
-                download.download = `${item.id}-${String(current + 1).padStart(2, "0")}.png`;
-            }
-            card.querySelector("[data-previous]").addEventListener("click", () => changeSlide(-1));
-            card.querySelector("[data-next]").addEventListener("click", () => changeSlide(1));
-            const region = card.querySelector(".marketing-preview");
-            region.tabIndex = 0;
-            region.addEventListener("keydown", event => {
-                if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-                event.preventDefault();
-                changeSlide(event.key === "ArrowRight" ? 1 : -1);
-            });
-            let touchStart;
-            preview.addEventListener("touchstart", event => {
-                touchStart = event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
-            }, { passive: true });
-            preview.addEventListener("touchend", event => {
-                if (!touchStart) return;
-                const dx = event.changedTouches[0].clientX - touchStart.x;
-                const dy = event.changedTouches[0].clientY - touchStart.y;
-                if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) changeSlide(dx < 0 ? 1 : -1);
-                touchStart = null;
-            }, { passive: true });
-            preview.addEventListener("touchcancel", () => { touchStart = null; });
-            card.querySelector("[data-download-all]").addEventListener("click", async event => {
-                const button = event.currentTarget;
-                button.disabled = true;
-                const status = card.querySelector(".marketing-status");
-                status.textContent = "Avvio del download delle immagini…";
-                try {
-                    for (const [index, image] of item.images.entries()) {
-                        if (!card.isConnected) return;
-                        const link = document.createElement("a");
-                        link.href = image.url;
-                        link.download = `${item.id}-${String(index + 1).padStart(2, "0")}.png`;
-                        document.body.append(link);
-                        link.click();
-                        link.remove();
-                        await new Promise(resolve => setTimeout(resolve, 500));
-                    }
-                    status.textContent = "Download richiesti. Controlla i file scaricati e consenti i download multipli se il browser lo richiede.";
-                } finally {
-                    button.disabled = false;
-                }
-            });
+                <div class="marketing-actions">
+                    <button type="button" class="btn btn--outline btn--small" data-preview aria-haspopup="dialog" aria-label="Anteprima: ${item.title}">Anteprima</button>
+                    ${reels ? `<a class="btn btn--primary btn--small" href="${item.url}" download aria-label="Scarica reel: ${item.title}">Scarica reel</a>` : '<button type="button" class="btn btn--primary btn--small" data-download-all>Scarica tutte</button>'}
+                </div>
+                ${reels ? '' : '<p class="marketing-status" role="status"></p>'}
+            </article>`).join('') || '<p class="empty-state">I materiali scaricabili saranno disponibili qui.</p>';
+        content.querySelectorAll('.marketing-row').forEach((card, index) => {
+            const item = items[index];
+            card.querySelector('[data-preview]').addEventListener('click', () => openMarketingPreview(item, category));
+            if (!reels) bindMarketingDownloads(card, item);
         });
     }
-    list.querySelectorAll("[data-marketing]").forEach(button => {
-        button.addEventListener("click", () => showCategory(button.dataset.marketing));
+    list.querySelectorAll('[data-marketing]').forEach(button => {
+        button.addEventListener('click', () => showCategory(button.dataset.marketing));
     });
-    showCategory("grafiche");
+    showCategory('grafiche');
 }
 
 function renderFormazione(area) {
