@@ -129,8 +129,8 @@ body {
     font-size: 16px;
 }
 
-body.nav-open,
-body.modal-open {
+html.nav-open,
+html.modal-open {
     overflow: hidden;
 }
 

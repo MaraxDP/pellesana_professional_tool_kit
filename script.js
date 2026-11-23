@@ -1208,7 +1208,7 @@ function openModal(html, variant) {
     body.innerHTML = html;
     wireCrossLinks(body);
     dialog.classList.toggle("modal--video", variant === "video");
-    document.body.classList.add("modal-open");
+    document.documentElement.classList.add("modal-open");
     if (typeof dialog.showModal === "function" && !dialog.open) {
         dialog.showModal();
     } else if (!dialog.open) {
@@ -1231,7 +1231,7 @@ function initModal() {
     // interrompe automaticamente qualsiasi video incorporato in riproduzione.
     dialog.addEventListener("close", () => {
         if (body) body.innerHTML = "";
-        document.body.classList.remove("modal-open");
+        document.documentElement.classList.remove("modal-open");
     });
 }
 
@@ -1309,13 +1309,13 @@ function initNav() {
         const closeNav = () => {
             nav.classList.remove("is-open");
             toggle.setAttribute("aria-expanded", "false");
-            document.body.classList.remove("nav-open");
+            document.documentElement.classList.remove("nav-open");
         };
 
         toggle.addEventListener("click", () => {
             const isOpen = nav.classList.toggle("is-open");
             toggle.setAttribute("aria-expanded", String(isOpen));
-            document.body.classList.toggle("nav-open", isOpen);
+            document.documentElement.classList.toggle("nav-open", isOpen);
         });
         qsa("a", nav).forEach(a => a.addEventListener("click", () => {
             closeNav();
