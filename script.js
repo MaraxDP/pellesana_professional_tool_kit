@@ -1093,6 +1093,16 @@ function activeCategoryForCodeGroup(codeGroup) {
         .find(Boolean) || "";
 }
 
+// Etichetta leggibile per un codice attivo o un gruppo di alternative: la
+// barra "/" dei dati sorgente viene mostrata come "o" per chiarire che si
+// tratta di un'alternativa tra attivi.
+function formatAttivoLabel(codeGroup) {
+    return String(codeGroup)
+        .split("/")
+        .map(code => code.trim())
+        .join(" o ");
+}
+
 function activeCategoryForName(name) {
     const normalized = String(name).toLowerCase().trim();
     const product = professionalProducts.find(item => item.nome.toLowerCase() === normalized);
@@ -1483,7 +1493,7 @@ function treatmentTimelineHtml(plan) {
                         <div class="treatment-timeline__content">
                             <span class="treatment-timeline__session">${seduta.label}</span>
                             <span class="treatment-timeline__phase">${seduta.fase}</span>
-                            <div class="treatment-timeline__badges">${seduta.attivi.map(code => `<span class="treatment-code${activeColorClass(activeCategoryForCodeGroup(code))}">${code}</span>`).join("")}</div>
+                            <div class="treatment-timeline__badges">${seduta.attivi.map(code => `<span class="treatment-code${activeColorClass(activeCategoryForCodeGroup(code))}">${formatAttivoLabel(code)}</span>`).join('<span class="treatment-code__or">o</span>')}</div>
                         </div>
                     </li>`).join("")}
             </ol>
