@@ -2893,8 +2893,7 @@ button, input, select, textarea, table {
         padding: 24px 18px;
     }
 
-    html,
-    body {
+    html {
         max-width: 100%;
         overflow-x: hidden;
         overflow-x: clip;
@@ -2973,6 +2972,10 @@ button, input, select, textarea, table {
     .site-header__inner {
         min-height: var(--header-height);
         padding: 8px 0;
+    }
+
+    .brand {
+        margin-left: 8px;
     }
 
     .brand__logo {
