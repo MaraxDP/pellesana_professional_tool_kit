@@ -2004,6 +2004,22 @@ const marketingReels = [{
     poster: "assets/marketing/reels/Reel2_pellesana.jpg",
     size: "25 MB",
     downloadLabel: "Download del video Full HD"
+}, {
+    id: "pellesana-reel-3",
+    title: "Pelle Sana – Reel 3",
+    description: "Il terzo reel di Pelle Sana, pronto da scaricare e condividere.",
+    url: "assets/marketing/reels/PelleSana_Reel3.web.mp4",
+    preview: "assets/marketing/reels/PelleSana_Reel3.preview.mp4",
+    poster: "assets/marketing/reels/PelleSana_Reel3.jpg",
+    size: "30 MB"
+}, {
+    id: "pellesana-reel-4",
+    title: "Pelle Sana – Reel 4",
+    description: "Il quarto reel di Pelle Sana, pronto da scaricare e condividere.",
+    url: "assets/marketing/reels/PelleSana_Reel4.mp4",
+    preview: "assets/marketing/reels/PelleSana_Reel4.preview.mp4",
+    poster: "assets/marketing/reels/PelleSana_Reel4.jpg",
+    size: "29 MB"
 }];
 
 function openMarketingPreview(item, category) {
