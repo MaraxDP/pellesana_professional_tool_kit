@@ -382,7 +382,7 @@ const professionalProducts = [
         nome: "Antiaging Peeling Cocktail",
         categoria: ["acidi-cosmetici"],
         quantita: "Box 5x5ml",
-        principiAttivi: "AHA 15% (acido mandelico, ferulico, citrico) + DMAE 2%",
+        principiAttivi: "AHA 15% (acido mandelico, ferulico, citrico) + DMAE 5%",
         funzione: "Attenua le linee sottili di espressione e rassoda la pelle.",
         descrizione: "Peeling che idrata ed esfolia delicatamente, favorendo il rinnovamento cellulare.",
         indicazioni: "Rughe sottili, perdita di tono, prima fase di preparazione della pelle.",
